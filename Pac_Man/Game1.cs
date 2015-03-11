@@ -21,9 +21,6 @@ namespace Pac_Man
         Texture2D bloco;
         Texture2D comida;
 
-        float posiçãoTabX;
-        float posiçãoTabY;
-
         Personagem pacman;
 
 
@@ -57,7 +54,7 @@ namespace Pac_Man
             graphics.IsFullScreen = false;
             graphics.PreferMultiSampling = true;
             graphics.GraphicsProfile = GraphicsProfile.HiDef;
-            graphics.PreferredBackBufferWidth = 800;
+            graphics.PreferredBackBufferWidth = 600;
             graphics.PreferredBackBufferHeight = 600;
             Content.RootDirectory = "Content";
         }
@@ -122,27 +119,27 @@ namespace Pac_Man
 
             ultimoMovimento += (float)gameTime.ElapsedGameTime.TotalSeconds;
             teclado = Keyboard.GetState();
-            if (posiçãoTabY < 0)
-            {
-                posiçãoTabY = 30f;
-            }
 
 
-            if (teclado.IsKeyDown(Keys.W) && !paredeEncontradaCima())
+            if (teclado.IsKeyDown(Keys.W) && 
+                !paredeEncontrada(new Vector2(pacman.Posicao.X, pacman.Posicao.Y - pacman.Velocidade * 10)))
             {
-                pacman.moverPacMan(Coordenada.Y, -0.1f);
+                pacman.moverPacMan(Direccao.Cima);
             }
-            if (teclado.IsKeyDown(Keys.A) && !paredeEncontradaEsquerda())
+            if (teclado.IsKeyDown(Keys.A) &&
+                !paredeEncontrada(new Vector2(pacman.Posicao.X - pacman.Velocidade * 10, pacman.Posicao.Y)))
             {
-                pacman.moverPacMan(Coordenada.X, -0.1f);
+                pacman.moverPacMan(Direccao.Esquerda);
             }
-            if (teclado.IsKeyDown(Keys.D) && !paredeEncontradaDireita())
+            if (teclado.IsKeyDown(Keys.D) &&
+                !paredeEncontrada(new Vector2(pacman.Posicao.X + pacman.Velocidade * 10, pacman.Posicao.Y)))
             {
-                pacman.moverPacMan(Coordenada.X, 0.1f);
+                pacman.moverPacMan(Direccao.Direita);
             }
-            if (teclado.IsKeyDown(Keys.S) && !paredeEncontradaBaixo())
+            if (teclado.IsKeyDown(Keys.S) &&
+                !paredeEncontrada(new Vector2(pacman.Posicao.X, pacman.Posicao.Y + pacman.Velocidade * 10)))
             {
-                pacman.moverPacMan(Coordenada.Y, 0.1f);
+                pacman.moverPacMan(Direccao.Baixo);
             }
 
 
@@ -188,60 +185,12 @@ namespace Pac_Man
             base.Draw(gameTime);
 
         }
-        //METODO PARA DETETAR PAREDES À DIREITA
-        private bool paredeEncontradaDireita()
+        //METODO PARA DETETAR PAREDES
+        private bool paredeEncontrada(Vector2 posicaoFutura)
         {
 
-
-            posiçãoTabX = (20 * pacman.Posicao.X) / 30;
-            posiçãoTabY = (20 * pacman.Posicao.Y) / 30;
-            int posiçãoX = (int)Math.Round(posiçãoTabX + 0.33);
-            int posiçãoY = (int)Math.Round(posiçãoTabY);
-            if (mapa[posiçãoX, posiçãoY] == 1)
-            {
-                return true;
-            }
-
-            return false;
-
-        }
-        //METODO PARA DETETAR PAREDES À ESQUERDA
-        private bool paredeEncontradaEsquerda()
-        {
-            posiçãoTabX = (20 * pacman.Posicao.X) / 30;
-            posiçãoTabY = (20 * pacman.Posicao.Y) / 30;
-            int posiçãoX = (int)Math.Round(posiçãoTabX - 0.66);
-            int posiçãoY = (int)Math.Round(posiçãoTabY);
-            if (mapa[posiçãoX, posiçãoY] == 1)
-            {
-                return true;
-            }
-
-            return false;
-
-        }
-        //METODO PARA DETETAR PAREDES EM CIMA
-        private bool paredeEncontradaCima()
-        {
-            posiçãoTabX = (20 * pacman.Posicao.X) / 30;
-            posiçãoTabY = (20 * pacman.Posicao.Y) / 30;
-            int posiçãoX = (int)Math.Round(posiçãoTabX);
-            int posiçãoY = (int)Math.Round(posiçãoTabY - 0.66);
-            if (mapa[posiçãoX, posiçãoY] == 1)
-            {
-                return true;
-            }
-
-            return false;
-
-        }
-        //METODO PARA DETETAR PAREDES EM CIMA
-        private bool paredeEncontradaBaixo()
-        {
-            posiçãoTabX = (20 * pacman.Posicao.X) / 30;
-            posiçãoTabY = (20 * pacman.Posicao.Y) / 30;
-            int posiçãoX = (int)Math.Round(posiçãoTabX);
-            int posiçãoY = (int)Math.Round(posiçãoTabY + 0.33);
+            int posiçãoX = (int)Math.Round((30 * posicaoFutura.X) * 20 / 600);
+            int posiçãoY = (int)Math.Round((30 * posicaoFutura.Y) * 20 / 600);
             if (mapa[posiçãoX, posiçãoY] == 1)
             {
                 return true;

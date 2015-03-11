@@ -9,10 +9,12 @@ using System.Text;
 namespace Pac_Man
 {
 
-    public enum Coordenada
+    public enum Direccao
     {
-        X,
-        Y
+        Cima,
+        Baixo,
+        Esquerda,
+        Direita
     }
 
     public class Personagem
@@ -45,6 +47,17 @@ namespace Pac_Man
             get { return rotacao; }
             set { rotacao = value; }
         }
+
+        private float velocidade;
+        /// <summary>
+        /// Velocidade a que a personagem se move
+        /// </summary>
+        public float Velocidade
+        {
+            get { return velocidade; }
+            set { velocidade = value; }
+        }
+        
         
 
         /// <summary>
@@ -55,7 +68,8 @@ namespace Pac_Man
         public Personagem(ContentManager content, string assetName)
         {
             this.Rotacao = 0f;
-            this.Posicao = new Vector2(2, 2);
+            this.velocidade = 0.05f;
+            this.Posicao = new Vector2(2, 1);
             this.textura = content.Load<Texture2D>(assetName);
         }
 
@@ -64,15 +78,21 @@ namespace Pac_Man
 
         }
 
-        public void moverPacMan(Coordenada coord, float amount)
+        public void moverPacMan(Direccao direccao)
         {
-            switch (coord)
+            switch (direccao)
             {
-                case Coordenada.X:
-                    this.posicao.X += amount;
+                case Direccao.Cima:
+                    this.posicao.Y -= Velocidade;
                     break;
-                case Coordenada.Y:
-                    this.posicao.Y += amount;
+                case Direccao.Baixo:
+                    this.posicao.Y += Velocidade;
+                    break;
+                case Direccao.Esquerda:
+                    this.posicao.X -= Velocidade;
+                    break;
+                case Direccao.Direita:
+                    this.posicao.X += Velocidade;
                     break;
                 default:
                     break;
@@ -81,7 +101,7 @@ namespace Pac_Man
 
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
-            spriteBatch.Draw(Textura, new Vector2(Posicao.X * 20, Posicao.Y * 20), Color.White);
+            spriteBatch.Draw(Textura, new Vector2(Posicao.X * 30, Posicao.Y * 30 + 5f), Color.White);
         }
 
         /// <summary>
