@@ -20,6 +20,7 @@ namespace Pac_Man
         SpriteBatch spriteBatch;
         Texture2D bloco;
         Texture2D comida;
+        Texture2D sem_comida;
 
         float posiçãoTabX;
         float posiçãoTabY;
@@ -89,7 +90,7 @@ namespace Pac_Man
             pacman = new Personagem(Content, "pac2");
 
             comida = Content.Load<Texture2D>("comida");
-
+            sem_comida = Content.Load<Texture2D>("sem_comida");
 
             // TODO: use this.Content to load your game content here
 
@@ -106,6 +107,7 @@ namespace Pac_Man
             bloco.Dispose();
             pacman.Dispose();
             comida.Dispose();
+            sem_comida.Dispose();
         }
 
         /// <summary>
@@ -145,6 +147,7 @@ namespace Pac_Man
                 pacman.moverPacMan(Coordenada.Y, 0.1f);
             }
 
+            comer();
 
             // condiçoes que permitem o pacaman passar pelo tunel
 
@@ -250,6 +253,10 @@ namespace Pac_Man
             return false;
 
         }
+
+        //metodo para eliminar comida apos pacman passar por cima
+       
+
 
     }
     
