@@ -255,8 +255,20 @@ namespace Pac_Man
         }
 
         //metodo para eliminar comida apos pacman passar por cima
-       
 
+        private void comer()
+        {
+            for (int x = 0; x < 20; x++)
+            {
+                for (int y = 0; y < 20; y++)
+                {
+                    if (mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] == 0)
+                    {
+                        mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 2;
+                    }
+                }
+            }
+        }
 
     }
     
