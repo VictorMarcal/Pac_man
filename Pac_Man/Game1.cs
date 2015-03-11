@@ -207,15 +207,10 @@ namespace Pac_Man
 
         private void comer()
         {
-            for (int x = 0; x < 20; x++)
+           
+            if(mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y]==0)
             {
-                for (int y = 0; y < 20; y++)
-                {
-                    if (mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] == 0)
-                    {
-                        mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 2;
-                    }
-                }
+                mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 2;
             }
         }
 
