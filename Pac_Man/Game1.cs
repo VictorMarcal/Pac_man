@@ -19,12 +19,12 @@ namespace Pac_Man
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D bloco;
-        Texture2D pac_man;
         Texture2D comida;
-        float posiçãoPacX = 13f;
-        float posiçãoPacY = 9f;
+
         float posiçãoTabX;
         float posiçãoTabY;
+
+        Personagem pacman;
 
 
         float ultimoMovimento = 0f;
@@ -85,7 +85,9 @@ namespace Pac_Man
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             bloco = Content.Load<Texture2D>("parede");
-            pac_man = Content.Load<Texture2D>("pac2");
+
+            pacman = new Personagem(Content, "pac2");
+
             comida = Content.Load<Texture2D>("comida");
 
 
@@ -102,7 +104,7 @@ namespace Pac_Man
         {
             // TODO: Unload any non ContentManager content here
             bloco.Dispose();
-            pac_man.Dispose();
+            pacman.Dispose();
             comida.Dispose();
         }
 
@@ -126,31 +128,30 @@ namespace Pac_Man
             }
 
 
-
             if (teclado.IsKeyDown(Keys.W) && !paredeEncontradaCima())
             {
-                posiçãoPacY -= 0.1f;
+                pacman.moverPacMan(Coordenada.Y, -0.1f);
             }
             if (teclado.IsKeyDown(Keys.A) && !paredeEncontradaEsquerda())
             {
-                posiçãoPacX -= 0.1f;
+                pacman.moverPacMan(Coordenada.X, -0.1f);
             }
             if (teclado.IsKeyDown(Keys.D) && !paredeEncontradaDireita())
             {
-                posiçãoPacX += 0.1f;
+                pacman.moverPacMan(Coordenada.X, 0.1f);
             }
             if (teclado.IsKeyDown(Keys.S) && !paredeEncontradaBaixo())
             {
-                posiçãoPacY += 0.1f;
+                pacman.moverPacMan(Coordenada.Y, 0.1f);
             }
-            
+
 
             // condiçoes que permitem o pacaman passar pelo tunel
 
-            
+
             base.Update(gameTime);
-            Console.WriteLine("valor de x {0}", posiçãoPacX);
-            Console.WriteLine("valor de y {0}", posiçãoPacY);
+            Console.WriteLine("valor de x {0}", pacman.Posicao.X);
+            Console.WriteLine("valor de y {0}", pacman.Posicao.Y);
 
         }
 
@@ -179,7 +180,9 @@ namespace Pac_Man
                     }
                 }
             }
-            spriteBatch.Draw(pac_man, new Vector2((posiçãoPacX * 20), (posiçãoPacY * 20)), Color.White);
+
+            pacman.Draw(spriteBatch, gameTime);
+
             spriteBatch.End();
 
             base.Draw(gameTime);
@@ -190,8 +193,8 @@ namespace Pac_Man
         {
 
 
-            posiçãoTabX = (20 * posiçãoPacX) / 30;
-            posiçãoTabY = (20 * posiçãoPacY) / 30;
+            posiçãoTabX = (20 * pacman.Posicao.X) / 30;
+            posiçãoTabY = (20 * pacman.Posicao.Y) / 30;
             int posiçãoX = (int)Math.Round(posiçãoTabX + 0.33);
             int posiçãoY = (int)Math.Round(posiçãoTabY);
             if (mapa[posiçãoX, posiçãoY] == 1)
@@ -205,8 +208,8 @@ namespace Pac_Man
         //METODO PARA DETETAR PAREDES À ESQUERDA
         private bool paredeEncontradaEsquerda()
         {
-            posiçãoTabX = (20 * posiçãoPacX) / 30;
-            posiçãoTabY = (20 * posiçãoPacY) / 30;
+            posiçãoTabX = (20 * pacman.Posicao.X) / 30;
+            posiçãoTabY = (20 * pacman.Posicao.Y) / 30;
             int posiçãoX = (int)Math.Round(posiçãoTabX - 0.66);
             int posiçãoY = (int)Math.Round(posiçãoTabY);
             if (mapa[posiçãoX, posiçãoY] == 1)
@@ -220,8 +223,8 @@ namespace Pac_Man
         //METODO PARA DETETAR PAREDES EM CIMA
         private bool paredeEncontradaCima()
         {
-            posiçãoTabX = (20 * posiçãoPacX) / 30;
-            posiçãoTabY = (20 * posiçãoPacY) / 30;
+            posiçãoTabX = (20 * pacman.Posicao.X) / 30;
+            posiçãoTabY = (20 * pacman.Posicao.Y) / 30;
             int posiçãoX = (int)Math.Round(posiçãoTabX);
             int posiçãoY = (int)Math.Round(posiçãoTabY - 0.66);
             if (mapa[posiçãoX, posiçãoY] == 1)
@@ -235,8 +238,8 @@ namespace Pac_Man
         //METODO PARA DETETAR PAREDES EM CIMA
         private bool paredeEncontradaBaixo()
         {
-            posiçãoTabX = (20 * posiçãoPacX) / 30;
-            posiçãoTabY = (20 * posiçãoPacY) / 30;
+            posiçãoTabX = (20 * pacman.Posicao.X) / 30;
+            posiçãoTabY = (20 * pacman.Posicao.Y) / 30;
             int posiçãoX = (int)Math.Round(posiçãoTabX);
             int posiçãoY = (int)Math.Round(posiçãoTabY + 0.33);
             if (mapa[posiçãoX, posiçãoY] == 1)
@@ -248,6 +251,6 @@ namespace Pac_Man
 
         }
 
-        
+    }
     
 }

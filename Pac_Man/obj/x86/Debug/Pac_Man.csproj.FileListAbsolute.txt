@@ -26,3 +26,4 @@ C:\Users\Joana\Desktop\ipca\pac_man\Pac_Man\Pac_Man\Pac_Man\obj\x86\Debug\Pac_Ma
 C:\Users\Joana\Desktop\ipca\pac_man\Pac_Man\Pac_Man\Pac_Man\bin\Windows\Debug\Content\comida.png
 C:\Users\Joana\Desktop\ipca\pac_man\Pac_Man\Pac_Man\Pac_Man\bin\Windows\Debug\Content\pac2.png
 C:\Users\Joana\Desktop\ipca\pac_man\Pac_Man\Pac_Man\Pac_Man\bin\Windows\Debug\Content\parede.png
+C:\Users\nlopes\Documents\IPCA\EDJD\code\Técnicas de Desenvolvimento de Jogos\Pac_man\Pac_Man\bin\Windows\Debug\SharpDX.xml
