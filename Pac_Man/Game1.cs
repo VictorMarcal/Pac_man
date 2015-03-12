@@ -23,7 +23,8 @@ namespace Pac_Man
         Texture2D sem_comida;
 
         Personagem pacman;
-
+        SpriteFont myFont;
+        int score=0;
         List<Rectangle> listaParedes;
         Texture2D dummyTexture;
 
@@ -57,7 +58,7 @@ namespace Pac_Man
             graphics.IsFullScreen = false;
             graphics.PreferMultiSampling = true;
             graphics.GraphicsProfile = GraphicsProfile.HiDef;
-            graphics.PreferredBackBufferWidth = 600;
+            graphics.PreferredBackBufferWidth = 800;
             graphics.PreferredBackBufferHeight = 600;
             Content.RootDirectory = "Content";
         }
@@ -88,13 +89,14 @@ namespace Pac_Man
             bloco = Content.Load<Texture2D>("parede");
 
             pacman = new Personagem(Content, "pac2");
-
+            
             comida = Content.Load<Texture2D>("comida");
             sem_comida = Content.Load<Texture2D>("sem_comida");
 
             dummyTexture = new Texture2D(GraphicsDevice, 1, 1);
             dummyTexture.SetData(new Color[] { Color.White });
 
+            myFont = Content.Load<SpriteFont>("MyFont");
         }
 
         /// <summary>
@@ -108,6 +110,7 @@ namespace Pac_Man
             pacman.Dispose();
             comida.Dispose();
             sem_comida.Dispose();
+            
         }
 
         /// <summary>
@@ -190,6 +193,10 @@ namespace Pac_Man
 
             pacman.Draw(spriteBatch, gameTime, dummyTexture);
 
+            //desenhar texto e mostrar pontuaçao
+            
+            spriteBatch.DrawString(myFont, "Score", new Vector2(650, 10), Color.Yellow);
+            spriteBatch.DrawString(myFont, score+"", new Vector2(650, 50), Color.Yellow);
 
            /* graphics.GraphicsDevice.BlendState = BlendState.AlphaBlend;
             foreach (Rectangle parede in listaParedes)
@@ -225,6 +232,7 @@ namespace Pac_Man
             if(mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y]==0)
             {
                 mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 2;
+                score+=10;
             }
         }
 
