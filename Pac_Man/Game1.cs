@@ -125,36 +125,39 @@ namespace Pac_Man
             ultimoMovimento += (float)gameTime.ElapsedGameTime.TotalSeconds;
             teclado = Keyboard.GetState();
 
-
-            if (teclado.IsKeyDown(Keys.W) && 
-                !paredeEncontrada(new Vector2(pacman.Posicao.X, pacman.Posicao.Y - pacman.Velocidade * 10)))
+            if (ultimoMovimento > 0.09f)
             {
-                pacman.moverPacMan(Direccao.Cima);
-            }
-            if (teclado.IsKeyDown(Keys.A) &&
-                !paredeEncontrada(new Vector2(pacman.Posicao.X - pacman.Velocidade * 10, pacman.Posicao.Y)))
-            {
-                pacman.moverPacMan(Direccao.Esquerda);
-            }
-            if (teclado.IsKeyDown(Keys.D) &&
-                !paredeEncontrada(new Vector2(pacman.Posicao.X + pacman.Velocidade * 10, pacman.Posicao.Y)))
-            {
-                pacman.moverPacMan(Direccao.Direita);
-            }
-            if (teclado.IsKeyDown(Keys.S) &&
-                !paredeEncontrada(new Vector2(pacman.Posicao.X, pacman.Posicao.Y + pacman.Velocidade * 10)))
-            {
-                pacman.moverPacMan(Direccao.Baixo);
-            }
+                if (teclado.IsKeyDown(Keys.W) &&
+                    !paredeEncontrada(new Vector2(pacman.Posicao.X, pacman.Posicao.Y - pacman.Velocidade)))
+                {
+                    pacman.moverPacMan(Direccao.Cima);
+                }
+                if (teclado.IsKeyDown(Keys.A) &&
+                    !paredeEncontrada(new Vector2(pacman.Posicao.X - pacman.Velocidade, pacman.Posicao.Y)))
+                {
+                    pacman.moverPacMan(Direccao.Esquerda);
+                }
+                if (teclado.IsKeyDown(Keys.D) &&
+                    !paredeEncontrada(new Vector2(pacman.Posicao.X + pacman.Velocidade, pacman.Posicao.Y)))
+                {
+                    pacman.moverPacMan(Direccao.Direita);
+                }
+                if (teclado.IsKeyDown(Keys.S) &&
+                    !paredeEncontrada(new Vector2(pacman.Posicao.X, pacman.Posicao.Y + pacman.Velocidade)))
+                {
+                    pacman.moverPacMan(Direccao.Baixo);
+                }
 
-            comer();
+                comer();
 
-            // condiçoes que permitem o pacaman passar pelo tunel
+                // condiçoes que permitem o pacaman passar pelo tunel
 
 
-            base.Update(gameTime);
-            Console.WriteLine("valor de x {0}", pacman.Posicao.X);
-            Console.WriteLine("valor de y {0}", pacman.Posicao.Y);
+                base.Update(gameTime);
+                Console.WriteLine("valor de x {0}", pacman.Posicao.X);
+                Console.WriteLine("valor de y {0}", pacman.Posicao.Y);
+                ultimoMovimento = 0;
+            }
 
         }
 
@@ -188,11 +191,11 @@ namespace Pac_Man
             pacman.Draw(spriteBatch, gameTime, dummyTexture);
 
 
-            graphics.GraphicsDevice.BlendState = BlendState.AlphaBlend;
+           /* graphics.GraphicsDevice.BlendState = BlendState.AlphaBlend;
             foreach (Rectangle parede in listaParedes)
             {
                 spriteBatch.Draw(dummyTexture, parede, Color.White);
-            }
+            }`*/
 
             spriteBatch.End();
 

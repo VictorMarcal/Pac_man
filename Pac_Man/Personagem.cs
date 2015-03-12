@@ -48,11 +48,11 @@ namespace Pac_Man
             set { rotacao = value; }
         }
 
-        private float velocidade;
+        private int velocidade;
         /// <summary>
         /// Velocidade a que a personagem se move
         /// </summary>
-        public float Velocidade
+        public int Velocidade
         {
             get { return velocidade; }
             set { velocidade = value; }
@@ -68,8 +68,8 @@ namespace Pac_Man
         public Personagem(ContentManager content, string assetName)
         {
             this.Rotacao = 0f;
-            this.velocidade = 0.05f;
-            this.Posicao = new Vector2(2, 1);
+            this.velocidade = 1;
+            this.Posicao = new Vector2(1, 1);
             this.textura = content.Load<Texture2D>(assetName);
         }
 
@@ -102,7 +102,7 @@ namespace Pac_Man
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime, Texture2D dummyTexture)
         {
             spriteBatch.Draw(Textura, new Vector2(Posicao.X * 30, Posicao.Y * 30), Color.White);
-            spriteBatch.Draw(dummyTexture, new Rectangle((int)Posicao.X * 30, (int)Posicao.Y * 30, 30, 30), Color.Yellow);
+            //spriteBatch.Draw(dummyTexture, new Rectangle((int)Posicao.X * 30, (int)Posicao.Y * 30, 30, 30), Color.Yellow);
         }
 
         /// <summary>
