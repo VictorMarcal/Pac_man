@@ -54,3 +54,4 @@ C:\Users\User\Documents\GitHub\Pac_man\Pac_Man\bin\Windows\Debug\SharpDX.Direct2
 C:\Users\User\Documents\GitHub\Pac_man\Pac_Man\bin\Windows\Debug\SharpDX.XInput.xml
 C:\Users\User\Documents\GitHub\Pac_man\Pac_Man\bin\Windows\Debug\SharpDX.RawInput.xml
 C:\Users\User\Documents\GitHub\Pac_man\Pac_Man\bin\Windows\Debug\SharpDX.Direct3D9.xml
+C:\Users\nlopes\Documents\IPCA\EDJD\code\Técnicas de Desenvolvimento de Jogos\Pac_man\Pac_Man\bin\Windows\Debug\SharpDX.MediaFoundation.xml

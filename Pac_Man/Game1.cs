@@ -24,6 +24,8 @@ namespace Pac_Man
 
         Personagem pacman;
 
+        List<Rectangle> listaParedes;
+        Texture2D dummyTexture;
 
         float ultimoMovimento = 0f;
         KeyboardState teclado;
@@ -70,6 +72,7 @@ namespace Pac_Man
         {
             // TODO: Add your initialization logic here
             teclado = new KeyboardState();
+            listaParedes = new List<Rectangle>();
 
             base.Initialize();
         }
@@ -89,8 +92,8 @@ namespace Pac_Man
             comida = Content.Load<Texture2D>("comida");
             sem_comida = Content.Load<Texture2D>("sem_comida");
 
-            // TODO: use this.Content to load your game content here
-
+            dummyTexture = new Texture2D(GraphicsDevice, 1, 1);
+            dummyTexture.SetData(new Color[] { Color.White });
 
         }
 
@@ -172,6 +175,7 @@ namespace Pac_Man
                     if (mapa[x, y] == 1)
                     {
                         spriteBatch.Draw(bloco, new Vector2(x * 30, y * 30), Color.White);
+                        listaParedes.Add(new Rectangle(x *30, y*30, 30, 30));
                     }
                     if (mapa[x, y] == 0)
                     {
@@ -181,7 +185,14 @@ namespace Pac_Man
                 }
             }
 
-            pacman.Draw(spriteBatch, gameTime);
+            pacman.Draw(spriteBatch, gameTime, dummyTexture);
+
+
+            graphics.GraphicsDevice.BlendState = BlendState.AlphaBlend;
+            foreach (Rectangle parede in listaParedes)
+            {
+                spriteBatch.Draw(dummyTexture, parede, Color.White);
+            }
 
             spriteBatch.End();
 

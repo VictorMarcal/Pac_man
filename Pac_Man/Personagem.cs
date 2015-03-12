@@ -99,9 +99,10 @@ namespace Pac_Man
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
+        public void Draw(SpriteBatch spriteBatch, GameTime gameTime, Texture2D dummyTexture)
         {
-            spriteBatch.Draw(Textura, new Vector2(Posicao.X * 30, Posicao.Y * 30 + 5f), Color.White);
+            spriteBatch.Draw(Textura, new Vector2(Posicao.X * 30, Posicao.Y * 30), Color.White);
+            spriteBatch.Draw(dummyTexture, new Rectangle((int)Posicao.X * 30, (int)Posicao.Y * 30, 30, 30), Color.Yellow);
         }
 
         /// <summary>
