@@ -38,6 +38,8 @@ namespace Pac_Man
             set { posicao = value; }
         }
 
+        private Vector2 posicaoTarget;
+
         private float rotacao;
         /// <summary>
         /// Rotação da personagem
@@ -70,33 +72,46 @@ namespace Pac_Man
             this.Rotacao = 0f;
             this.velocidade = 1;
             this.Posicao = new Vector2(1, 2);
+            posicaoTarget = posicao;
             this.textura = content.Load<Texture2D>(assetName);
         }
 
         public void Update(GameTime gameTime)
         {
-
+            if (Vector2.Distance(posicaoTarget, Posicao) < 0.1f)
+            {
+                //Se estamos suficientemente perto do target, fazer snap para o target
+                Posicao = posicaoTarget;
+            }
+            if (Posicao != posicaoTarget)
+            {
+                //Ainda não chegámos ao target, lerpar
+                posicao = Vector2.Lerp(posicao, posicaoTarget, 0.7f);
+            }
         }
 
         public void moverPacMan(Direccao direccao)
         {
-            switch (direccao)
+            if (Posicao == posicaoTarget)
             {
-                case Direccao.Cima:
-                    
-                    this.posicao.Y -= Velocidade;
-                    break;
-                case Direccao.Baixo:
-                    this.posicao.Y += Velocidade;
-                    break;
-                case Direccao.Esquerda:
-                    this.posicao.X -= Velocidade;
-                    break;
-                case Direccao.Direita:
-                    this.posicao.X += Velocidade;
-                    break;
-                default:
-                    break;
+                switch (direccao)
+                {
+                    case Direccao.Cima:
+
+                        this.posicaoTarget.Y -= Velocidade;
+                        break;
+                    case Direccao.Baixo:
+                        this.posicaoTarget.Y += Velocidade;
+                        break;
+                    case Direccao.Esquerda:
+                        this.posicaoTarget.X -= Velocidade;
+                        break;
+                    case Direccao.Direita:
+                        this.posicaoTarget.X += Velocidade;
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 

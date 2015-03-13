@@ -169,7 +169,8 @@ namespace Pac_Man
                 {
                     pacman.moverPacMan(Direccao.Baixo);
                 }
-                
+
+                pacman.Update(gameTime);
 
                 comer();
 
