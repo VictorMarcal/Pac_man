@@ -59,8 +59,8 @@ namespace Pac_Man
             get { return velocidade; }
             set { velocidade = value; }
         }
-        
-        
+
+        private SpriteEffects flip;
 
         /// <summary>
         /// Construtor
@@ -74,6 +74,7 @@ namespace Pac_Man
             this.Posicao = new Vector2(1, 2);
             posicaoTarget = posicao;
             this.textura = content.Load<Texture2D>(assetName);
+            flip = SpriteEffects.None;
         }
 
         public void Update(GameTime gameTime)
@@ -97,7 +98,6 @@ namespace Pac_Man
                 switch (direccao)
                 {
                     case Direccao.Cima:
-
                         this.posicaoTarget.Y -= Velocidade;
                         break;
                     case Direccao.Baixo:
@@ -105,9 +105,11 @@ namespace Pac_Man
                         break;
                     case Direccao.Esquerda:
                         this.posicaoTarget.X -= Velocidade;
+                        flip = SpriteEffects.FlipHorizontally;
                         break;
                     case Direccao.Direita:
                         this.posicaoTarget.X += Velocidade;
+                        flip = SpriteEffects.None;
                         break;
                     default:
                         break;
@@ -117,7 +119,7 @@ namespace Pac_Man
 
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime, Texture2D dummyTexture)
         {
-            spriteBatch.Draw(Textura, new Vector2(Posicao.X * 30 + Textura.Width / 4, Posicao.Y * 30 + Textura.Height / 4), Color.White);
+            spriteBatch.Draw(Textura, new Vector2(Posicao.X * 30 + Textura.Width / 4, Posicao.Y * 30 + Textura.Height / 4), null, Color.White, this.Rotacao, Vector2.Zero, 1f, flip, 0f);
             //spriteBatch.Draw(dummyTexture, new Rectangle((int)Posicao.X * 30, (int)Posicao.Y * 30, 30, 30), Color.Yellow);
         }
 
