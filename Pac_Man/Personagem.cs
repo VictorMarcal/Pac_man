@@ -69,7 +69,7 @@ namespace Pac_Man
         {
             this.Rotacao = 0f;
             this.velocidade = 1;
-            this.Posicao = new Vector2(1, 1);
+            this.Posicao = new Vector2(1, 2);
             this.textura = content.Load<Texture2D>(assetName);
         }
 
@@ -83,6 +83,7 @@ namespace Pac_Man
             switch (direccao)
             {
                 case Direccao.Cima:
+                    
                     this.posicao.Y -= Velocidade;
                     break;
                 case Direccao.Baixo:

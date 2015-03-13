@@ -16,11 +16,13 @@ namespace Pac_Man
     /// </summary>
     public class Game1 : Game
     {
+        
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D bloco;
         Texture2D comida;
         Texture2D sem_comida;
+        
 
         Personagem pacman;
         SpriteFont myFont;
@@ -29,6 +31,9 @@ namespace Pac_Man
         Texture2D dummyTexture;
 
         float ultimoMovimento = 0f;
+        float time;
+        int gametime;
+        
         KeyboardState teclado;
         byte[,] mapa ={{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
                         {1,0,0,0,0,1,1,0,0,0,0,0,0,1,1,0,0,0,0,1},
@@ -126,30 +131,45 @@ namespace Pac_Man
 
 
             ultimoMovimento += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            time += (float)gameTime.ElapsedGameTime.TotalSeconds;
             teclado = Keyboard.GetState();
+            gametime = (int)time;
 
             if (ultimoMovimento > 0.09f)
             {
                 if (teclado.IsKeyDown(Keys.W) &&
-                    !paredeEncontrada(new Vector2(pacman.Posicao.X, pacman.Posicao.Y - pacman.Velocidade)))
+                    !paredeEncontrada(new Vector2(pacman.Posicao.X, pacman.Posicao.Y - pacman.Velocidade))
+                    && teclado.IsKeyUp(Keys.S) 
+                    && teclado.IsKeyUp(Keys.A) 
+                    && teclado.IsKeyUp(Keys.D))
                 {
                     pacman.moverPacMan(Direccao.Cima);
                 }
                 if (teclado.IsKeyDown(Keys.A) &&
-                    !paredeEncontrada(new Vector2(pacman.Posicao.X - pacman.Velocidade, pacman.Posicao.Y)))
+                    !paredeEncontrada(new Vector2(pacman.Posicao.X - pacman.Velocidade, pacman.Posicao.Y)) 
+                    && teclado.IsKeyUp(Keys.S)
+                    && teclado.IsKeyUp(Keys.W)
+                    && teclado.IsKeyUp(Keys.D))
                 {
                     pacman.moverPacMan(Direccao.Esquerda);
                 }
                 if (teclado.IsKeyDown(Keys.D) &&
-                    !paredeEncontrada(new Vector2(pacman.Posicao.X + pacman.Velocidade, pacman.Posicao.Y)))
+                    !paredeEncontrada(new Vector2(pacman.Posicao.X + pacman.Velocidade, pacman.Posicao.Y))
+                    && teclado.IsKeyUp(Keys.S)
+                    && teclado.IsKeyUp(Keys.A)
+                    && teclado.IsKeyUp(Keys.W))
                 {
                     pacman.moverPacMan(Direccao.Direita);
                 }
                 if (teclado.IsKeyDown(Keys.S) &&
-                    !paredeEncontrada(new Vector2(pacman.Posicao.X, pacman.Posicao.Y + pacman.Velocidade)))
+                    !paredeEncontrada(new Vector2(pacman.Posicao.X, pacman.Posicao.Y + pacman.Velocidade))
+                    && teclado.IsKeyUp(Keys.W)
+                    && teclado.IsKeyUp(Keys.A)
+                    && teclado.IsKeyUp(Keys.D))
                 {
                     pacman.moverPacMan(Direccao.Baixo);
                 }
+                
 
                 comer();
 
@@ -160,16 +180,15 @@ namespace Pac_Man
                 Console.WriteLine("valor de x {0}", pacman.Posicao.X);
                 Console.WriteLine("valor de y {0}", pacman.Posicao.Y);
                 ultimoMovimento = 0;
+                
             }
 
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        
         protected override void Draw(GameTime gameTime)
         {
+
             GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin();
 
@@ -195,10 +214,13 @@ namespace Pac_Man
 
             //desenhar texto e mostrar pontuaçao
             
+            
             spriteBatch.DrawString(myFont, "Score", new Vector2(650, 10), Color.Yellow);
-            spriteBatch.DrawString(myFont, score+"", new Vector2(650, 50), Color.Yellow);
+            spriteBatch.DrawString(myFont, score+"", new Vector2(680, 50), Color.Yellow);
+            spriteBatch.DrawString(myFont, "Game Time", new Vector2(620, 150), Color.Yellow);
+            spriteBatch.DrawString(myFont, gametime + "sec", new Vector2(680, 190), Color.Yellow);
 
-           /* graphics.GraphicsDevice.BlendState = BlendState.AlphaBlend;
+           /* graphics.GraphicsDevice.BlendState = BlendState.AlphaBlend
             foreach (Rectangle parede in listaParedes)
             {
                 spriteBatch.Draw(dummyTexture, parede, Color.White);
@@ -235,7 +257,7 @@ namespace Pac_Man
                 score+=10;
             }
         }
-
+       
     }
     
 }
