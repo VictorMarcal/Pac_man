@@ -101,11 +101,11 @@ namespace Pac_Man
             return this;
         }
 
-        public void Update(GameTime gameTime, Vector2 posicaoPacman)
+        public void Update(GameTime gameTime, Vector2 posicaoPacman, byte[,] mapa)
         {
             if (tipoPersonagem == Pac_Man.TipoPersonagem.NPC)
             {
-                moverFantasma(posicaoPacman);
+                moverFantasma(posicaoPacman, mapa);
             }
             if (Vector2.Distance(posicaoTarget, Posicao) < 0.1f)
             {
@@ -119,43 +119,69 @@ namespace Pac_Man
             }
         }
 
-        private void moverFantasma(Vector2 posicaoPacman)
+        private int moverFantasma(Vector2 posicaoPacman, byte[,] mapa)
         {
+            bool podeMoverCima = false,
+                 podeMoverBaixo = false,
+                 podeMoverEsquerda = false,
+                 podeMoverDireita = false, 
+                 moveu = false;
+
+            podeMoverCima = !Colisoes.paredeEncontrada(mapa, new Vector2(this.Posicao.X, this.Posicao.Y - 1));
+            podeMoverBaixo = !Colisoes.paredeEncontrada(mapa, new Vector2(this.Posicao.X, this.Posicao.Y + 1));
+            podeMoverEsquerda = !Colisoes.paredeEncontrada(mapa, new Vector2(this.Posicao.X - 1, this.Posicao.Y));
+            podeMoverDireita = !Colisoes.paredeEncontrada(mapa, new Vector2(this.Posicao.X + 1, this.Posicao.Y));
+
             if (Posicao == posicaoTarget)
             {
                 float difX = posicaoPacman.X - Posicao.X;
                 float difY = posicaoPacman.Y - Posicao.Y;
-                if (Math.Abs(difX) > Math.Abs(difY))
+                
+                if (difX == 0 && difY == 0)
                 {
-                    //Vamos andar na lateral
-                    if (difX > 0)
-                    {
-                        //Andar para a esquerda
-                        this.posicaoTarget.X += 1;
-                        flip = SpriteEffects.FlipHorizontally;
-                    }
-                    else
-                    {
-                        //Andar para a direita
-                        this.posicaoTarget.X -= 1;
-                        flip = SpriteEffects.None;
-                    }
+                    //estamos em cima do pacman!
+                    return 1;
                 }
-                else
+
+                if (difX < 0 && difY < 0)
                 {
-                    //Vamos andar na vertical
-                    if (difY > 0)
+                    //O pacman está acima e à esquerda
+                    if (podeMoverEsquerda)
                     {
-                        //Andar para baixo
-                        this.posicaoTarget.Y += 1;
+                        this.posicaoTarget.X -= 1;
+                        flip = SpriteEffects.FlipHorizontally;
+                        return 1;
                     }
                     else
                     {
-                        //Andar para cima
-                        this.posicaoTarget.Y -= 1;
+                        //Não podemos ir para a esquerda, vamos para cima
+                        if (podeMoverCima)
+                        {
+                            this.posicaoTarget.Y -= 1;
+                            return 1;
+                        }
+                        else
+                        {
+                            //Não podemos andar nem para a esquerda nem para cima..
+                            if (podeMoverBaixo)
+                            {
+                                this.posicaoTarget.Y += 1;
+                                return 1;
+                            }
+                            else
+                            {
+                                if (podeMoverDireita)
+                                {
+                                    this.posicaoTarget.X += 1;
+                                    flip = SpriteEffects.None;
+                                    return 1;
+                                }
+                            }
+                        }
                     }
                 }
             }
+            return 1;
         }
 
         public void moverPacMan(Direccao direccao)

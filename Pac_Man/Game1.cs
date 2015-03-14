@@ -143,7 +143,7 @@ namespace Pac_Man
             if (ultimoMovimento > 0.09f)
             {
                 if (teclado.IsKeyDown(Keys.W) &&
-                    !paredeEncontrada(new Vector2(pacman.Posicao.X, pacman.Posicao.Y - pacman.Velocidade))
+                    !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X, pacman.Posicao.Y - 1))
                     && teclado.IsKeyUp(Keys.S) 
                     && teclado.IsKeyUp(Keys.A) 
                     && teclado.IsKeyUp(Keys.D))
@@ -151,7 +151,7 @@ namespace Pac_Man
                     pacman.moverPacMan(Direccao.Cima);
                 }
                 if (teclado.IsKeyDown(Keys.A) &&
-                    !paredeEncontrada(new Vector2(pacman.Posicao.X - pacman.Velocidade, pacman.Posicao.Y)) 
+                    !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X - 1, pacman.Posicao.Y)) 
                     && teclado.IsKeyUp(Keys.S)
                     && teclado.IsKeyUp(Keys.W)
                     && teclado.IsKeyUp(Keys.D))
@@ -159,7 +159,7 @@ namespace Pac_Man
                     pacman.moverPacMan(Direccao.Esquerda);
                 }
                 if (teclado.IsKeyDown(Keys.D) &&
-                    !paredeEncontrada(new Vector2(pacman.Posicao.X + pacman.Velocidade, pacman.Posicao.Y))
+                    !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X + 1, pacman.Posicao.Y))
                     && teclado.IsKeyUp(Keys.S)
                     && teclado.IsKeyUp(Keys.A)
                     && teclado.IsKeyUp(Keys.W))
@@ -167,7 +167,7 @@ namespace Pac_Man
                     pacman.moverPacMan(Direccao.Direita);
                 }
                 if (teclado.IsKeyDown(Keys.S) &&
-                    !paredeEncontrada(new Vector2(pacman.Posicao.X, pacman.Posicao.Y + pacman.Velocidade))
+                    !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X, pacman.Posicao.Y + 1))
                     && teclado.IsKeyUp(Keys.W)
                     && teclado.IsKeyUp(Keys.A)
                     && teclado.IsKeyUp(Keys.D))
@@ -175,11 +175,11 @@ namespace Pac_Man
                     pacman.moverPacMan(Direccao.Baixo);
                 }
 
-                pacman.Update(gameTime, pacman.Posicao);
+                pacman.Update(gameTime, pacman.Posicao, mapa);
 
                 foreach (Personagem fantasma in fantasmas)
                 {
-                    fantasma.Update(gameTime, pacman.Posicao);
+                    fantasma.Update(gameTime, pacman.Posicao, mapa);
                 }
 
                 comer();
@@ -236,23 +236,9 @@ namespace Pac_Man
             base.Draw(gameTime);
 
         }
-        //METODO PARA DETETAR PAREDES
-        private bool paredeEncontrada(Vector2 posicaoFutura)
-        {
-
-            int posiçãoX = (int)Math.Round((30 * posicaoFutura.X) * 20 / 600);
-            int posiçãoY = (int)Math.Round((30 * posicaoFutura.Y) * 20 / 600);
-            if (mapa[posiçãoX, posiçãoY] == 1)
-            {
-                return true;
-            }
-
-            return false;
-
-        }
+        
 
         //metodo para eliminar comida apos pacman passar por cima
-
         private void comer()
         {
            
