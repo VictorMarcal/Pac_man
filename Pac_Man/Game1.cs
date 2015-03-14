@@ -23,11 +23,11 @@ namespace Pac_Man
         Texture2D comida;
         Texture2D sem_comida;
         
-
         Personagem pacman;
+        List<Personagem> fantasmas;
+
         SpriteFont myFont;
         int score=0;
-        List<Rectangle> listaParedes;
         Texture2D dummyTexture;
 
         float ultimoMovimento = 0f;
@@ -78,7 +78,8 @@ namespace Pac_Man
         {
             // TODO: Add your initialization logic here
             teclado = new KeyboardState();
-            listaParedes = new List<Rectangle>();
+
+            fantasmas = new List<Personagem>();
 
             base.Initialize();
         }
@@ -93,7 +94,9 @@ namespace Pac_Man
             spriteBatch = new SpriteBatch(GraphicsDevice);
             bloco = Content.Load<Texture2D>("parede");
 
-            pacman = new Personagem(Content, "pac2");
+            pacman = new Personagem(Content, "pac2", TipoPersonagem.Player);
+
+            fantasmas.Add(new Personagem(Content, "ghost", TipoPersonagem.NPC).teleportTo(new Vector2(11,12)));
             
             comida = Content.Load<Texture2D>("comida");
             sem_comida = Content.Load<Texture2D>("sem_comida");
@@ -170,17 +173,20 @@ namespace Pac_Man
                     pacman.moverPacMan(Direccao.Baixo);
                 }
 
-                pacman.Update(gameTime);
+                pacman.Update(gameTime, pacman.Posicao);
+
+                foreach (Personagem fantasma in fantasmas)
+                {
+                    fantasma.Update(gameTime, pacman.Posicao);
+                }
 
                 comer();
 
-                // condiçoes que permitem o pacaman passar pelo tunel
-
-
-                base.Update(gameTime);
                 Console.WriteLine("valor de x {0}", pacman.Posicao.X);
                 Console.WriteLine("valor de y {0}", pacman.Posicao.Y);
                 ultimoMovimento = 0;
+
+                base.Update(gameTime);
                 
             }
 
@@ -201,7 +207,6 @@ namespace Pac_Man
                     if (mapa[x, y] == 1)
                     {
                         spriteBatch.Draw(bloco, new Vector2(x * 30, y * 30), Color.White);
-                        listaParedes.Add(new Rectangle(x *30, y*30, 30, 30));
                     }
                     if (mapa[x, y] == 0)
                     {
@@ -211,21 +216,18 @@ namespace Pac_Man
                 }
             }
 
-            pacman.Draw(spriteBatch, gameTime, dummyTexture);
+            pacman.Draw(spriteBatch, gameTime);
+
+            foreach (Personagem fantasma in fantasmas)
+            {
+                fantasma.Draw(spriteBatch, gameTime);
+            }
 
             //desenhar texto e mostrar pontuaçao
-            
-            
             spriteBatch.DrawString(myFont, "Score", new Vector2(650, 10), Color.Yellow);
             spriteBatch.DrawString(myFont, score+"", new Vector2(680, 50), Color.Yellow);
             spriteBatch.DrawString(myFont, "Game Time", new Vector2(620, 150), Color.Yellow);
             spriteBatch.DrawString(myFont, gametime + "sec", new Vector2(680, 190), Color.Yellow);
-
-           /* graphics.GraphicsDevice.BlendState = BlendState.AlphaBlend
-            foreach (Rectangle parede in listaParedes)
-            {
-                spriteBatch.Draw(dummyTexture, parede, Color.White);
-            }`*/
 
             spriteBatch.End();
 
