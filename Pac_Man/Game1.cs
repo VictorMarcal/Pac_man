@@ -96,7 +96,9 @@ namespace Pac_Man
 
             pacman = new Personagem(Content, "pac2", TipoPersonagem.Player);
 
-            fantasmas.Add(new Personagem(Content, "ghost", TipoPersonagem.NPC).teleportTo(new Vector2(11,12)));
+            Personagem fantasma = new Personagem(Content, "ghost", TipoPersonagem.NPC).teleportTo(new Vector2(11, 12));
+            fantasma.Velocidade = 0.3f;
+            fantasmas.Add(fantasma);
             
             comida = Content.Load<Texture2D>("comida");
             sem_comida = Content.Load<Texture2D>("sem_comida");

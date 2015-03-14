@@ -56,11 +56,11 @@ namespace Pac_Man
             set { rotacao = value; }
         }
 
-        private int velocidade;
+        private float velocidade;
         /// <summary>
         /// Velocidade a que a personagem se move
         /// </summary>
-        public int Velocidade
+        public float Velocidade
         {
             get { return velocidade; }
             set { velocidade = value; }
@@ -86,7 +86,7 @@ namespace Pac_Man
         public Personagem(ContentManager content, string assetName, TipoPersonagem tipoPersonagem)
         {
             this.Rotacao = 0f;
-            this.velocidade = 1;
+            this.velocidade = 0.7f;
             this.Posicao = new Vector2(1, 2);
             this.posicaoTarget = posicao;
             this.textura = content.Load<Texture2D>(assetName);
@@ -115,7 +115,7 @@ namespace Pac_Man
             if (Posicao != posicaoTarget)
             {
                 //Ainda não chegámos ao target, lerpar
-                posicao = Vector2.Lerp(posicao, posicaoTarget, 0.7f);
+                posicao = Vector2.Lerp(posicao, posicaoTarget, Velocidade);
             }
         }
 
@@ -131,13 +131,13 @@ namespace Pac_Man
                     if (difX > 0)
                     {
                         //Andar para a esquerda
-                        this.posicaoTarget.X += Velocidade;
+                        this.posicaoTarget.X += 1;
                         flip = SpriteEffects.FlipHorizontally;
                     }
                     else
                     {
                         //Andar para a direita
-                        this.posicaoTarget.X -= Velocidade;
+                        this.posicaoTarget.X -= 1;
                         flip = SpriteEffects.None;
                     }
                 }
@@ -147,12 +147,12 @@ namespace Pac_Man
                     if (difY > 0)
                     {
                         //Andar para baixo
-                        this.posicaoTarget.Y += Velocidade;
+                        this.posicaoTarget.Y += 1;
                     }
                     else
                     {
                         //Andar para cima
-                        this.posicaoTarget.Y -= Velocidade;
+                        this.posicaoTarget.Y -= 1;
                     }
                 }
             }
@@ -165,17 +165,17 @@ namespace Pac_Man
                 switch (direccao)
                 {
                     case Direccao.Cima:
-                        this.posicaoTarget.Y -= Velocidade;
+                        this.posicaoTarget.Y -= 1;
                         break;
                     case Direccao.Baixo:
-                        this.posicaoTarget.Y += Velocidade;
+                        this.posicaoTarget.Y += 1;
                         break;
                     case Direccao.Esquerda:
-                        this.posicaoTarget.X -= Velocidade;
+                        this.posicaoTarget.X -= 1;
                         flip = SpriteEffects.FlipHorizontally;
                         break;
                     case Direccao.Direita:
-                        this.posicaoTarget.X += Velocidade;
+                        this.posicaoTarget.X += 1;
                         flip = SpriteEffects.None;
                         break;
                     default:
