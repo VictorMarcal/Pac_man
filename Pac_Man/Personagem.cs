@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Pac_Man.AI;
 
 namespace Pac_Man
 {
@@ -78,12 +79,15 @@ namespace Pac_Man
             return tipoPersonagem;
         }
 
+        //AI
+        PathFinder pathFinder;
+
         /// <summary>
         /// Construtor
         /// </summary>
         /// <param name="content">Instância de ContentManager</param>
         /// <param name="assetName">Nome da textura desta personagem</param>
-        public Personagem(ContentManager content, string assetName, TipoPersonagem tipoPersonagem)
+        public Personagem(ContentManager content, string assetName, TipoPersonagem tipoPersonagem, byte[,] mapa)
         {
             this.Rotacao = 0f;
             this.velocidade = 0.7f;
@@ -92,6 +96,10 @@ namespace Pac_Man
             this.textura = content.Load<Texture2D>(assetName);
             this.flip = SpriteEffects.None;
             this.tipoPersonagem = tipoPersonagem;
+            if (tipoPersonagem == Pac_Man.TipoPersonagem.NPC)
+            {
+                pathFinder = new PathFinder(mapa);
+            }
         }
 
         public Personagem teleportTo(Vector2 posicao)
@@ -101,11 +109,15 @@ namespace Pac_Man
             return this;
         }
 
-        public void Update(GameTime gameTime, Vector2 posicaoPacman, byte[,] mapa)
+        public void Update(GameTime gameTime, Vector2 posicaoPacman)
         {
             if (tipoPersonagem == Pac_Man.TipoPersonagem.NPC)
             {
-                moverFantasma(posicaoPacman, mapa);
+                if (Posicao == posicaoTarget)
+                {
+                    moverFantasma(posicaoPacman);
+                }
+                
             }
             if (Vector2.Distance(posicaoTarget, Posicao) < 0.1f)
             {
@@ -119,69 +131,9 @@ namespace Pac_Man
             }
         }
 
-        private int moverFantasma(Vector2 posicaoPacman, byte[,] mapa)
+        private void moverFantasma(Vector2 posicaoPacman)
         {
-            bool podeMoverCima = false,
-                 podeMoverBaixo = false,
-                 podeMoverEsquerda = false,
-                 podeMoverDireita = false, 
-                 moveu = false;
-
-            podeMoverCima = !Colisoes.paredeEncontrada(mapa, new Vector2(this.Posicao.X, this.Posicao.Y - 1));
-            podeMoverBaixo = !Colisoes.paredeEncontrada(mapa, new Vector2(this.Posicao.X, this.Posicao.Y + 1));
-            podeMoverEsquerda = !Colisoes.paredeEncontrada(mapa, new Vector2(this.Posicao.X - 1, this.Posicao.Y));
-            podeMoverDireita = !Colisoes.paredeEncontrada(mapa, new Vector2(this.Posicao.X + 1, this.Posicao.Y));
-
-            if (Posicao == posicaoTarget)
-            {
-                float difX = posicaoPacman.X - Posicao.X;
-                float difY = posicaoPacman.Y - Posicao.Y;
-                
-                if (difX == 0 && difY == 0)
-                {
-                    //estamos em cima do pacman!
-                    return 1;
-                }
-
-                if (difX < 0 && difY < 0)
-                {
-                    //O pacman está acima e à esquerda
-                    if (podeMoverEsquerda)
-                    {
-                        this.posicaoTarget.X -= 1;
-                        flip = SpriteEffects.FlipHorizontally;
-                        return 1;
-                    }
-                    else
-                    {
-                        //Não podemos ir para a esquerda, vamos para cima
-                        if (podeMoverCima)
-                        {
-                            this.posicaoTarget.Y -= 1;
-                            return 1;
-                        }
-                        else
-                        {
-                            //Não podemos andar nem para a esquerda nem para cima..
-                            if (podeMoverBaixo)
-                            {
-                                this.posicaoTarget.Y += 1;
-                                return 1;
-                            }
-                            else
-                            {
-                                if (podeMoverDireita)
-                                {
-                                    this.posicaoTarget.X += 1;
-                                    flip = SpriteEffects.None;
-                                    return 1;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            return 1;
+            this.posicaoTarget = pathFinder.FindPath(this.Posicao, posicaoPacman).First();
         }
 
         public void moverPacMan(Direccao direccao)

@@ -94,11 +94,15 @@ namespace Pac_Man
             spriteBatch = new SpriteBatch(GraphicsDevice);
             bloco = Content.Load<Texture2D>("parede");
 
-            pacman = new Personagem(Content, "pac2", TipoPersonagem.Player);
+            pacman = new Personagem(Content, "pac2", TipoPersonagem.Player, mapa);
 
-            Personagem fantasma = new Personagem(Content, "ghost", TipoPersonagem.NPC).teleportTo(new Vector2(11, 12));
-            fantasma.Velocidade = 0.3f;
+            Personagem fantasma = new Personagem(Content, "ghost", TipoPersonagem.NPC, mapa).teleportTo(new Vector2(11, 12));
+            fantasma.Velocidade = 0.6f;
             fantasmas.Add(fantasma);
+
+            Personagem fantasma2 = new Personagem(Content, "ghost", TipoPersonagem.NPC, mapa).teleportTo(new Vector2(11, 10));
+            fantasma2.Velocidade = 0.6f;
+            fantasmas.Add(fantasma2);
             
             comida = Content.Load<Texture2D>("comida");
             sem_comida = Content.Load<Texture2D>("sem_comida");
@@ -175,11 +179,11 @@ namespace Pac_Man
                     pacman.moverPacMan(Direccao.Baixo);
                 }
 
-                pacman.Update(gameTime, pacman.Posicao, mapa);
+                pacman.Update(gameTime, pacman.Posicao);
 
                 foreach (Personagem fantasma in fantasmas)
                 {
-                    fantasma.Update(gameTime, pacman.Posicao, mapa);
+                    fantasma.Update(gameTime, pacman.Posicao);
                 }
 
                 comer();
