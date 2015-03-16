@@ -227,7 +227,8 @@ namespace Pac_Man.AI
         /// <summary>
         /// Finds the optimal path from one point to another.
         /// </summary>
-        public List<Vector2> FindPath(Vector2 startPoint, Vector2 endPoint)
+        public List<Vector2> FindPath(Vector2 startPoint, Vector2 endPoint, List<Personagem> listaFantasmas, 
+                                      Personagem fantasmaAtivo)
         {
             // Only try to find a path if the start and end points are different.
             if (startPoint == endPoint)
@@ -300,7 +301,17 @@ namespace Pac_Man.AI
                     // i) : Make sure that the neighbouring node can 
                     //      be walked across. 
                     //////////////////////////////////////////////////
-                    if (neighbor == null || neighbor.Caminho == false)
+
+                    bool temFantasma = false;
+                    foreach (Personagem fantasma in listaFantasmas)
+                    {
+                        if (neighbor != null && fantasmaAtivo != fantasma && fantasma.Posicao == neighbor.Posicao)
+                        {
+                            temFantasma = true;
+                        }
+                    }
+
+                    if (neighbor == null || neighbor.Caminho == false || temFantasma)
                     {
                         continue;
                     }

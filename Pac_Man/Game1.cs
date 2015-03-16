@@ -179,11 +179,11 @@ namespace Pac_Man
                     pacman.moverPacMan(Direccao.Baixo);
                 }
 
-                pacman.Update(gameTime, pacman.Posicao);
+                pacman.Update(gameTime, pacman.Posicao, fantasmas);
 
                 foreach (Personagem fantasma in fantasmas)
                 {
-                    fantasma.Update(gameTime, pacman.Posicao);
+                    fantasma.Update(gameTime, pacman.Posicao, fantasmas);
                 }
 
                 comer();
