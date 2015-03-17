@@ -198,15 +198,19 @@ namespace Pac_Man
                 }
                 if (teclado.IsKeyDown(Keys.Space))
                 {
-                    if (Utils.existePortal(mapa, 4) && Utils.posicaoPortalSaida(mapa) != pacman.Posicao)
+                    if (Utils.existePortal(mapa, 4) && !Utils.existePortal(mapa, 5) && Utils.posicaoPortalSaida(mapa) != pacman.Posicao)
                     {
                         //Já existe portal de saída, vamos colocar um portal de entrada
                         mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 5;
                     }
                     else
                     {
-                        //Ainda não existe portal de saida, vamos colocar portal de saida
-                        mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 4;
+                        if (!Utils.existePortal(mapa, 4))
+                        {
+                            //Ainda não existe portal de saida, vamos colocar portal de saida
+                            mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 4;
+                        }
+                        
                     }
                 }
 

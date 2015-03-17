@@ -141,7 +141,7 @@ namespace Pac_Man
 
                 //Player
 
-                if (mapa[(int)Posicao.X, (int)Posicao.Y] == 5 && contadorPortalEntrada > 100)
+                if (mapa[(int)Posicao.X, (int)Posicao.Y] == 5 && contadorPortalEntrada > 75)
                 {
                     //Estamos em cima de um portal de entrada, teleport!
                     this.teleportTo(Utils.posicaoPortalSaida(mapa));

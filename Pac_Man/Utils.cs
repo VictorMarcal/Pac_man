@@ -61,7 +61,7 @@ namespace Pac_Man
                 {
                     if (mapa[x, y] == 4 || mapa[x, y] == 5)
                     {
-                        mapa[x, y] = 0;
+                        mapa[x, y] = 2;
                     }
                 }
             }
