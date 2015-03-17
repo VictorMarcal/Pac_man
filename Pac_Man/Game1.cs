@@ -49,6 +49,7 @@ namespace Pac_Man
          * 3 - Caminho sem comida ?
          * 4 - Portal de saida
          * 5 - Portal de entrada
+         * 6 - Bomba
         */
         
         KeyboardState teclado;
@@ -330,14 +331,15 @@ namespace Pac_Man
         private void Bomba()
         {
             // expressões que difinem o acontecimento na vizinhança da bomba
-            if (tempoExpulão >= 1f)
+            if (tempoExpulão >= 0.5f)
             {
 
                 //explosão em cruz
-                mapa[(int)PosiçãoBomba.X - 1, (int)PosiçãoBomba.Y] = 0;
-                mapa[(int)PosiçãoBomba.X + 1, (int)PosiçãoBomba.Y] = 0;
-                mapa[(int)PosiçãoBomba.X, (int)PosiçãoBomba.Y - 1] = 0;
-                mapa[(int)PosiçãoBomba.X, (int)PosiçãoBomba.Y + 1] = 0;
+                mapa[(int)PosiçãoBomba.X - 1, (int)PosiçãoBomba.Y] = 2;
+                mapa[(int)PosiçãoBomba.X + 1, (int)PosiçãoBomba.Y] = 2;
+                mapa[(int)PosiçãoBomba.X, (int)PosiçãoBomba.Y - 1] = 2;
+                mapa[(int)PosiçãoBomba.X, (int)PosiçãoBomba.Y + 1] = 2;
+                mapa[(int)PosiçãoBomba.X, (int)PosiçãoBomba.Y] = 2;
                 score -= 100;
                 bombaLargada = false;
                 tempoExpulão = 0;
