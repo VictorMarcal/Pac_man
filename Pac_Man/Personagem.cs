@@ -46,6 +46,10 @@ namespace Pac_Man
         }
 
         private Vector2 posicaoTarget;
+        public Vector2 getPosicaoTarget()
+        {
+            return posicaoTarget;
+        }
 
         private float rotacao;
         /// <summary>
@@ -81,13 +85,18 @@ namespace Pac_Man
 
         //AI
         PathFinder pathFinder;
+        List<Vector2> path;
+
+        Color cor;
+
+        int pathOffset;
 
         /// <summary>
         /// Construtor
         /// </summary>
         /// <param name="content">Instância de ContentManager</param>
         /// <param name="assetName">Nome da textura desta personagem</param>
-        public Personagem(ContentManager content, string assetName, TipoPersonagem tipoPersonagem, byte[,] mapa)
+        public Personagem(ContentManager content, string assetName, TipoPersonagem tipoPersonagem, byte[,] mapa, Color cor, int pathOffset)
         {
             this.Rotacao = 0f;
             this.velocidade = 0.7f;
@@ -98,8 +107,11 @@ namespace Pac_Man
             this.tipoPersonagem = tipoPersonagem;
             if (tipoPersonagem == Pac_Man.TipoPersonagem.NPC)
             {
-                pathFinder = new PathFinder(mapa);
+                pathFinder = new PathFinder(mapa, null, null);
             }
+            this.cor = cor;
+            this.path = new List<Vector2>();
+            this.pathOffset = pathOffset;
         }
 
         public Personagem teleportTo(Vector2 posicao)
@@ -109,13 +121,13 @@ namespace Pac_Man
             return this;
         }
 
-        public void Update(GameTime gameTime, Vector2 posicaoPacman)
+        public void Update(GameTime gameTime, Vector2 posicaoPacman, byte[,] mapa, List<Personagem> listaFantasmas)
         {
             if (tipoPersonagem == Pac_Man.TipoPersonagem.NPC)
             {
                 if (Posicao == posicaoTarget)
                 {
-                    moverFantasma(posicaoPacman);
+                    moverFantasma(posicaoPacman, mapa, listaFantasmas, this);
                 }
                 
             }
@@ -131,9 +143,14 @@ namespace Pac_Man
             }
         }
 
-        private void moverFantasma(Vector2 posicaoPacman)
+        private void moverFantasma(Vector2 posicaoPacman, byte[,] mapa, List<Personagem> listaFantasmas, Personagem fantasma)
         {
-            this.posicaoTarget = pathFinder.FindPath(this.Posicao, posicaoPacman).First();
+            path = pathFinder.FindPath(this.Posicao, posicaoPacman, mapa, listaFantasmas, this);
+            if (path.Count > 0)
+            {
+                this.posicaoTarget = path.First();
+            }
+            
         }
 
         public void moverPacMan(Direccao direccao)
@@ -164,7 +181,22 @@ namespace Pac_Man
 
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
-            spriteBatch.Draw(Textura, new Vector2(Posicao.X * 30 + Textura.Width / 4, Posicao.Y * 30 + Textura.Height / 4), null, Color.White, this.Rotacao, Vector2.Zero, 1f, flip, 0f);
+            spriteBatch.Draw(Textura, new Vector2(Posicao.X * 30 + Textura.Width / 4, Posicao.Y * 30 + Textura.Height / 4), null, cor, this.Rotacao, Vector2.Zero, 1f, flip, 0f);
+            
+            /*
+             * DEBUG
+             * Desenha os caminhos calculados pelos fantasmas
+             * 
+             */
+            //if (path.Count > 0)
+            //{
+            //    foreach (Vector2 posicao in path)
+            //    {
+            //        spriteBatch.Draw(Textura, new Vector2(posicao.X * 30 + Textura.Width / 4 + pathOffset, posicao.Y * 30 + Textura.Height / 4 + pathOffset), null, cor, this.Rotacao, Vector2.Zero, 0.2f, SpriteEffects.None, 0f);
+            //    }
+
+            //}
+            
         }
 
         /// <summary>

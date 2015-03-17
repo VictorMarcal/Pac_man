@@ -16,7 +16,7 @@ namespace Pac_Man.AI
         /// <summary>
         /// Guarda uma lista de posções do mapa em que se pode andar
         /// </summary>
-        private SearchNode[,] searchNodes;
+        public SearchNode[,] searchNodes;
 
         /// <summary>
         /// Largura do mapa
@@ -45,21 +45,22 @@ namespace Pac_Man.AI
         /// Construtor
         /// </summary>
         /// <param name="mapa">A matriz do mapa</param>
-        public PathFinder(byte[,] mapa)
+        public PathFinder(byte[,] mapa, List<Personagem> listaFantasmas, Personagem fantasmaAtivo)
         {
             this.largura = mapa.GetLength(0);
             this.altura = mapa.GetLength(1);
-            InicializarSearchNodes(mapa);
+            //InicializarSearchNodes(mapa, null, null);
         }
 
         /// <summary>
         /// Divide a matriz do mapa num grapho de nodes
         /// </summary>
         /// <param name="mapa"></param>
-        private void InicializarSearchNodes(byte[,] mapa)
+        private void InicializarSearchNodes(byte[,] mapa, List<Personagem> listaFantasmas = null, Personagem fantasmaAtivo = null)
         {
-            searchNodes = new SearchNode[largura, altura];
-
+            if (searchNodes == null)
+                searchNodes = new SearchNode[largura, altura];
+            
             //Vamos criar um nó para cada um dos espaços do mapa
             for (int x = 0; x < largura; x++)
             {
@@ -70,12 +71,12 @@ namespace Pac_Man.AI
                     posicao.X = x;
                     posicao.Y = y;
                     node.Posicao = posicao;
-
+                    
                     //Só podemos andar nos espaços da matriz que têm 0
                     node.Caminho = mapa[x, y] == 0;
 
                     //Só queremos guardar na lista caminhos em que se pode andar
-                    if (node.Caminho)
+                    if (node.Caminho && !temFantasma(listaFantasmas, fantasmaAtivo, x, y))
                     {
                         node.Vizinhos = new SearchNode[4];
                         searchNodes[x, y] = node;
@@ -91,7 +92,7 @@ namespace Pac_Man.AI
                     SearchNode node = searchNodes[x, y];
 
                     //Só nos interessam os nós em que podemos andar
-                    if (node == null || !node.Caminho)
+                    if (node == null || !node.Caminho || temFantasma(listaFantasmas, fantasmaAtivo, (int)node.Posicao.X, (int)node.Posicao.Y))
                     {
                         continue;
                     }
@@ -119,7 +120,7 @@ namespace Pac_Man.AI
                         SearchNode vizinho = searchNodes[(int)position.X, (int)position.Y];
 
                         //Só nos interessam os vizinhos em que se pode andar
-                        if (vizinho == null || !vizinho.Caminho)
+                        if (vizinho == null || !vizinho.Caminho || temFantasma(listaFantasmas, fantasmaAtivo, (int)vizinho.Posicao.X, (int)vizinho.Posicao.Y))
                         {
                             continue;
                         }
@@ -131,6 +132,26 @@ namespace Pac_Man.AI
                 }
             }
 
+        }
+
+        private bool temFantasma(List<Personagem> listaFantasmas, Personagem fantasmaAtivo, int x, int y)
+        {
+            if (listaFantasmas != null)
+            {
+                foreach (Personagem fantasma in listaFantasmas)
+                {
+                    if (fantasma != fantasmaAtivo)
+                    {
+                        if ((int)fantasma.getPosicaoTarget().X == x && (int)fantasma.getPosicaoTarget().Y == y ||
+                            (int)fantasma.Posicao.X == x && (int)fantasma.Posicao.Y == y)
+                        {
+                            return true;
+                        }
+                    }
+
+                }
+            }
+            return false;
         }
 
         /// <summary>
@@ -169,6 +190,9 @@ namespace Pac_Man.AI
 
                     node.DistanciaViajada = float.MaxValue;
                     node.DistanciaAlvo = float.MaxValue;
+
+                    node.Parent = null;
+
                 }
             }
         }
@@ -227,8 +251,9 @@ namespace Pac_Man.AI
         /// <summary>
         /// Finds the optimal path from one point to another.
         /// </summary>
-        public List<Vector2> FindPath(Vector2 startPoint, Vector2 endPoint)
+        public List<Vector2> FindPath(Vector2 startPoint, Vector2 endPoint, byte[,] mapa, List<Personagem> listaFantasmas, Personagem fantasma)
         {
+
             // Only try to find a path if the start and end points are different.
             if (startPoint == endPoint)
             {
@@ -240,7 +265,8 @@ namespace Pac_Man.AI
             //          and G values in case they are still set from the last 
             //          time we tried to find a path. 
             /////////////////////////////////////////////////////////////////////
-            ResetSearchNodes();
+            if(searchNodes != null) ResetSearchNodes();
+            InicializarSearchNodes(mapa, listaFantasmas, fantasma);
 
             // Store references to the start and end nodes for convenience.
             SearchNode startNode = searchNodes[(int)startPoint.X, (int)startPoint.Y];
@@ -300,7 +326,7 @@ namespace Pac_Man.AI
                     // i) : Make sure that the neighbouring node can 
                     //      be walked across. 
                     //////////////////////////////////////////////////
-                    if (neighbor == null || neighbor.Caminho == false)
+                    if (neighbor == null || neighbor.Caminho == false || temFantasma(listaFantasmas, fantasma, (int)neighbor.Posicao.X, (int)neighbor.Posicao.Y))
                     {
                         continue;
                     }

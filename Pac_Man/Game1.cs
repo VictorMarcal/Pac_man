@@ -37,8 +37,8 @@ namespace Pac_Man
         KeyboardState teclado;
         byte[,] mapa ={{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
                         {1,0,0,0,0,1,1,0,0,0,0,0,0,1,1,0,0,0,0,1},
-                        {1,0,1,1,0,1,1,0,1,1,0,1,0,1,1,0,1,1,0,1},
-                        {1,0,1,1,0,1,1,0,1,1,0,1,0,1,1,0,1,1,0,1},
+                        {1,0,1,0,0,1,1,0,1,1,0,1,0,1,1,0,0,1,0,1},
+                        {1,0,1,0,0,1,1,0,1,1,0,1,0,1,1,0,0,1,0,1},
                         {1,0,1,1,0,1,1,0,0,0,0,1,0,1,1,0,1,1,0,1},
                         {1,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,0,1},
                         {1,0,1,1,1,1,1,0,1,1,0,1,0,1,1,1,1,1,0,1},
@@ -50,8 +50,8 @@ namespace Pac_Man
                         {1,0,1,1,1,1,1,0,1,0,1,1,0,1,1,1,1,1,0,1},
                         {1,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,0,1},
                         {1,0,1,1,0,1,1,0,1,0,1,1,0,1,1,0,1,1,0,1},
-                        {1,0,1,1,0,1,1,0,1,0,0,0,0,1,1,0,1,1,0,1},
-                        {1,0,1,1,0,0,0,0,1,0,1,1,0,0,0,0,1,1,0,1},
+                        {1,0,1,0,0,1,1,0,1,0,0,0,0,1,1,0,0,1,0,1},
+                        {1,0,1,0,0,0,0,0,1,0,1,1,0,0,0,0,0,1,0,1},
                         {1,0,1,1,0,1,1,0,1,0,1,1,0,1,1,0,1,1,0,1},
                         {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
                         {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
@@ -94,15 +94,19 @@ namespace Pac_Man
             spriteBatch = new SpriteBatch(GraphicsDevice);
             bloco = Content.Load<Texture2D>("parede");
 
-            pacman = new Personagem(Content, "pac2", TipoPersonagem.Player, mapa);
+            pacman = new Personagem(Content, "pac2", TipoPersonagem.Player, mapa, Color.Yellow, 0);
 
-            Personagem fantasma = new Personagem(Content, "ghost", TipoPersonagem.NPC, mapa).teleportTo(new Vector2(11, 12));
-            fantasma.Velocidade = 0.6f;
+            Personagem fantasma = new Personagem(Content, "ghost", TipoPersonagem.NPC, mapa, Color.Green, 1).teleportTo(new Vector2(11, 12));
+            fantasma.Velocidade = 0.5f;
             fantasmas.Add(fantasma);
 
-            Personagem fantasma2 = new Personagem(Content, "ghost", TipoPersonagem.NPC, mapa).teleportTo(new Vector2(11, 10));
-            fantasma2.Velocidade = 0.6f;
+            Personagem fantasma2 = new Personagem(Content, "ghost", TipoPersonagem.NPC, mapa, Color.Red, 6).teleportTo(new Vector2(11, 10));
+            fantasma2.Velocidade = 0.5f;
             fantasmas.Add(fantasma2);
+
+            Personagem fantasma3 = new Personagem(Content, "ghost", TipoPersonagem.NPC, mapa, Color.Blue, 4).teleportTo(new Vector2(11, 8));
+            fantasma3.Velocidade = 0.5f;
+            fantasmas.Add(fantasma3);
             
             comida = Content.Load<Texture2D>("comida");
             sem_comida = Content.Load<Texture2D>("sem_comida");
@@ -179,11 +183,11 @@ namespace Pac_Man
                     pacman.moverPacMan(Direccao.Baixo);
                 }
 
-                pacman.Update(gameTime, pacman.Posicao);
+                pacman.Update(gameTime, pacman.Posicao, mapa, fantasmas);
 
                 foreach (Personagem fantasma in fantasmas)
                 {
-                    fantasma.Update(gameTime, pacman.Posicao);
+                    fantasma.Update(gameTime, pacman.Posicao, mapa, fantasmas);
                 }
 
                 comer();
