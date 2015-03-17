@@ -29,3 +29,6 @@ C:\Users\Joana\Documents\GitHub\Pac_man\Pac_Man\bin\Windows\Release\SharpDX.Dire
 C:\Users\Joana\Documents\GitHub\Pac_man\Pac_Man\obj\x86\Release\Pac_Man.csprojResolveAssemblyReference.cache
 C:\Users\Joana\Documents\GitHub\Pac_man\Pac_Man\obj\x86\Release\Pac_Man.exe
 C:\Users\Joana\Documents\GitHub\Pac_man\Pac_Man\obj\x86\Release\Pac_Man.pdb
+C:\Users\Joana\Documents\GitHub\Pac_man\Pac_Man\bin\Windows\Release\Content\portal_entrada.png
+C:\Users\Joana\Documents\GitHub\Pac_man\Pac_Man\bin\Windows\Release\Content\portal_saida.png
+C:\Users\Joana\Documents\GitHub\Pac_man\Pac_Man\bin\Windows\Release\Content\Bomb.png

@@ -35,7 +35,9 @@ namespace Pac_Man
         int gametime;
         bool bombaLargada = false;
         float tempoExpulão;
+        int numerodeBombasimplantadas=0;
         Vector2 PosiçãoBomba;
+        Texture2D bomba;
 
         Texture2D portal_saida;
         Texture2D portal_entrada;
@@ -129,6 +131,8 @@ namespace Pac_Man
             portal_saida = Content.Load<Texture2D>("portal_saida");
             portal_entrada = Content.Load<Texture2D>("portal_entrada");
 
+            bomba = Content.Load<Texture2D>("Bomb");
+
             dummyTexture = new Texture2D(GraphicsDevice, 1, 1);
             dummyTexture.SetData(new Color[] { Color.White });
 
@@ -146,6 +150,7 @@ namespace Pac_Man
             pacman.Dispose();
             comida.Dispose();
             sem_comida.Dispose();
+            bomba.Dispose();
             
         }
 
@@ -213,14 +218,18 @@ namespace Pac_Man
                         mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 4;
                     }
                 }
-                if (teclado.IsKeyDown(Keys.LeftShift))
+                if (teclado.IsKeyDown(Keys.B))
                 {
-                    if (score > 100)
+                    if (score > 100&& numerodeBombasimplantadas==0)
                     {
-                        PosiçãoBomba = new Vector2(pacman.Posicao.X, pacman.Posicao.Y);
-                        bombaLargada = true;
                         
-
+                        // posição da bomba passa a ser igual à posição do pac neste instante de tempo!!
+                        PosiçãoBomba = new Vector2(pacman.Posicao.X, pacman.Posicao.Y);
+                        mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 6;
+                       
+                        bombaLargada = true;
+                        numerodeBombasimplantadas = 1;
+                        
                     }
                 }
                 if (bombaLargada == true) 
@@ -274,6 +283,9 @@ namespace Pac_Man
                         case 5:
                             spriteBatch.Draw(portal_entrada, new Vector2(x * 30, y * 30), Color.White);
                             break;
+                        case 6:
+                            spriteBatch.Draw(bomba, new Vector2(x*30, y*30), Color.White);
+                            break;
                         default:
                             break;
                     }
@@ -292,6 +304,8 @@ namespace Pac_Man
             spriteBatch.DrawString(myFont, score+"", new Vector2(680, 50), Color.Yellow);
             spriteBatch.DrawString(myFont, "Game Time", new Vector2(620, 150), Color.Yellow);
             spriteBatch.DrawString(myFont, gametime + "sec", new Vector2(680, 190), Color.Yellow);
+
+            
 
             spriteBatch.End();
 
@@ -315,12 +329,8 @@ namespace Pac_Man
 
         private void Bomba()
         {
-            
-            
-            
-
-
-            if (tempoExpulão >= 0.09f)
+            // expressões que difinem o acontecimento na vizinhança da bomba
+            if (tempoExpulão >= 1f)
             {
 
                 //explosão em cruz
@@ -331,6 +341,7 @@ namespace Pac_Man
                 score -= 100;
                 bombaLargada = false;
                 tempoExpulão = 0;
+                numerodeBombasimplantadas = 0;
             }
                     
                     
