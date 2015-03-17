@@ -36,7 +36,18 @@ namespace Pac_Man
         bool bombaLargada = false;
         float tempoExpulão;
         Vector2 PosiçãoBomba;
-        
+
+        Texture2D portal_saida;
+        Texture2D portal_entrada;
+
+        /*
+         * 0 - Caminho / Comida
+         * 1 - Parede
+         * 2 - ???
+         * 3 - Caminho sem comida ?
+         * 4 - Portal de saida
+         * 5 - Portal de entrada
+        */
         
         KeyboardState teclado;
         byte[,] mapa ={{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
@@ -115,6 +126,9 @@ namespace Pac_Man
             comida = Content.Load<Texture2D>("comida");
             sem_comida = Content.Load<Texture2D>("sem_comida");
 
+            portal_saida = Content.Load<Texture2D>("portal_saida");
+            portal_entrada = Content.Load<Texture2D>("portal_entrada");
+
             dummyTexture = new Texture2D(GraphicsDevice, 1, 1);
             dummyTexture.SetData(new Color[] { Color.White });
 
@@ -186,6 +200,19 @@ namespace Pac_Man
                 {
                     pacman.moverPacMan(Direccao.Baixo);
                 }
+                if (teclado.IsKeyDown(Keys.Space))
+                {
+                    if (Utils.existePortal(mapa, 4) && Utils.posicaoPortalSaida(mapa) != pacman.Posicao)
+                    {
+                        //Já existe portal de saída, vamos colocar um portal de entrada
+                        mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 5;
+                    }
+                    else
+                    {
+                        //Ainda não existe portal de saida, vamos colocar portal de saida
+                        mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 4;
+                    }
+                }
                 if (teclado.IsKeyDown(Keys.LeftShift))
                 {
                     if (score > 100)
@@ -233,14 +260,22 @@ namespace Pac_Man
             {
                 for (int y = 0; y < 20; y++)
                 {
-                    if (mapa[x, y] == 1)
+                    switch (mapa[x, y])
                     {
-                        spriteBatch.Draw(bloco, new Vector2(x * 30, y * 30), Color.White);
-                    }
-                    if (mapa[x, y] == 0)
-                    {
-                        spriteBatch.Draw(comida, new Vector2((x * 30) + 12, (y * 30) + 12), Color.White);
-
+                        case 0:
+                            spriteBatch.Draw(comida, new Vector2((x * 30) + 12, (y * 30) + 12), Color.White);
+                            break;
+                        case 1:
+                            spriteBatch.Draw(bloco, new Vector2(x * 30, y * 30), Color.White);
+                            break;
+                        case 4:
+                            spriteBatch.Draw(portal_saida, new Vector2(x * 30, y * 30), Color.White);
+                            break;
+                        case 5:
+                            spriteBatch.Draw(portal_entrada, new Vector2(x * 30, y * 30), Color.White);
+                            break;
+                        default:
+                            break;
                     }
                 }
             }
