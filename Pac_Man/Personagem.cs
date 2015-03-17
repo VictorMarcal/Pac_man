@@ -109,13 +109,13 @@ namespace Pac_Man
             return this;
         }
 
-        public void Update(GameTime gameTime, Vector2 posicaoPacman, List<Personagem> listaFantasmas)
+        public void Update(GameTime gameTime, Vector2 posicaoPacman)
         {
             if (tipoPersonagem == Pac_Man.TipoPersonagem.NPC)
             {
                 if (Posicao == posicaoTarget)
                 {
-                    moverFantasma(posicaoPacman, listaFantasmas);
+                    moverFantasma(posicaoPacman);
                 }
                 
             }
@@ -131,9 +131,9 @@ namespace Pac_Man
             }
         }
 
-        private void moverFantasma(Vector2 posicaoPacman, List<Personagem> listaFantamas)
+        private void moverFantasma(Vector2 posicaoPacman)
         {
-            this.posicaoTarget = pathFinder.FindPath(this.Posicao, posicaoPacman, listaFantamas, this).First();
+            this.posicaoTarget = pathFinder.FindPath(this.Posicao, posicaoPacman).First();
         }
 
         public void moverPacMan(Direccao direccao)
