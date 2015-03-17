@@ -33,6 +33,10 @@ namespace Pac_Man
         float ultimoMovimento = 0f;
         float time;
         int gametime;
+        bool bombaLargada = false;
+        float tempoExpulão;
+        Vector2 PosiçãoBomba;
+        
         
         KeyboardState teclado;
         byte[,] mapa ={{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
@@ -182,6 +186,20 @@ namespace Pac_Man
                 {
                     pacman.moverPacMan(Direccao.Baixo);
                 }
+                if (teclado.IsKeyDown(Keys.LeftShift))
+                {
+                    if (score > 100)
+                    {
+                        PosiçãoBomba = new Vector2(pacman.Posicao.X, pacman.Posicao.Y);
+                        bombaLargada = true;
+                        
+
+                    }
+                }
+                if (bombaLargada == true) 
+                {
+                    tempoExpulão += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                }
 
                 pacman.Update(gameTime, pacman.Posicao, mapa, fantasmas);
 
@@ -191,7 +209,8 @@ namespace Pac_Man
                 }
 
                 comer();
-
+                Bomba();
+                
                 Console.WriteLine("valor de x {0}", pacman.Posicao.X);
                 Console.WriteLine("valor de y {0}", pacman.Posicao.Y);
                 ultimoMovimento = 0;
@@ -255,6 +274,33 @@ namespace Pac_Man
                 mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 2;
                 score+=10;
             }
+        }
+        
+
+
+        private void Bomba()
+        {
+            
+            
+            
+
+
+            if (tempoExpulão >= 0.09f)
+            {
+
+                //explosão em cruz
+                mapa[(int)PosiçãoBomba.X - 1, (int)PosiçãoBomba.Y] = 0;
+                mapa[(int)PosiçãoBomba.X + 1, (int)PosiçãoBomba.Y] = 0;
+                mapa[(int)PosiçãoBomba.X, (int)PosiçãoBomba.Y - 1] = 0;
+                mapa[(int)PosiçãoBomba.X, (int)PosiçãoBomba.Y + 1] = 0;
+                score -= 100;
+                bombaLargada = false;
+                tempoExpulão = 0;
+            }
+                    
+                    
+                
+            
         }
        
     }
