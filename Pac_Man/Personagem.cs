@@ -89,6 +89,8 @@ namespace Pac_Man
 
         Color cor;
 
+        int contadorPortalEntrada;
+
         int pathOffset;
 
         /// <summary>
@@ -112,6 +114,7 @@ namespace Pac_Man
             this.cor = cor;
             this.path = new List<Vector2>();
             this.pathOffset = pathOffset;
+            this.contadorPortalEntrada = 0;
         }
 
         public Personagem teleportTo(Vector2 posicao)
@@ -125,12 +128,35 @@ namespace Pac_Man
         {
             if (tipoPersonagem == Pac_Man.TipoPersonagem.NPC)
             {
+                //Fantasmas
+
                 if (Posicao == posicaoTarget)
                 {
                     moverFantasma(posicaoPacman, mapa, listaFantasmas, this);
                 }
-                
+
             }
+            else
+            {
+
+                //Player
+
+                if (mapa[(int)Posicao.X, (int)Posicao.Y] == 5 && contadorPortalEntrada > 100)
+                {
+                    //Estamos em cima de um portal de entrada, teleport!
+                    this.teleportTo(Utils.posicaoPortalSaida(mapa));
+                    Utils.eliminarPortais(mapa);
+                    contadorPortalEntrada = 0;
+                }
+
+                if (Utils.existePortal(mapa, 5))
+                {
+                    contadorPortalEntrada += gameTime.ElapsedGameTime.Milliseconds;
+                }
+
+            }
+
+            //Comum a NPC's e Player
             if (Vector2.Distance(posicaoTarget, Posicao) < 0.1f)
             {
                 //Se estamos suficientemente perto do target, fazer snap para o target
@@ -141,6 +167,7 @@ namespace Pac_Man
                 //Ainda não chegámos ao target, lerpar
                 posicao = Vector2.Lerp(posicao, posicaoTarget, Velocidade);
             }
+            
         }
 
         private void moverFantasma(Vector2 posicaoPacman, byte[,] mapa, List<Personagem> listaFantasmas, Personagem fantasma)
