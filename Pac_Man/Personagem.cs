@@ -124,7 +124,7 @@ namespace Pac_Man
             return this;
         }
 
-        public void Update(GameTime gameTime, Vector2 posicaoPacman, byte[,] mapa, List<Personagem> listaFantasmas)
+        public void Update(GameTime gameTime, List<Personagem> pacmans, byte[,] mapa, List<Personagem> listaFantasmas)
         {
             if (tipoPersonagem == Pac_Man.TipoPersonagem.NPC)
             {
@@ -133,6 +133,18 @@ namespace Pac_Man
 
                 if (Posicao == posicaoTarget)
                 {
+
+                    //Escolher o pacman mais perto
+                    float distancia = float.MaxValue;
+                    Vector2 posicaoPacman = Vector2.Zero;
+                    foreach (Personagem pacman in pacmans)
+                    {
+                        if (Vector2.Distance(this.Posicao, pacman.Posicao) < distancia)
+                        {
+                            distancia = Vector2.Distance(this.Posicao, pacman.Posicao);
+                            posicaoPacman = pacman.Posicao;
+                        }
+                    }
                     moverFantasma(posicaoPacman, mapa, listaFantasmas, this);
                 }
 

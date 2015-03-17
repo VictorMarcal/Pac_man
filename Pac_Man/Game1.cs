@@ -23,8 +23,8 @@ namespace Pac_Man
         Texture2D comida;
         Texture2D sem_comida;
         
-        Personagem pacman;
         List<Personagem> fantasmas;
+        List<Personagem> pacmans;
 
         SpriteFont myFont;
         int score=0;
@@ -98,6 +98,7 @@ namespace Pac_Man
             teclado = new KeyboardState();
 
             fantasmas = new List<Personagem>();
+            pacmans = new List<Personagem>();
 
             base.Initialize();
         }
@@ -112,7 +113,10 @@ namespace Pac_Man
             spriteBatch = new SpriteBatch(GraphicsDevice);
             bloco = Content.Load<Texture2D>("parede");
 
-            pacman = new Personagem(Content, "pac2", TipoPersonagem.Player, mapa, Color.Yellow, 0);
+            Personagem pac = new Personagem(Content, "pac2", TipoPersonagem.Player, mapa, Color.Yellow, 0);
+            pacmans.Add(pac);
+            pac = new Personagem(Content, "pac2", TipoPersonagem.Player, mapa, Color.Yellow, 0).teleportTo(new Vector2(11, 5));
+            pacmans.Add(pac);
 
             Personagem fantasma = new Personagem(Content, "ghost", TipoPersonagem.NPC, mapa, Color.Green, 1).teleportTo(new Vector2(11, 12));
             fantasma.Velocidade = 0.5f;
@@ -148,7 +152,10 @@ namespace Pac_Man
         {
             // TODO: Unload any non ContentManager content here
             bloco.Dispose();
-            pacman.Dispose();
+            foreach (Personagem pacman in pacmans)
+            {
+                pacman.Dispose();
+            }
             comida.Dispose();
             sem_comida.Dispose();
             bomba.Dispose();
@@ -174,88 +181,168 @@ namespace Pac_Man
 
             if (ultimoMovimento > 0.09f)
             {
-                if (teclado.IsKeyDown(Keys.W) &&
-                    !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X, pacman.Posicao.Y - 1))
-                    && teclado.IsKeyUp(Keys.S) 
-                    && teclado.IsKeyUp(Keys.A) 
-                    && teclado.IsKeyUp(Keys.D))
-                {
-                    pacman.moverPacMan(Direccao.Cima);
-                }
-                if (teclado.IsKeyDown(Keys.A) &&
-                    !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X - 1, pacman.Posicao.Y)) 
-                    && teclado.IsKeyUp(Keys.S)
-                    && teclado.IsKeyUp(Keys.W)
-                    && teclado.IsKeyUp(Keys.D))
-                {
-                    pacman.moverPacMan(Direccao.Esquerda);
-                }
-                if (teclado.IsKeyDown(Keys.D) &&
-                    !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X + 1, pacman.Posicao.Y))
-                    && teclado.IsKeyUp(Keys.S)
-                    && teclado.IsKeyUp(Keys.A)
-                    && teclado.IsKeyUp(Keys.W))
-                {
-                    pacman.moverPacMan(Direccao.Direita);
-                }
-                if (teclado.IsKeyDown(Keys.S) &&
-                    !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X, pacman.Posicao.Y + 1))
-                    && teclado.IsKeyUp(Keys.W)
-                    && teclado.IsKeyUp(Keys.A)
-                    && teclado.IsKeyUp(Keys.D))
-                {
-                    pacman.moverPacMan(Direccao.Baixo);
-                }
-                if (teclado.IsKeyDown(Keys.Space))
-                {
-                    if (Utils.existePortal(mapa, 4) && !Utils.existePortal(mapa, 5) && Utils.posicaoPortalSaida(mapa) != pacman.Posicao)
-                    {
-                        //Já existe portal de saída, vamos colocar um portal de entrada
-                        mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 5;
-                    }
-                    else if (!Utils.existePortal(mapa, 4))
-                    {
-                        //Ainda não existe portal de saida, vamos colocar portal de saida
-                        mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 4;
-                    }
-                }
-                if (teclado.IsKeyDown(Keys.B))
-                {
-                    if (score > 100&& numerodeBombasimplantadas==0)
-                    {
-                        
-                        // posição da bomba passa a ser igual à posição do pac neste instante de tempo!!
-                        PosiçãoBomba = new Vector2(pacman.Posicao.X, pacman.Posicao.Y);
-                        mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 6;
-                       
-                        bombaLargada = true;
-                        numerodeBombasimplantadas = 1;
-                        
-                    }
-                }
+
+                updateInput();
+                
                 if (bombaLargada == true) 
                 {
                     tempoExpulão += (float)gameTime.ElapsedGameTime.TotalSeconds;
                 }
 
-                pacman.Update(gameTime, pacman.Posicao, mapa, fantasmas);
+                foreach (Personagem pacman in pacmans)
+                {
+                    pacman.Update(gameTime, pacmans, mapa, fantasmas);
+                }
 
                 foreach (Personagem fantasma in fantasmas)
                 {
-                    fantasma.Update(gameTime, pacman.Posicao, mapa, fantasmas);
+                    fantasma.Update(gameTime, pacmans, mapa, fantasmas);
                 }
 
                 comer();
                 Bomba();
                 
-                Console.WriteLine("valor de x {0}", pacman.Posicao.X);
-                Console.WriteLine("valor de y {0}", pacman.Posicao.Y);
                 ultimoMovimento = 0;
 
                 base.Update(gameTime);
                 
             }
 
+        }
+
+        private void updateInput()
+        {
+            foreach (Personagem pacman in pacmans)
+            {
+                if (pacman == pacmans[0])
+                {
+                    #region Player 1
+                    if (teclado.IsKeyDown(Keys.W) &&
+                            !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X, pacman.Posicao.Y - 1))
+                            && teclado.IsKeyUp(Keys.S)
+                            && teclado.IsKeyUp(Keys.A)
+                            && teclado.IsKeyUp(Keys.D))
+                    {
+                        pacman.moverPacMan(Direccao.Cima);
+                    }
+                    if (teclado.IsKeyDown(Keys.A) &&
+                        !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X - 1, pacman.Posicao.Y))
+                        && teclado.IsKeyUp(Keys.S)
+                        && teclado.IsKeyUp(Keys.W)
+                        && teclado.IsKeyUp(Keys.D))
+                    {
+                        pacman.moverPacMan(Direccao.Esquerda);
+                    }
+                    if (teclado.IsKeyDown(Keys.D) &&
+                        !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X + 1, pacman.Posicao.Y))
+                        && teclado.IsKeyUp(Keys.S)
+                        && teclado.IsKeyUp(Keys.A)
+                        && teclado.IsKeyUp(Keys.W))
+                    {
+                        pacman.moverPacMan(Direccao.Direita);
+                    }
+                    if (teclado.IsKeyDown(Keys.S) &&
+                        !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X, pacman.Posicao.Y + 1))
+                        && teclado.IsKeyUp(Keys.W)
+                        && teclado.IsKeyUp(Keys.A)
+                        && teclado.IsKeyUp(Keys.D))
+                    {
+                        pacman.moverPacMan(Direccao.Baixo);
+                    }
+                    if (teclado.IsKeyDown(Keys.Space))
+                    {
+                        if (Utils.existePortal(mapa, 4) && !Utils.existePortal(mapa, 5) && Utils.posicaoPortalSaida(mapa).X != (int)pacman.Posicao.X && Utils.posicaoPortalSaida(mapa).Y != (int)pacman.Posicao.Y)
+                        {
+                            //Já existe portal de saída, vamos colocar um portal de entrada
+                            mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 5;
+                        }
+                        else if (!Utils.existePortal(mapa, 4))
+                        {
+                            //Ainda não existe portal de saida, vamos colocar portal de saida
+                            mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 4;
+                        }
+                    }
+                    if (teclado.IsKeyDown(Keys.B))
+                    {
+                        if (score > 100 && numerodeBombasimplantadas == 0)
+                        {
+
+                            // posição da bomba passa a ser igual à posição do pac neste instante de tempo!!
+                            PosiçãoBomba = new Vector2(pacman.Posicao.X, pacman.Posicao.Y);
+                            mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 6;
+
+                            bombaLargada = true;
+                            numerodeBombasimplantadas = 1;
+
+                        }
+                    }
+                    #endregion
+                }
+                else
+                {
+                    #region Player 2
+                    if (teclado.IsKeyDown(Keys.Up) &&
+                            !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X, pacman.Posicao.Y - 1))
+                            && teclado.IsKeyUp(Keys.Down)
+                            && teclado.IsKeyUp(Keys.Left)
+                            && teclado.IsKeyUp(Keys.Right))
+                    {
+                        pacman.moverPacMan(Direccao.Cima);
+                    }
+                    if (teclado.IsKeyDown(Keys.Left) &&
+                        !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X - 1, pacman.Posicao.Y))
+                        && teclado.IsKeyUp(Keys.Down)
+                        && teclado.IsKeyUp(Keys.Up)
+                        && teclado.IsKeyUp(Keys.Right))
+                    {
+                        pacman.moverPacMan(Direccao.Esquerda);
+                    }
+                    if (teclado.IsKeyDown(Keys.Right) &&
+                        !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X + 1, pacman.Posicao.Y))
+                        && teclado.IsKeyUp(Keys.Down)
+                        && teclado.IsKeyUp(Keys.Left)
+                        && teclado.IsKeyUp(Keys.Up))
+                    {
+                        pacman.moverPacMan(Direccao.Direita);
+                    }
+                    if (teclado.IsKeyDown(Keys.Down) &&
+                        !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X, pacman.Posicao.Y + 1))
+                        && teclado.IsKeyUp(Keys.Up)
+                        && teclado.IsKeyUp(Keys.Left)
+                        && teclado.IsKeyUp(Keys.Right))
+                    {
+                        pacman.moverPacMan(Direccao.Baixo);
+                    }
+                    if (teclado.IsKeyDown(Keys.Insert))
+                    {
+                        if (Utils.existePortal(mapa, 4) && !Utils.existePortal(mapa, 5) && Utils.posicaoPortalSaida(mapa).X != (int)pacman.Posicao.X && Utils.posicaoPortalSaida(mapa).Y != (int)pacman.Posicao.Y)
+                        {
+                            //Já existe portal de saída, vamos colocar um portal de entrada
+                            mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 5;
+                        }
+                        else if (!Utils.existePortal(mapa, 4) && !Utils.existePortal(mapa, 5))
+                        {
+                            //Ainda não existe portal de saida, vamos colocar portal de saida
+                            mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 4;
+                        }
+                    }
+                    if (teclado.IsKeyDown(Keys.Delete))
+                    {
+                        if (score > 100 && numerodeBombasimplantadas == 0)
+                        {
+
+                            // posição da bomba passa a ser igual à posição do pac neste instante de tempo!!
+                            PosiçãoBomba = new Vector2(pacman.Posicao.X, pacman.Posicao.Y);
+                            mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 6;
+
+                            bombaLargada = true;
+                            numerodeBombasimplantadas = 1;
+
+                        }
+                    }
+                    #endregion
+                }
+            }     
         }
 
         
@@ -293,7 +380,10 @@ namespace Pac_Man
                 }
             }
 
-            pacman.Draw(spriteBatch, gameTime);
+            foreach (Personagem pacman in pacmans)
+            {
+                pacman.Draw(spriteBatch, gameTime);
+            }
 
             foreach (Personagem fantasma in fantasmas)
             {
@@ -318,11 +408,13 @@ namespace Pac_Man
         //metodo para eliminar comida apos pacman passar por cima
         private void comer()
         {
-           
-            if(mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y]==0)
+            foreach (Personagem pacman in pacmans)
             {
-                mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 2;
-                score+=10;
+                if (mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] == 0)
+                {
+                    mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 2;
+                    score += 10;
+                }
             }
         }
         
