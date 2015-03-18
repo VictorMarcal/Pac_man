@@ -429,7 +429,7 @@ namespace Pac_Man
 
         private void criarSegundoJogador()
         {
-            Personagem pac = new Personagem(Content, "pac2", TipoPersonagem.Player, mapa, Color.Yellow, 0).teleportTo(new Vector2(11, 5));
+            Personagem pac = new Personagem(Content, "pac2", TipoPersonagem.Player, mapa, Color.Pink, 0).teleportTo(new Vector2(11, 5));
             pacmans.Add(pac);
         }
         

@@ -76,7 +76,7 @@ namespace Pac_Man.AI
                     node.Caminho = mapa[x, y] == 0;
 
                     //Só queremos guardar na lista caminhos em que se pode andar
-                    if (node.Caminho && !temFantasma(listaFantasmas, fantasmaAtivo, x, y))
+                    if (node.Caminho && !temFantasmaOuBomba(listaFantasmas, fantasmaAtivo, x, y, mapa))
                     {
                         node.Vizinhos = new SearchNode[4];
                         searchNodes[x, y] = node;
@@ -92,7 +92,7 @@ namespace Pac_Man.AI
                     SearchNode node = searchNodes[x, y];
 
                     //Só nos interessam os nós em que podemos andar
-                    if (node == null || !node.Caminho || temFantasma(listaFantasmas, fantasmaAtivo, (int)node.Posicao.X, (int)node.Posicao.Y))
+                    if (node == null || !node.Caminho || temFantasmaOuBomba(listaFantasmas, fantasmaAtivo, (int)node.Posicao.X, (int)node.Posicao.Y, mapa))
                     {
                         continue;
                     }
@@ -120,7 +120,7 @@ namespace Pac_Man.AI
                         SearchNode vizinho = searchNodes[(int)position.X, (int)position.Y];
 
                         //Só nos interessam os vizinhos em que se pode andar
-                        if (vizinho == null || !vizinho.Caminho || temFantasma(listaFantasmas, fantasmaAtivo, (int)vizinho.Posicao.X, (int)vizinho.Posicao.Y))
+                        if (vizinho == null || !vizinho.Caminho || temFantasmaOuBomba(listaFantasmas, fantasmaAtivo, (int)vizinho.Posicao.X, (int)vizinho.Posicao.Y, mapa))
                         {
                             continue;
                         }
@@ -134,7 +134,7 @@ namespace Pac_Man.AI
 
         }
 
-        private bool temFantasma(List<Personagem> listaFantasmas, Personagem fantasmaAtivo, int x, int y)
+        private bool temFantasmaOuBomba(List<Personagem> listaFantasmas, Personagem fantasmaAtivo, int x, int y, byte[,] mapa)
         {
             if (listaFantasmas != null)
             {
@@ -143,7 +143,8 @@ namespace Pac_Man.AI
                     if (fantasma != fantasmaAtivo)
                     {
                         if ((int)fantasma.getPosicaoTarget().X == x && (int)fantasma.getPosicaoTarget().Y == y ||
-                            (int)fantasma.Posicao.X == x && (int)fantasma.Posicao.Y == y)
+                            (int)fantasma.Posicao.X == x && (int)fantasma.Posicao.Y == y ||
+                            mapa[x,y] == 6)
                         {
                             return true;
                         }
@@ -326,7 +327,7 @@ namespace Pac_Man.AI
                     // i) : Make sure that the neighbouring node can 
                     //      be walked across. 
                     //////////////////////////////////////////////////
-                    if (neighbor == null || neighbor.Caminho == false || temFantasma(listaFantasmas, fantasma, (int)neighbor.Posicao.X, (int)neighbor.Posicao.Y))
+                    if (neighbor == null || neighbor.Caminho == false || temFantasmaOuBomba(listaFantasmas, fantasma, (int)neighbor.Posicao.X, (int)neighbor.Posicao.Y, mapa))
                     {
                         continue;
                     }
