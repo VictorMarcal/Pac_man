@@ -456,10 +456,40 @@ namespace Pac_Man
             {
 
                 //explosão em cruz
-                mapa[(int)PosiçãoBomba.X - 1, (int)PosiçãoBomba.Y] = 2;
-                mapa[(int)PosiçãoBomba.X + 1, (int)PosiçãoBomba.Y] = 2;
-                mapa[(int)PosiçãoBomba.X, (int)PosiçãoBomba.Y - 1] = 2;
-                mapa[(int)PosiçãoBomba.X, (int)PosiçãoBomba.Y + 1] = 2;
+                if (mapa[1, (int)PosiçãoBomba.Y] == 1) 
+                {
+                    mapa[(int)PosiçãoBomba.X + 1, (int)PosiçãoBomba.Y] = 2;
+                    mapa[(int)PosiçãoBomba.X, (int)PosiçãoBomba.Y + 1] = 2;
+                    mapa[(int)PosiçãoBomba.X, (int)PosiçãoBomba.Y - 1] = 2;
+
+                }
+                if (mapa[19, (int)PosiçãoBomba.Y] == 1) 
+                {
+                    mapa[(int)PosiçãoBomba.X - 1, (int)PosiçãoBomba.Y] = 2;
+                    mapa[(int)PosiçãoBomba.X, (int)PosiçãoBomba.Y + 1] = 2;
+                    mapa[(int)PosiçãoBomba.X, (int)PosiçãoBomba.Y - 1] = 2;
+                }
+                if (mapa[(int)PosiçãoBomba.X, 1] == 1) 
+                {
+                    mapa[(int)PosiçãoBomba.X + 1, (int)PosiçãoBomba.Y+1] = 2;
+                    mapa[(int)PosiçãoBomba.X - 1, (int)PosiçãoBomba.Y+1] = 2;
+                    mapa[(int)PosiçãoBomba.X, (int)PosiçãoBomba.Y + 1] = 2;
+                }
+                if (mapa[(int)PosiçãoBomba.X, 19] == 1)
+                {
+                    mapa[(int)PosiçãoBomba.X - 1, (int)PosiçãoBomba.Y] = 2;
+                    mapa[(int)PosiçãoBomba.X + 1, (int)PosiçãoBomba.Y] = 2;
+                    mapa[(int)PosiçãoBomba.X, (int)PosiçãoBomba.Y - 1] = 2;
+                }
+                else 
+                {
+                    mapa[(int)PosiçãoBomba.X - 1, (int)PosiçãoBomba.Y] = 2;
+                    mapa[(int)PosiçãoBomba.X + 1, (int)PosiçãoBomba.Y] = 2;
+                    mapa[(int)PosiçãoBomba.X, (int)PosiçãoBomba.Y - 1] = 2;
+                    mapa[(int)PosiçãoBomba.X, (int)PosiçãoBomba.Y + 1] = 2;
+                    
+                }
+
                 mapa[(int)PosiçãoBomba.X, (int)PosiçãoBomba.Y] = 2;
                 score -= 100;
                 bombaLargada = false;
