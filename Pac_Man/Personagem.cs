@@ -83,6 +83,14 @@ namespace Pac_Man
             return tipoPersonagem;
         }
 
+        //score
+        private int score;
+        public int Score
+        {
+            get { return score; }
+            set { score = value; }
+        }
+
         //AI
         PathFinder pathFinder;
         List<Vector2> path;
