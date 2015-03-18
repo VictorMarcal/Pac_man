@@ -72,8 +72,8 @@ namespace Pac_Man.AI
                     posicao.Y = y;
                     node.Posicao = posicao;
                     
-                    //Só podemos andar nos espaços da matriz que têm 0
-                    node.Caminho = mapa[x, y] == 0;
+                    //Só podemos andar nos espaços da matriz que têm 0 ou 2
+                    node.Caminho = mapa[x, y] == 0 || mapa[x, y] == 2;
 
                     //Só queremos guardar na lista caminhos em que se pode andar
                     if (node.Caminho && !temFantasmaOuBomba(listaFantasmas, fantasmaAtivo, x, y, mapa))
@@ -144,7 +144,7 @@ namespace Pac_Man.AI
                     {
                         if ((int)fantasma.getPosicaoTarget().X == x && (int)fantasma.getPosicaoTarget().Y == y ||
                             (int)fantasma.Posicao.X == x && (int)fantasma.Posicao.Y == y ||
-                            mapa[x,y] == 6)
+                            mapa[x, y] == 6)
                         {
                             return true;
                         }
