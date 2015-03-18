@@ -118,6 +118,7 @@ namespace Pac_Man
 
             Personagem pac = new Personagem(Content, "pac2", TipoPersonagem.Player, mapa, Color.Yellow, 0);
             pacmans.Add(pac);
+            
 
             Personagem fantasma = new Personagem(Content, "ghost", TipoPersonagem.NPC, mapa, Color.Green, 1).teleportTo(new Vector2(11, 12));
             fantasma.Velocidade = 0.5f;
@@ -415,9 +416,16 @@ namespace Pac_Man
 
             //desenhar texto e mostrar pontuaçao
             spriteBatch.DrawString(myFont, "Score", new Vector2(650, 10), Color.Yellow);
-            spriteBatch.DrawString(myFont, score+"", new Vector2(680, 50), Color.Yellow);
-            spriteBatch.DrawString(myFont, "Game Time", new Vector2(620, 150), Color.Yellow);
-            spriteBatch.DrawString(myFont, gametime + "sec", new Vector2(680, 190), Color.Yellow);
+            spriteBatch.DrawString(myFont, pacmans[0].Score+"", new Vector2(680, 50), Color.Yellow);
+            
+            if(pacmans.Count==2)
+            {
+                spriteBatch.DrawString(myFont, "Score", new Vector2(650, 100), Color.Yellow);
+                spriteBatch.DrawString(myFont, pacmans[1].Score + "", new Vector2(680, 150), Color.Yellow);
+            }
+            
+            spriteBatch.DrawString(myFont, "Game Time", new Vector2(620, 200), Color.Yellow);
+            spriteBatch.DrawString(myFont, gametime + "sec", new Vector2(680, 250), Color.Yellow);
 
             
 
@@ -439,10 +447,16 @@ namespace Pac_Man
         {
             foreach (Personagem pacman in pacmans)
             {
+                
                 if (mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] == 0)
                 {
                     mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 2;
-                    score += 10;
+                   
+                   {
+                       pacman.Score += 10;
+
+                   }
+                    
                 }
             }
         }
