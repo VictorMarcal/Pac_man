@@ -280,7 +280,7 @@ namespace Pac_Man
                     }
                     if (teclado.IsKeyDown(Keys.B))
                     {
-                        if (score > 100 && numerodeBombasimplantadas == 0)
+                        if (pacman.Score > 100 && numerodeBombasimplantadas == 0)
                         {
 
                             // posição da bomba passa a ser igual à posição do pac neste instante de tempo!!
@@ -347,7 +347,7 @@ namespace Pac_Man
                         }
                         if (teclado.IsKeyDown(Keys.Delete))
                         {
-                            if (score > 100 && numerodeBombasimplantadas == 0)
+                            if (pacman.Score > 100 && numerodeBombasimplantadas == 0)
                             {
 
                                 // posição da bomba passa a ser igual à posição do pac neste instante de tempo!!
@@ -454,7 +454,6 @@ namespace Pac_Man
                    
                    {
                        pacman.Score += 10;
-
                    }
                     
                 }
