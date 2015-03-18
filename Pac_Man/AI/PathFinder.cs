@@ -230,7 +230,7 @@ namespace Pac_Man.AI
 
             // Trace back through the nodes using the parent fields
             // to find the best path.
-            while (parentTile != startNode)
+            while (parentTile != startNode && parentTile !=null && parentTile.Parent != null)
             {
                 closedList.Add(parentTile);
                 parentTile = parentTile.Parent;
