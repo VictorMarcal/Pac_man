@@ -264,6 +264,7 @@ namespace Pac_Man
                 else if(bomb.Exploded==true)
                 {
                     mapa[(int)bomb.Posicao.X, (int)bomb.Posicao.Y] = 2;
+                    
                 }
             }
             /*
