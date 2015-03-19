@@ -9,7 +9,7 @@ using Pac_Man.AI;
 
 namespace Pac_Man
 {
-
+    
     public enum TipoPersonagem
     {
         Player,
@@ -26,6 +26,9 @@ namespace Pac_Man
 
     public class Personagem
     {
+        float timer;
+        private List<Bomba> bombas;
+
         private Texture2D textura;
         /// <summary>
         /// Textura utilizada por esta personagem
@@ -108,6 +111,7 @@ namespace Pac_Man
         /// <param name="assetName">Nome da textura desta personagem</param>
         public Personagem(ContentManager content, string assetName, TipoPersonagem tipoPersonagem, byte[,] mapa, Color cor, int pathOffset)
         {
+            bombas = new List<Bomba>();
             this.Rotacao = 0f;
             this.velocidade = 0.7f;
             this.Posicao = new Vector2(1, 2);
@@ -124,6 +128,17 @@ namespace Pac_Man
             this.pathOffset = pathOffset;
             this.contadorPortalEntrada = 0;
         }
+        public int insereBomba(int score)
+        {
+            timer = 600f;
+            if (score >= 100)
+            {
+                Bomba bomba = new Bomba(Color.White, posicao);
+                bombas.Add(bomba);
+                return (score - 100);
+            }
+            return (score);
+        }
 
         public Personagem teleportTo(Vector2 posicao)
         {
@@ -132,8 +147,18 @@ namespace Pac_Man
             return this;
         }
 
-        public void Update(GameTime gameTime, List<Personagem> pacmans, byte[,] mapa, List<Personagem> listaFantasmas)
+        public void UpdateBombs(float tempoExplosao, byte[,] mapa,GameTime gameTime)
         {
+            
+            foreach (Bomba bomb in bombas)
+            {
+                bomb.Update(gameTime, mapa, bomb.Posicao.X, bomb.Posicao.Y);
+            }
+            
+        }
+        public void Update(GameTime gameTime, List<Personagem> pacmans, byte[,] mapa, List<Personagem> listaFantasmas,float tempoExplosao)
+        {
+           
             if (tipoPersonagem == Pac_Man.TipoPersonagem.NPC)
             {
 
@@ -226,10 +251,21 @@ namespace Pac_Man
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
+        public void Draw(SpriteBatch spriteBatch, GameTime gameTime,Byte[,] mapa)
         {
             spriteBatch.Draw(Textura, new Vector2(Posicao.X * 30 + Textura.Width / 4, Posicao.Y * 30 + Textura.Height / 4), null, cor, this.Rotacao, Vector2.Zero, 1f, flip, 0f);
-            
+            //plantar bombas
+            foreach (Bomba bomb in bombas)
+            {
+                if (bomb.Exploded == false)
+                {
+                    mapa[(int)bomb.Posicao.X, (int)bomb.Posicao.Y] = 6;
+                }
+                else if(bomb.Exploded==true)
+                {
+                    mapa[(int)bomb.Posicao.X, (int)bomb.Posicao.Y] = 0;
+                }
+            }
             /*
              * DEBUG
              * Desenha os caminhos calculados pelos fantasmas

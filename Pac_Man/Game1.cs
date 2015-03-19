@@ -25,16 +25,17 @@ namespace Pac_Man
         
         List<Personagem> fantasmas;
         List<Personagem> pacmans;
+        
 
         SpriteFont myFont;
         int score=0;
         Texture2D dummyTexture;
-
+        
         float ultimoMovimento = 0f;
         float time;
         int gametime;
         bool bombaLargada = false;
-        float tempoExpulão;
+        public float tempoExpulão;
         int numerodeBombasimplantadas=0;
         Vector2 PosiçãoBomba;
         Texture2D bomba;
@@ -102,7 +103,8 @@ namespace Pac_Man
             fantasmas = new List<Personagem>();
             pacmans = new List<Personagem>();
             doisJogadores = false;
-
+            
+            
             base.Initialize();
         }
 
@@ -115,6 +117,7 @@ namespace Pac_Man
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             bloco = Content.Load<Texture2D>("parede");
+            
 
             Personagem pac = new Personagem(Content, "pac2", TipoPersonagem.Player, mapa, Color.Yellow, 0);
             pacmans.Add(pac);
@@ -134,11 +137,11 @@ namespace Pac_Man
             
             comida = Content.Load<Texture2D>("comida");
             sem_comida = Content.Load<Texture2D>("sem_comida");
-
+            bomba = Content.Load<Texture2D>("Bomb");
             portal_saida = Content.Load<Texture2D>("portal_saida");
             portal_entrada = Content.Load<Texture2D>("portal_entrada");
 
-            bomba = Content.Load<Texture2D>("Bomb");
+            
 
             dummyTexture = new Texture2D(GraphicsDevice, 1, 1);
             dummyTexture.SetData(new Color[] { Color.White });
@@ -181,7 +184,7 @@ namespace Pac_Man
             time += (float)gameTime.ElapsedGameTime.TotalSeconds;
             teclado = Keyboard.GetState();
             gametime = (int)time;
-
+            
             if (ultimoMovimento > 0.09f)
             {
 
@@ -192,21 +195,26 @@ namespace Pac_Man
                     tempoExpulão += (float)gameTime.ElapsedGameTime.TotalSeconds;
                 }
 
+
                 foreach (Personagem pacman in pacmans)
                 {
-                    pacman.Update(gameTime, pacmans, mapa, fantasmas);
+                    pacman.Update(gameTime, pacmans, mapa, fantasmas,tempoExpulão);
+                    
+                    pacman.UpdateBombs(tempoExpulão, mapa,gameTime);
+                    
                 }
-
+                
                 foreach (Personagem fantasma in fantasmas)
                 {
-                    fantasma.Update(gameTime, pacmans, mapa, fantasmas);
+                    fantasma.Update(gameTime, pacmans, mapa, fantasmas,tempoExpulão);
                 }
 
                 comer();
-                Bomba();
+                bombaLargada = false;
+               
                 
                 ultimoMovimento = 0;
-
+                tempoExpulão = 0;
                 base.Update(gameTime);
                 
             }
@@ -280,15 +288,17 @@ namespace Pac_Man
                     }
                     if (teclado.IsKeyDown(Keys.B))
                     {
-                        if (score > 100 && numerodeBombasimplantadas == 0)
+                        if (pacmans[0].Score > 100 && numerodeBombasimplantadas == 0)
                         {
 
                             // posição da bomba passa a ser igual à posição do pac neste instante de tempo!!
-                            PosiçãoBomba = new Vector2(pacman.Posicao.X, pacman.Posicao.Y);
-                            mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 6;
-
+                            //Bomba bomb=new Bomba(Content, "Bomb", Color.White, pacman.Posicao);
+                            //bombas.Add(bomb);
+                            //PosiçãoBomba = new Vector2(pacman.Posicao.X, pacman.Posicao.Y);
+                            //mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 6;
+                            pacmans[0].Score=pacmans[0].insereBomba(pacmans[0].Score);
                             bombaLargada = true;
-                            numerodeBombasimplantadas = 1;
+                            //numerodeBombasimplantadas = 1;
 
                         }
                     }
@@ -347,17 +357,21 @@ namespace Pac_Man
                         }
                         if (teclado.IsKeyDown(Keys.Delete))
                         {
-                            if (score > 100 && numerodeBombasimplantadas == 0)
+                           if (pacmans[1].Score > 100 && numerodeBombasimplantadas == 0)
                             {
 
-                                // posição da bomba passa a ser igual à posição do pac neste instante de tempo!!
-                                PosiçãoBomba = new Vector2(pacman.Posicao.X, pacman.Posicao.Y);
-                                mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 6;
-
-                                bombaLargada = true;
-                                numerodeBombasimplantadas = 1;
+                            // posição da bomba passa a ser igual à posição do pac neste instante de tempo!!
+                            //Bomba bomb=new Bomba(Content, "Bomb", Color.White, pacman.Posicao);
+                            //bombas.Add(bomb);
+                            //PosiçãoBomba = new Vector2(pacman.Posicao.X, pacman.Posicao.Y);
+                            //mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 6;
+                            pacmans[1].Score=pacmans[1].insereBomba(pacmans[1].Score);
+                            bombaLargada = true;
+                            //numerodeBombasimplantadas = 1;
 
                             }
+
+                            
                         }
                     #endregion
                     }
@@ -403,15 +417,16 @@ namespace Pac_Man
                     }
                 }
             }
+        
 
             foreach (Personagem pacman in pacmans)
             {
-                pacman.Draw(spriteBatch, gameTime);
+                pacman.Draw(spriteBatch, gameTime,mapa);
             }
 
             foreach (Personagem fantasma in fantasmas)
             {
-                fantasma.Draw(spriteBatch, gameTime);
+                fantasma.Draw(spriteBatch, gameTime,mapa);
             }
 
             //desenhar texto e mostrar pontuaçao
@@ -420,8 +435,8 @@ namespace Pac_Man
             
             if(pacmans.Count==2)
             {
-                spriteBatch.DrawString(myFont, "Score", new Vector2(650, 100), Color.Yellow);
-                spriteBatch.DrawString(myFont, pacmans[1].Score + "", new Vector2(680, 150), Color.Yellow);
+                spriteBatch.DrawString(myFont, "Score", new Vector2(650, 100), Color.Pink);
+                spriteBatch.DrawString(myFont, pacmans[1].Score + "", new Vector2(680, 150), Color.Pink);
             }
             
             spriteBatch.DrawString(myFont, "Game Time", new Vector2(620, 200), Color.Yellow);
@@ -460,7 +475,7 @@ namespace Pac_Man
                 }
             }
         }
-        
+
 
 
         private void Bomba()
@@ -480,10 +495,10 @@ namespace Pac_Man
                 tempoExpulão = 0;
                 numerodeBombasimplantadas = 0;
             }
-                    
-                    
-                
-            
+
+
+
+
         }
        
     }

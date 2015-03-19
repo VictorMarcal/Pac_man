@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="AI\PathFinder.cs" />
     <Compile Include="AI\SearchNode.cs" />
+    <Compile Include="Bomba.cs" />
     <Compile Include="Colisoes.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Personagem.cs" />
