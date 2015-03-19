@@ -28,7 +28,6 @@ namespace Pac_Man
         
 
         SpriteFont myFont;
-        int score=0;
         Texture2D dummyTexture;
         
         float ultimoMovimento = 0f;
@@ -37,7 +36,6 @@ namespace Pac_Man
         bool bombaLargada = false;
         public float tempoExpulão;
         int numerodeBombasimplantadas=0;
-        Vector2 PosiçãoBomba;
         Texture2D bomba;
 
         Texture2D portal_saida;
@@ -49,7 +47,7 @@ namespace Pac_Man
          * 0 - Caminho / Comida
          * 1 - Parede
          * 2 - ???
-         * 3 - Caminho sem comida ?
+         * 3 - sasa dos fantasmas
          * 4 - Portal de saida
          * 5 - Portal de entrada
          * 6 - Bomba
@@ -65,7 +63,7 @@ namespace Pac_Man
                         {1,0,1,1,1,1,1,0,1,1,0,1,0,1,1,1,1,1,0,1},
                         {1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1},
                         {1,1,1,0,1,0,1,1,1,1,1,1,1,1,0,1,0,1,1,1},
-                        {0,0,0,0,1,0,1,2,2,2,2,2,2,1,0,1,0,0,0,0},
+                        {0,0,0,0,1,0,1,3,3,3,3,3,3,1,0,1,0,0,0,0},
                         {1,1,1,0,1,0,1,1,1,1,1,1,1,1,0,1,0,1,1,1},
                         {1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1},
                         {1,0,1,1,1,1,1,0,1,0,1,1,0,1,1,1,1,1,0,1},
@@ -465,12 +463,12 @@ namespace Pac_Man
                 
                 if (mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] == 0)
                 {
-                    mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 2;
+                    mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 3;
                    
-                   {
+                   
                        pacman.Score += 10;
 
-                   }
+                   
                     
                 }
             }
@@ -478,28 +476,7 @@ namespace Pac_Man
 
 
 
-        private void Bomba()
-        {
-            // expressões que difinem o acontecimento na vizinhança da bomba
-            if (tempoExpulão >= 0.5f)
-            {
-
-                //explosão em cruz
-                mapa[(int)PosiçãoBomba.X - 1, (int)PosiçãoBomba.Y] = 2;
-                mapa[(int)PosiçãoBomba.X + 1, (int)PosiçãoBomba.Y] = 2;
-                mapa[(int)PosiçãoBomba.X, (int)PosiçãoBomba.Y - 1] = 2;
-                mapa[(int)PosiçãoBomba.X, (int)PosiçãoBomba.Y + 1] = 2;
-                mapa[(int)PosiçãoBomba.X, (int)PosiçãoBomba.Y] = 2;
-                score -= 100;
-                bombaLargada = false;
-                tempoExpulão = 0;
-                numerodeBombasimplantadas = 0;
-            }
-
-
-
-
-        }
+        
        
     }
     

@@ -38,18 +38,78 @@ namespace Pac_Man
             this.timer = 600f;
             
         }
+        
 
         public void Update(GameTime gameTime, byte[,] mapa,float posBombaX, float posBombaY)
         {
             timer -= (float)gameTime.ElapsedGameTime.TotalMilliseconds;
              if (timer<=0f)
             {
-                mapa[(int)posBombaX, (int)posBombaY] = 0;
+                if (posBombaX == 1) 
+                {
+                    mapa[(int)posBombaX + 1, (int)posBombaY] = 2;
+                    if (posBombaY == 1) 
+                    {
+                        mapa[(int)posBombaX, (int)posBombaY + 1] = 2;
+                    }
+                    else if (posBombaY == 18) 
+                    {
+                        mapa[(int)posBombaX, (int)posBombaY - 1] = 2;
+                    }
+                    else if (posBombaY != 1 && posBombaY != 18) 
+                    {
+                        mapa[(int)posBombaX, (int)posBombaY - 1] = 2;
+                        mapa[(int)posBombaX, (int)posBombaY + 1] = 2;
+                    }
+
+                }
+                else if (posBombaX == 18) 
+                {
+                     mapa[(int)posBombaX - 1, (int)posBombaY] = 2;
+                    if (posBombaY == 1) 
+                    {
+                        mapa[(int)posBombaX, (int)posBombaY + 1] = 2;
+                    }
+                    else if (posBombaY == 18) 
+                    {
+                        mapa[(int)posBombaX, (int)posBombaY - 1] = 2;
+                    }
+                    else if (posBombaY != 1 && posBombaY != 18) 
+                    {
+                        mapa[(int)posBombaX, (int)posBombaY - 1] = 2;
+                        mapa[(int)posBombaX, (int)posBombaY + 1] = 2;
+                    }
+                
+                }
+                else if (posBombaY == 1) 
+                {
+                    mapa[(int)posBombaX , (int)posBombaY+1] = 2;
+                    mapa[(int)posBombaX-1, (int)posBombaY ] = 2;
+                    mapa[(int)posBombaX+1, (int)posBombaY ] = 2;
+
+                }
+                else if (posBombaY == 18)
+                {
+                    mapa[(int)posBombaX, (int)posBombaY - 1] = 2;
+                    mapa[(int)posBombaX - 1, (int)posBombaY] = 2;
+                    mapa[(int)posBombaX + 1, (int)posBombaY] = 2;
+
+                }
+                else 
+                {
+                    
+                    mapa[(int)posBombaX, (int)posBombaY + 1] = 2;
+                    mapa[(int)posBombaX, (int)posBombaY - 1] = 2;
+                    mapa[(int)posBombaX + 1, (int)posBombaY] = 2;
+                    mapa[(int)posBombaX - 1, (int)posBombaY] = 2;
+
+                }
+
+                
                 this.Exploded = true;
       
             }
         }
-
-        
+         
     }
 }
