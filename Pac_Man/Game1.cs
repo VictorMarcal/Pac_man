@@ -33,6 +33,7 @@ namespace Pac_Man
         float ultimoMovimento = 0f;
         float time;
         int gametime;
+        float contador;
         bool bombaLargada = false;
         public float tempoExpulão;
         int numerodeBombasimplantadas=0;
@@ -182,6 +183,7 @@ namespace Pac_Man
             time += (float)gameTime.ElapsedGameTime.TotalSeconds;
             teclado = Keyboard.GetState();
             gametime = (int)time;
+            contador += 0.5f;
             
             if (ultimoMovimento > 0.09f)
             {
@@ -408,7 +410,12 @@ namespace Pac_Man
                             spriteBatch.Draw(portal_entrada, new Vector2(x * 30, y * 30), Color.White);
                             break;
                         case 6:
-                            spriteBatch.Draw(bomba, new Vector2(x*30, y*30), Color.White);
+                            
+                            if (contador >= 3f)
+                            {
+                                spriteBatch.Draw(bomba, new Vector2(x * 30, y * 30), Color.White);
+                                contador = 0f;
+                            }
                             break;
                         default:
                             break;
@@ -464,19 +471,10 @@ namespace Pac_Man
                 if (mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] == 0)
                 {
                     mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 3;
-                   
-                   
                        pacman.Score += 10;
-
-                   
-                    
                 }
             }
-        }
-
-
-
-        
+        }  
        
     }
     

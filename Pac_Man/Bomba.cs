@@ -43,10 +43,7 @@ namespace Pac_Man
         public void Update(GameTime gameTime, byte[,] mapa,float posBombaX, float posBombaY)
         {
             timer -= (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            if (timer > 0f)
-            {
-                mapa[(int)posBombaX, (int)posBombaY] = 2;
-            }
+            
             
              if (timer<=0f)
             {
