@@ -54,11 +54,11 @@ namespace Pac_Man
                     {
                         mapa[(int)posBombaX, (int)posBombaY + 1] = 2;
                     }
-                    else if (posBombaY == 18) 
+                     if (posBombaY == 18) 
                     {
                         mapa[(int)posBombaX, (int)posBombaY - 1] = 2;
                     }
-                    else if (posBombaY != 1 && posBombaY != 18) 
+                     if (posBombaY != 1 && posBombaY != 18) 
                     {
                         mapa[(int)posBombaX, (int)posBombaY - 1] = 2;
                         mapa[(int)posBombaX, (int)posBombaY + 1] = 2;
@@ -72,11 +72,11 @@ namespace Pac_Man
                     {
                         mapa[(int)posBombaX, (int)posBombaY + 1] = 2;
                     }
-                    else if (posBombaY == 18) 
+                     if (posBombaY == 18) 
                     {
                         mapa[(int)posBombaX, (int)posBombaY - 1] = 2;
                     }
-                    else if (posBombaY != 1 && posBombaY != 18) 
+                     if (posBombaY != 1 && posBombaY != 18) 
                     {
                         mapa[(int)posBombaX, (int)posBombaY - 1] = 2;
                         mapa[(int)posBombaX, (int)posBombaY + 1] = 2;
@@ -85,16 +85,40 @@ namespace Pac_Man
                 }
                 else if (posBombaY == 1) 
                 {
-                    mapa[(int)posBombaX , (int)posBombaY+1] = 2;
-                    mapa[(int)posBombaX-1, (int)posBombaY ] = 2;
-                    mapa[(int)posBombaX+1, (int)posBombaY ] = 2;
+                    mapa[(int)posBombaX, (int)posBombaY + 1] = 2;
+                    if (posBombaX == 1) 
+                    {                  
+                        mapa[(int)posBombaX + 1, (int)posBombaY] = 2;
+                    }
+                    if (posBombaX == 18) 
+                    {
+                        mapa[(int)posBombaX - 1, (int)posBombaY] = 2;
+                    }
+                    if (posBombaX != 1 && posBombaX != 18) 
+                    {
+                        mapa[(int)posBombaX - 1, (int)posBombaY] = 2;
+                        mapa[(int)posBombaX + 1, (int)posBombaY] = 2;
+                    }
+                    
 
                 }
                 else if (posBombaY == 18)
                 {
                     mapa[(int)posBombaX, (int)posBombaY - 1] = 2;
-                    mapa[(int)posBombaX - 1, (int)posBombaY] = 2;
-                    mapa[(int)posBombaX + 1, (int)posBombaY] = 2;
+                    if (posBombaX == 1) 
+                    {
+                        mapa[(int)posBombaX + 1, (int)posBombaY] = 2;
+                    }
+                    if (posBombaX == 18) 
+                    {
+                        mapa[(int)posBombaX - 1, (int)posBombaY] = 2;
+                    }
+                    if (posBombaX != 1 && posBombaX != 18) 
+                    {
+                        mapa[(int)posBombaX - 1, (int)posBombaY] = 2;
+                        mapa[(int)posBombaX + 1, (int)posBombaY] = 2;
+
+                    }
 
                 }
                 else 

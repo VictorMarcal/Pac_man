@@ -37,6 +37,8 @@ namespace Pac_Man
         bool bombaLargada = false;
         public float tempoExpulão;
         int numerodeBombasimplantadas=0;
+        bool proximaBombaPac1;
+        bool proximaBombaPac2;
         Texture2D bomba;
 
         Texture2D portal_saida;
@@ -286,7 +288,7 @@ namespace Pac_Man
                             mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 4;
                         }
                     }
-                    if (teclado.IsKeyDown(Keys.B))
+                    if (teclado.IsKeyDown(Keys.B)&&proximaBombaPac1==true)
                     {
                         if (pacmans[0].Score > 50 && numerodeBombasimplantadas == 0)
                         {
@@ -298,9 +300,14 @@ namespace Pac_Man
                             //mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 6;
                             pacmans[0].Score=pacmans[0].insereBomba(pacmans[0].Score);
                             bombaLargada = true;
+                            proximaBombaPac2 = false;
                             //numerodeBombasimplantadas = 1;
 
                         }
+                    }
+                    if (teclado.IsKeyUp(Keys.B)) 
+                    {
+                        proximaBombaPac1 = true;
                     }
                     #endregion
                 }
@@ -355,7 +362,7 @@ namespace Pac_Man
                                 mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 4;
                             }
                         }
-                        if (teclado.IsKeyDown(Keys.Delete))
+                        if (teclado.IsKeyDown(Keys.Delete)&& proximaBombaPac2==true)
                         {
                            if (pacmans[1].Score > 20 && numerodeBombasimplantadas == 0)
                             {
@@ -367,11 +374,16 @@ namespace Pac_Man
                             //mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 6;
                             pacmans[1].Score=pacmans[1].insereBomba(pacmans[1].Score);
                             bombaLargada = true;
+                            proximaBombaPac2 = false;
                             //numerodeBombasimplantadas = 1;
 
                             }
 
                             
+                        }
+                        if (teclado.IsKeyUp(Keys.Delete))
+                        {
+                            proximaBombaPac2 = true;
                         }
                     #endregion
                     }
