@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
+using Pac_Man.Animations;
 #endregion
 
 namespace Pac_Man
@@ -45,6 +46,8 @@ namespace Pac_Man
         Texture2D portal_entrada;
 
         bool doisJogadores;
+
+        SpriteAnimation animExplosao;
 
         /*
          * 0 - Caminho / Comida
@@ -142,7 +145,10 @@ namespace Pac_Man
             portal_saida = Content.Load<Texture2D>("portal_saida");
             portal_entrada = Content.Load<Texture2D>("portal_entrada");
 
-            
+            animExplosao = new SpriteAnimation(Content.Load<Texture2D>("explosao"), 9, 9);
+            animExplosao.posicao = new Vector2(100, 100);
+            animExplosao.isLooping = true;
+            animExplosao.FramesPerSecond = 20;
 
             dummyTexture = new Texture2D(GraphicsDevice, 1, 1);
             dummyTexture.SetData(new Color[] { Color.White });
@@ -217,9 +223,14 @@ namespace Pac_Man
                 
                 ultimoMovimento = 0;
                 tempoExpulão = 0;
-                base.Update(gameTime);
+                
                 
             }
+
+            //atualizar explosões
+            animExplosao.Update(gameTime);
+
+            base.Update(gameTime);
 
         }
 
@@ -445,6 +456,9 @@ namespace Pac_Man
             {
                 fantasma.Draw(spriteBatch, gameTime,mapa);
             }
+
+            //Desenhar explosões
+            animExplosao.Draw(spriteBatch);
 
             //desenhar texto e mostrar pontuaçao
             spriteBatch.DrawString(myFont, "Score", new Vector2(650, 10), Color.Yellow);
