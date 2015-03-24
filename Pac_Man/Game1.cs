@@ -8,6 +8,9 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
 using Pac_Man.Animations;
+using Microsoft.Xna.Framework.Audio;
+using Pac_Man.Animations;
+using Microsoft.Xna.Framework.Audio;
 #endregion
 
 namespace Pac_Man
@@ -26,7 +29,8 @@ namespace Pac_Man
         
         List<Personagem> fantasmas;
         List<Personagem> pacmans;
-        
+        SoundEffect somComer;
+        SoundEffectInstance instanceSomComer;
 
         SpriteFont myFont;
         Texture2D dummyTexture;
@@ -154,6 +158,9 @@ namespace Pac_Man
             dummyTexture.SetData(new Color[] { Color.White });
 
             myFont = Content.Load<SpriteFont>("MyFont");
+            //som
+            somComer = Content.Load<SoundEffect>("som\\pacmanComer");
+            
         }
 
 
@@ -498,6 +505,8 @@ namespace Pac_Man
                 {
                     mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 3;
                        pacman.Score += 10;
+                    //som comer
+                       somComer.Play();
                 }
             }
         }  
