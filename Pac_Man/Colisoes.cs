@@ -14,7 +14,7 @@ namespace Pac_Man
 
             int posiçãoX = (int)Math.Round((30 * posicaoFutura.X) * 20 / 600);
             int posiçãoY = (int)Math.Round((30 * posicaoFutura.Y) * 20 / 600);
-            if (mapa[posiçãoX, posiçãoY] == 1)
+            if (mapa[posiçãoX, posiçãoY] == 1 || mapa[posiçãoX,posiçãoY]==3)
             {
                 return true;
             }

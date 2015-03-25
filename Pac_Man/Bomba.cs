@@ -51,6 +51,7 @@ namespace Pac_Man
             
              if (timer<=0f)
             {
+                Som.playExplosao(Content);
                 if (posBombaX == 1) 
                 {
                     mapa[(int)posBombaX + 1, (int)posBombaY] = 2;
