@@ -200,13 +200,11 @@ namespace Pac_Man
                         deteleport = Content.Load<Texture2D>("de-teleport");
                     }
                     //Estamos em cima de um portal de entrada, teleport!
-                    SpriteAnimationManager.addAnimation(teleport, 5, 3, false,
-                    new Vector2(Posicao.X * 30 - (teleport.Width / 5 / 4) - 10, Posicao.Y * 30 - (teleport.Height / 3 / 4) - 10), 15, 0);
+                    SpriteAnimationManager.addAnimation(teleport, 3, 5, false, Posicao, 15, 0);
 
                     Vector2 posicaosaida = Utils.posicaoPortalSaida(mapa);
                     this.teleportTo(posicaosaida);
-                    SpriteAnimationManager.addAnimation(deteleport, 5, 2, false,
-                    new Vector2(posicaosaida.X * 30 - (deteleport.Width / 5 / 2) + 15, posicaosaida.Y * 30 - (deteleport.Height / 2 / 2) + 15), 10, 200);
+                    SpriteAnimationManager.addAnimation(deteleport, 2, 5, false,Posicao, 10, 200);
                     Utils.eliminarPortais(mapa);
                     contadorPortalEntrada = 0;
                 }

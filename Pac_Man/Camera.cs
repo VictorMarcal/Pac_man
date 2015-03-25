@@ -88,8 +88,8 @@ namespace Pac_Man
         {
             if (shakeAmount > 0)
             {
-                shake.X = random.Next(-10, 10);
-                shake.Y = random.Next(-10, 10);
+                shake.X = random.Next(-5, 5);
+                shake.Y = random.Next(-5, 5);
                 shakeAmount -= 10;
             }
             else

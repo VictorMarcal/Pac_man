@@ -25,13 +25,14 @@ namespace Pac_Man.Animations
         protected Rectangle[] rectangulos;
         protected int frameIndex = 0;
         protected bool draw;
+        int altura, largura;
 
         public SpriteManager(Texture2D textura, int linhas, int colunas, Vector2 posicao)
         {
             this.textura = textura;
             this.posicao = posicao;
-            int altura = textura.Width / linhas;
-            int largura = textura.Height / colunas;
+            largura = textura.Width / colunas;
+            altura = textura.Height / linhas;
             rectangulos = new Rectangle[linhas * colunas];
             int contador = 0;
             for (int i = 0; i < linhas; i++)
@@ -48,8 +49,8 @@ namespace Pac_Man.Animations
         public void Draw(SpriteBatch spriteBatch)
         {
             if(this.draw)
-                spriteBatch.Draw(textura, new Vector2(Camera.WorldPoint2Pixels(posicao).X - (textura.Width / 9 / 4) - 10,
-                        Camera.WorldPoint2Pixels(posicao).Y - (textura.Height / 9 / 4)), rectangulos[frameIndex], cor, rotacao, origem, escala, spriteEffect, 0f);
+                spriteBatch.Draw(textura, new Vector2(Camera.WorldPoint2Pixels(posicao).X - (largura / 2),
+                        Camera.WorldPoint2Pixels(posicao).Y - (altura / 2)), rectangulos[frameIndex], cor, rotacao, origem, escala, spriteEffect, 0f);
         }
     }
 }
