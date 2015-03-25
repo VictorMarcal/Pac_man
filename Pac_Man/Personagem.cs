@@ -105,7 +105,7 @@ namespace Pac_Man
 
         int contadorPortalEntrada;
 
-        Texture2D teleport;
+        Texture2D teleport, deteleport;
 
         /// <summary>
         /// Construtor
@@ -195,10 +195,18 @@ namespace Pac_Man
                     if(teleport == null){
                         teleport = Content.Load<Texture2D>("teleport");
                     }
+                    if (deteleport == null)
+                    {
+                        deteleport = Content.Load<Texture2D>("de-teleport");
+                    }
                     //Estamos em cima de um portal de entrada, teleport!
                     SpriteAnimationManager.addAnimation(teleport, 5, 3, false,
                     new Vector2(Posicao.X * 30 - (teleport.Width / 5 / 4) - 10, Posicao.Y * 30 - (teleport.Height / 3 / 4) - 10), 15, 0);
-                    this.teleportTo(Utils.posicaoPortalSaida(mapa));
+
+                    Vector2 posicaosaida = Utils.posicaoPortalSaida(mapa);
+                    this.teleportTo(posicaosaida);
+                    SpriteAnimationManager.addAnimation(deteleport, 5, 2, false,
+                    new Vector2(posicaosaida.X * 30 - (deteleport.Width / 5 / 2) + 15, posicaosaida.Y * 30 - (deteleport.Height / 2 / 2) + 15), 10, 200);
                     Utils.eliminarPortais(mapa);
                     contadorPortalEntrada = 0;
                 }
