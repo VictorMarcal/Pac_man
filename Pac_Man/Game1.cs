@@ -178,7 +178,7 @@ namespace Pac_Man
             bomba.Dispose();
             
         }
-
+        
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -234,7 +234,7 @@ namespace Pac_Man
 
             //atualizar explosões
             SpriteAnimationManager.Update(gameTime);
-
+            
             base.Update(gameTime);
 
         }
@@ -443,7 +443,7 @@ namespace Pac_Man
                             {
                                 spriteBatch.Draw(bomba, new Vector2(x * 30, y * 30), Color.White);
                                 contador = 0f;
-                                somAviso.Play();
+                                Som.playAvisoBomba(Content);
                             }
                             break;
                         default:
@@ -505,7 +505,7 @@ namespace Pac_Man
                     mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 3;
                        pacman.Score += 10;
                     //som comer
-                       somComer.Play();
+                       Som.playComer(Content);
                 }
             }
         }  
