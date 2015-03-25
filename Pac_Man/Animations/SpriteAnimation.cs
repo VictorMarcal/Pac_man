@@ -22,12 +22,12 @@ namespace Pac_Man.Animations
             set { timeToUpdate = (1f / value); }
         }
 
-        public SpriteAnimation(Texture2D textura, int largura, int altura, bool looping, Vector2 posicao, int maxDelay)
+        public SpriteAnimation(Texture2D textura, int largura, int altura, bool looping, Vector2 posicao, int fps, int maxDelay)
             : base(textura, largura, altura, posicao)
         {
             this.alive = true;
             this.isLooping = looping;
-            FramesPerSecond = 30;
+            FramesPerSecond = fps;
             this.maxDelay = maxDelay;
             this.frameIndex = 0;
         }

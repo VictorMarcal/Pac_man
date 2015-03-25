@@ -18,9 +18,9 @@ namespace Pac_Man.Animations
             listAnimations = new List<SpriteAnimation>();
         }
 
-        public static void addAnimation(Texture2D textura, int largura, int altura, bool looping, Vector2 posicao, int maxDelay)
+        public static void addAnimation(Texture2D textura, int largura, int altura, bool looping, Vector2 posicao, int fps, int maxDelay)
         {
-            listAnimations.Add(new SpriteAnimation(textura, largura, altura, looping, posicao, random.Next(Math.Min(100, maxDelay), maxDelay)));
+            listAnimations.Add(new SpriteAnimation(textura, largura, altura, looping, posicao, fps, random.Next(Math.Min(100, maxDelay), maxDelay)));
         }
 
         public static void Update(GameTime gameTime)

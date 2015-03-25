@@ -207,7 +207,7 @@ namespace Pac_Man
 
                 foreach (Personagem pacman in pacmans)
                 {
-                    pacman.Update(gameTime, pacmans, mapa, fantasmas,tempoExpulão);
+                    pacman.Update(gameTime, pacmans, mapa, fantasmas,tempoExpulão, Content);
                     
                     pacman.UpdateBombs(tempoExpulão, mapa,gameTime, Content);
                     
@@ -215,7 +215,7 @@ namespace Pac_Man
                 
                 foreach (Personagem fantasma in fantasmas)
                 {
-                    fantasma.Update(gameTime, pacmans, mapa, fantasmas,tempoExpulão);
+                    fantasma.Update(gameTime, pacmans, mapa, fantasmas,tempoExpulão, Content);
                 }
 
                 comer();

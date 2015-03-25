@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Pac_Man.AI;
+using Pac_Man.Animations;
 
 namespace Pac_Man
 {
@@ -104,6 +105,8 @@ namespace Pac_Man
 
         int contadorPortalEntrada;
 
+        Texture2D teleport;
+
         /// <summary>
         /// Construtor
         /// </summary>
@@ -156,7 +159,7 @@ namespace Pac_Man
             }
             
         }
-        public void Update(GameTime gameTime, List<Personagem> pacmans, byte[,] mapa, List<Personagem> listaFantasmas,float tempoExplosao)
+        public void Update(GameTime gameTime, List<Personagem> pacmans, byte[,] mapa, List<Personagem> listaFantasmas,float tempoExplosao, ContentManager Content)
         {
            
             if (tipoPersonagem == Pac_Man.TipoPersonagem.NPC)
@@ -189,7 +192,12 @@ namespace Pac_Man
 
                 if (mapa[(int)Posicao.X, (int)Posicao.Y] == 5 && contadorPortalEntrada > 100)
                 {
+                    if(teleport == null){
+                        teleport = Content.Load<Texture2D>("teleport");
+                    }
                     //Estamos em cima de um portal de entrada, teleport!
+                    SpriteAnimationManager.addAnimation(teleport, 5, 3, false,
+                    new Vector2(Posicao.X * 30 - (teleport.Width / 5 / 4) - 10, Posicao.Y * 30 - (teleport.Height / 3 / 4) - 10), 15, 0);
                     this.teleportTo(Utils.posicaoPortalSaida(mapa));
                     Utils.eliminarPortais(mapa);
                     contadorPortalEntrada = 0;
