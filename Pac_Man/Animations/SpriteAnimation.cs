@@ -11,7 +11,10 @@ namespace Pac_Man.Animations
     {
 
         private float timeElapsed;
-        public bool isLooping = false;
+        private float timeElapsedDelay;
+        private bool isLooping;
+        public bool alive;
+        private int maxDelay;
 
         private float timeToUpdate = 0.05f;
         public int FramesPerSecond
@@ -19,25 +22,45 @@ namespace Pac_Man.Animations
             set { timeToUpdate = (1f / value); }
         }
 
-        public SpriteAnimation(Texture2D textura, int largura, int altura)
-            : base(textura, largura, altura)
+        public SpriteAnimation(Texture2D textura, int largura, int altura, bool looping, Vector2 posicao, int maxDelay)
+            : base(textura, largura, altura, posicao)
         {
-
+            this.alive = true;
+            this.isLooping = looping;
+            FramesPerSecond = 30;
+            this.maxDelay = maxDelay;
+            this.frameIndex = 0;
         }
 
         public void Update(GameTime gameTime)
         {
-            timeElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (timeElapsed > timeToUpdate)
+            if (timeElapsedDelay > maxDelay)
             {
-                timeElapsed -= timeToUpdate;
-                if (frameIndex < rectangulos.Length - 1)
+                this.draw = true;
+                timeElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                if (timeElapsed > timeToUpdate)
                 {
-                    frameIndex++;
-                }else if (isLooping){
-                    frameIndex = 0;
+                    timeElapsed -= timeToUpdate;
+                    if (frameIndex < rectangulos.Length - 1)
+                    {
+                        frameIndex++;
+                    }
+                    else if (isLooping)
+                    {
+                        frameIndex = 0;
+                    }
+                    else
+                    {
+                        frameIndex = rectangulos.Length - 1;
+                        this.alive = false;
+                    }
                 }
+            }
+            else
+            {
+                timeElapsedDelay += gameTime.ElapsedGameTime.Milliseconds;
             }
         }
     }

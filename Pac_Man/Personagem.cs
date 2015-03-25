@@ -147,12 +147,12 @@ namespace Pac_Man
             return this;
         }
 
-        public void UpdateBombs(float tempoExplosao, byte[,] mapa,GameTime gameTime)
+        public void UpdateBombs(float tempoExplosao, byte[,] mapa,GameTime gameTime, ContentManager Content)
         {
             
             foreach (Bomba bomb in bombas)
             {
-                bomb.Update(gameTime, mapa, bomb.Posicao.X, bomb.Posicao.Y);
+                bomb.Update(gameTime, mapa, bomb.Posicao.X, bomb.Posicao.Y, Content);
             }
             
         }

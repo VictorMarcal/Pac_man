@@ -51,8 +51,6 @@ namespace Pac_Man
 
         bool doisJogadores;
 
-        SpriteAnimation animExplosao;
-
         /*
          * 0 - Caminho / Comida
          * 1 - Parede
@@ -111,6 +109,8 @@ namespace Pac_Man
             fantasmas = new List<Personagem>();
             pacmans = new List<Personagem>();
             doisJogadores = false;
+
+            SpriteAnimationManager.Initialize();
             
             
             base.Initialize();
@@ -126,11 +126,9 @@ namespace Pac_Man
             spriteBatch = new SpriteBatch(GraphicsDevice);
             bloco = Content.Load<Texture2D>("parede");
             
-
             Personagem pac = new Personagem(Content, "pac2", TipoPersonagem.Player, mapa, Color.Yellow, 0);
             pacmans.Add(pac);
             
-
             Personagem fantasma = new Personagem(Content, "ghost", TipoPersonagem.NPC, mapa, Color.Green, 1).teleportTo(new Vector2(9, 7));
             fantasma.Velocidade = 0.5f;
             fantasmas.Add(fantasma);
@@ -149,10 +147,6 @@ namespace Pac_Man
             portal_saida = Content.Load<Texture2D>("portal_saida");
             portal_entrada = Content.Load<Texture2D>("portal_entrada");
 
-            animExplosao = new SpriteAnimation(Content.Load<Texture2D>("explosao"), 9, 9);
-            animExplosao.posicao = new Vector2(100, 100);
-            animExplosao.isLooping = true;
-            animExplosao.FramesPerSecond = 20;
 
             dummyTexture = new Texture2D(GraphicsDevice, 1, 1);
             dummyTexture.SetData(new Color[] { Color.White });
@@ -215,7 +209,7 @@ namespace Pac_Man
                 {
                     pacman.Update(gameTime, pacmans, mapa, fantasmas,tempoExpulão);
                     
-                    pacman.UpdateBombs(tempoExpulão, mapa,gameTime);
+                    pacman.UpdateBombs(tempoExpulão, mapa,gameTime, Content);
                     
                 }
                 
@@ -235,7 +229,7 @@ namespace Pac_Man
             }
 
             //atualizar explosões
-            animExplosao.Update(gameTime);
+            SpriteAnimationManager.Update(gameTime);
 
             base.Update(gameTime);
 
@@ -465,7 +459,7 @@ namespace Pac_Man
             }
 
             //Desenhar explosões
-            animExplosao.Draw(spriteBatch);
+            SpriteAnimationManager.Draw(spriteBatch);
 
             //desenhar texto e mostrar pontuaçao
             spriteBatch.DrawString(myFont, "Score", new Vector2(650, 10), Color.Yellow);

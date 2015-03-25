@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Pac_Man.Animations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,9 +39,11 @@ namespace Pac_Man
             this.timer = 600f;
             
         }
+
+        private Texture2D explosao;
         
 
-        public void Update(GameTime gameTime, byte[,] mapa,float posBombaX, float posBombaY)
+        public void Update(GameTime gameTime, byte[,] mapa,float posBombaX, float posBombaY, ContentManager Content)
         {
             timer -= (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             
@@ -50,54 +53,69 @@ namespace Pac_Man
                 if (posBombaX == 1) 
                 {
                     mapa[(int)posBombaX + 1, (int)posBombaY] = 2;
+                    inserirExplosao((int)posBombaX + 1, (int)posBombaY, Content, 300);
                     if (posBombaY == 1) 
                     {
                         mapa[(int)posBombaX, (int)posBombaY + 1] = 2;
+                        inserirExplosao((int)posBombaX, (int)posBombaY + 1, Content, 300);
                     }
                      if (posBombaY == 18) 
                     {
                         mapa[(int)posBombaX, (int)posBombaY - 1] = 2;
+                        inserirExplosao((int)posBombaX - 1, (int)posBombaY, Content, 300);
                     }
                      if (posBombaY != 1 && posBombaY != 18) 
                     {
                         mapa[(int)posBombaX, (int)posBombaY - 1] = 2;
+                        inserirExplosao((int)posBombaX, (int)posBombaY - 1, Content, 300);
                         mapa[(int)posBombaX, (int)posBombaY + 1] = 2;
+                        inserirExplosao((int)posBombaX, (int)posBombaY + 1, Content, 300);
                     }
 
                 }
                 else if (posBombaX == 18) 
                 {
                      mapa[(int)posBombaX - 1, (int)posBombaY] = 2;
+                     inserirExplosao((int)posBombaX - 1, (int)posBombaY, Content, 300);
                     if (posBombaY == 1) 
                     {
                         mapa[(int)posBombaX, (int)posBombaY + 1] = 2;
+                        inserirExplosao((int)posBombaX, (int)posBombaY + 1, Content, 300);
                     }
                      if (posBombaY == 18) 
                     {
                         mapa[(int)posBombaX, (int)posBombaY - 1] = 2;
+                        inserirExplosao((int)posBombaX, (int)posBombaY - 1, Content, 300);
                     }
                      if (posBombaY != 1 && posBombaY != 18) 
                     {
                         mapa[(int)posBombaX, (int)posBombaY - 1] = 2;
+                        inserirExplosao((int)posBombaX, (int)posBombaY - 1, Content, 300);
                         mapa[(int)posBombaX, (int)posBombaY + 1] = 2;
+                        inserirExplosao((int)posBombaX, (int)posBombaY + 1, Content, 300);
                     }
                 
                 }
                 else if (posBombaY == 1) 
                 {
                     mapa[(int)posBombaX, (int)posBombaY + 1] = 2;
+                    inserirExplosao((int)posBombaX, (int)posBombaY + 1, Content, 300);
                     if (posBombaX == 1) 
                     {                  
                         mapa[(int)posBombaX + 1, (int)posBombaY] = 2;
+                        inserirExplosao((int)posBombaX + 1, (int)posBombaY, Content, 300);
                     }
                     if (posBombaX == 18) 
                     {
                         mapa[(int)posBombaX - 1, (int)posBombaY] = 2;
+                        inserirExplosao((int)posBombaX - 1, (int)posBombaY, Content, 300);
                     }
                     if (posBombaX != 1 && posBombaX != 18) 
                     {
                         mapa[(int)posBombaX - 1, (int)posBombaY] = 2;
+                        inserirExplosao((int)posBombaX - 1, (int)posBombaY, Content, 300);
                         mapa[(int)posBombaX + 1, (int)posBombaY] = 2;
+                        inserirExplosao((int)posBombaX + 1, (int)posBombaY, Content, 300);
                     }
                     
 
@@ -105,18 +123,23 @@ namespace Pac_Man
                 else if (posBombaY == 18)
                 {
                     mapa[(int)posBombaX, (int)posBombaY - 1] = 2;
+                    inserirExplosao((int)posBombaX, (int)posBombaY - 1, Content, 300);
                     if (posBombaX == 1) 
                     {
                         mapa[(int)posBombaX + 1, (int)posBombaY] = 2;
+                        inserirExplosao((int)posBombaX + 1, (int)posBombaY, Content, 300);
                     }
                     if (posBombaX == 18) 
                     {
                         mapa[(int)posBombaX - 1, (int)posBombaY] = 2;
+                        inserirExplosao((int)posBombaX - 1, (int)posBombaY, Content, 300);
                     }
                     if (posBombaX != 1 && posBombaX != 18) 
                     {
                         mapa[(int)posBombaX - 1, (int)posBombaY] = 2;
+                        inserirExplosao((int)posBombaX - 1, (int)posBombaY, Content, 300);
                         mapa[(int)posBombaX + 1, (int)posBombaY] = 2;
+                        inserirExplosao((int)posBombaX + 1, (int)posBombaY, Content, 300);
 
                     }
 
@@ -125,16 +148,32 @@ namespace Pac_Man
                 {
                     
                     mapa[(int)posBombaX, (int)posBombaY + 1] = 2;
+                    inserirExplosao((int)posBombaX, (int)posBombaY + 1, Content, 300);
                     mapa[(int)posBombaX, (int)posBombaY - 1] = 2;
+                    inserirExplosao((int)posBombaX, (int)posBombaY - 1, Content, 300);
                     mapa[(int)posBombaX + 1, (int)posBombaY] = 2;
+                    inserirExplosao((int)posBombaX + 1, (int)posBombaY, Content, 300);
                     mapa[(int)posBombaX - 1, (int)posBombaY] = 2;
+                    inserirExplosao((int)posBombaX - 1, (int)posBombaY, Content, 300);
 
                 }
 
                 
                 this.Exploded = true;
-      
+
+                inserirExplosao((int)Posicao.X, (int)Posicao.Y, Content, 0);
+                timer = float.MaxValue;
             }
+        }
+
+        private void inserirExplosao(int x, int y, ContentManager Content, int maxDelay)
+        {
+            if (explosao == null)
+            {
+                explosao = Content.Load<Texture2D>("explosao");
+            }
+            SpriteAnimationManager.addAnimation(explosao, 9, 9, false,
+                    new Vector2(x * 30 - (explosao.Width / 9 / 4) - 10, y * 30 - (explosao.Height / 9 / 4)), maxDelay);
         }
          
     }

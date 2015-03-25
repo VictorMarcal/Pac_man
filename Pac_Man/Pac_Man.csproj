@@ -38,6 +38,7 @@
     <Compile Include="AI\PathFinder.cs" />
     <Compile Include="AI\SearchNode.cs" />
     <Compile Include="Animations\SpriteAnimation.cs" />
+    <Compile Include="Animations\SpriteAnimationManager.cs" />
     <Compile Include="Animations\SpriteManager.cs" />
     <Compile Include="Bomba.cs" />
     <Compile Include="Colisoes.cs" />
