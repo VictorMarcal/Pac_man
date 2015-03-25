@@ -24,6 +24,7 @@ namespace Pac_Man
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D bloco;
+        Texture2D paredeFerro;
         Texture2D comida;
         Texture2D sem_comida;
         
@@ -64,26 +65,26 @@ namespace Pac_Man
         */
         
         KeyboardState teclado;
-        byte[,] mapa ={{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-                        {1,0,0,0,0,1,1,0,0,0,0,0,0,1,1,0,0,0,0,1},
-                        {1,0,1,0,0,1,1,0,1,1,0,1,0,1,1,0,0,1,0,1},
-                        {1,0,1,0,0,1,1,0,1,1,0,1,0,1,1,0,0,1,0,1},
-                        {1,0,1,1,0,1,1,0,0,0,0,1,0,1,1,0,1,1,0,1},
-                        {1,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,0,1},
-                        {1,0,1,1,1,1,1,0,1,1,0,1,0,1,1,1,1,1,0,1},
-                        {1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1},
-                        {1,1,1,0,1,0,1,1,1,1,1,1,1,1,0,1,0,1,1,1},
+        byte[,] mapa ={{3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3},
+                        {3,0,0,0,0,1,1,0,0,0,0,0,0,1,1,0,0,0,0,3},
+                        {3,0,1,0,0,1,1,0,1,1,0,1,0,1,1,0,0,1,0,3},
+                        {3,0,1,0,0,1,1,0,1,1,0,1,0,1,1,0,0,1,0,3},
+                        {3,0,1,1,0,1,1,0,0,0,0,1,0,1,1,0,1,1,0,3},
+                        {3,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,0,3},
+                        {3,0,1,1,1,1,1,0,1,1,0,1,0,1,1,1,1,1,0,3},
+                        {3,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,3},
+                        {3,1,1,0,1,0,1,1,1,1,1,1,1,1,0,1,0,1,1,3},
                         {0,0,0,0,1,0,2,2,2,2,2,2,2,1,0,1,0,0,0,0},
-                        {1,1,1,0,1,0,1,1,1,1,1,1,1,1,0,1,0,1,1,1},
-                        {1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1},
-                        {1,0,1,1,1,1,1,0,1,0,1,1,0,1,1,1,1,1,0,1},
-                        {1,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,0,1},
-                        {1,0,1,1,0,1,1,0,1,0,1,1,0,1,1,0,1,1,0,1},
-                        {1,0,1,0,0,1,1,0,1,0,0,0,0,1,1,0,0,1,0,1},
-                        {1,0,1,0,0,0,0,0,1,0,1,1,0,0,0,0,0,1,0,1},
-                        {1,0,1,1,0,1,1,0,1,0,1,1,0,1,1,0,1,1,0,1},
-                        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
+                        {3,1,1,0,1,0,1,1,1,1,1,1,1,1,0,1,0,1,1,3},
+                        {3,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,3},
+                        {3,0,1,1,1,1,1,0,1,0,1,1,0,1,1,1,1,1,0,3},
+                        {3,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,0,3},
+                        {3,0,1,1,0,1,1,0,1,0,1,1,0,1,1,0,1,1,0,3},
+                        {3,0,1,0,0,1,1,0,1,0,0,0,0,1,1,0,0,1,0,3},
+                        {3,0,1,0,0,0,0,0,1,0,1,1,0,0,0,0,0,1,0,3},
+                        {3,0,1,1,0,1,1,0,1,0,1,1,0,1,1,0,1,1,0,3},
+                        {3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3},
+                        {3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3}};
 
         public Game1()
             : base()
@@ -127,6 +128,7 @@ namespace Pac_Man
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             bloco = Content.Load<Texture2D>("parede");
+            paredeFerro = Content.Load<Texture2D>("parede2");
             
             Personagem pac = new Personagem(Content, "pac2", TipoPersonagem.Player, mapa, Color.Yellow, 0);
             pacmans.Add(pac);
@@ -169,6 +171,7 @@ namespace Pac_Man
         {
             // TODO: Unload any non ContentManager content here
             bloco.Dispose();
+            paredeFerro.Dispose();
             foreach (Personagem pacman in pacmans)
             {
                 pacman.Dispose();
@@ -431,6 +434,10 @@ namespace Pac_Man
                         case 1:
                             spriteBatch.Draw(bloco, new Vector2(x * 30, y * 30), Color.White);
                             break;
+                        case 3:
+                            spriteBatch.Draw(paredeFerro, new Vector2(x * 30, y * 30), Color.White);
+                            break;
+
                         case 4:
                             spriteBatch.Draw(portal_saida, new Vector2(x * 30, y * 30), Color.White);
                             break;
@@ -439,7 +446,7 @@ namespace Pac_Man
                             break;
                         case 6:
                             
-                            if (contador >= 9f)
+                            if (contador >= 3f)
                             {
                                 spriteBatch.Draw(bomba, new Vector2(x * 30, y * 30), Color.White);
                                 contador = 0f;
@@ -502,7 +509,7 @@ namespace Pac_Man
                 
                 if (mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] == 0)
                 {
-                    mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 3;
+                    mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 2;
                        pacman.Score += 10;
                     //som comer
                        somComer.Play();
