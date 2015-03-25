@@ -446,7 +446,7 @@ namespace Pac_Man
                             spriteBatch.Draw(bloco, Camera.WorldPoint2Pixels(new Vector2(x, y)), Color.White);
                             break;
                         case 3:
-                            spriteBatch.Draw(paredeFerro, new Vector2(x * 30, y * 30), Color.White);
+                            spriteBatch.Draw(paredeFerro, Camera.WorldPoint2Pixels(new Vector2(x, y)), Color.White);
                             break;
 
                         case 4:
