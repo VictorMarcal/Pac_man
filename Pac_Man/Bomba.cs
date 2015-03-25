@@ -38,6 +38,7 @@ namespace Pac_Man
             this.Exploded = false;
             this.timer = 600f;
             
+            
         }
 
         private Texture2D explosao;

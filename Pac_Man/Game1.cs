@@ -30,6 +30,8 @@ namespace Pac_Man
         List<Personagem> fantasmas;
         List<Personagem> pacmans;
         SoundEffect somComer;
+        SoundEffect somExplosao;
+        SoundEffect somAviso;
         SoundEffectInstance instanceSomComer;
 
         SpriteFont myFont;
@@ -154,7 +156,8 @@ namespace Pac_Man
             myFont = Content.Load<SpriteFont>("MyFont");
             //som
             somComer = Content.Load<SoundEffect>("som\\pacmanComer");
-            
+            somAviso = Content.Load<SoundEffect>("som\\avisodaBomba");
+            somExplosao=Content.Load<SoundEffect>("som\\explosao");
         }
 
 
@@ -193,6 +196,7 @@ namespace Pac_Man
             teclado = Keyboard.GetState();
             gametime = (int)time;
             contador += 0.5f;
+            
             
             if (ultimoMovimento > 0.09f)
             {
@@ -435,10 +439,11 @@ namespace Pac_Man
                             break;
                         case 6:
                             
-                            if (contador >= 3f)
+                            if (contador >= 9f)
                             {
                                 spriteBatch.Draw(bomba, new Vector2(x * 30, y * 30), Color.White);
                                 contador = 0f;
+                                somAviso.Play();
                             }
                             break;
                         default:
