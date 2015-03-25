@@ -269,7 +269,7 @@ namespace Pac_Man
 
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime,Byte[,] mapa)
         {
-            spriteBatch.Draw(Textura, new Vector2(Posicao.X * 30 + Textura.Width / 4, Posicao.Y * 30 + Textura.Height / 4), null, cor, this.Rotacao, Vector2.Zero, 1f, flip, 0f);
+            spriteBatch.Draw(Textura, new Vector2(Camera.WorldPoint2Pixels(Posicao).X + Textura.Width / 4, Camera.WorldPoint2Pixels(Posicao).Y + Textura.Height / 4), null, cor, this.Rotacao, Vector2.Zero, 1f, flip, 0f);
             //plantar bombas
             foreach (Bomba bomb in bombas)
             {

@@ -48,7 +48,8 @@ namespace Pac_Man.Animations
         public void Draw(SpriteBatch spriteBatch)
         {
             if(this.draw)
-            spriteBatch.Draw(textura, posicao, rectangulos[frameIndex], cor, rotacao, origem, escala, spriteEffect, 0f);
+                spriteBatch.Draw(textura, new Vector2(Camera.WorldPoint2Pixels(posicao).X - (textura.Width / 9 / 4) - 10,
+                        Camera.WorldPoint2Pixels(posicao).Y - (textura.Height / 9 / 4)), rectangulos[frameIndex], cor, rotacao, origem, escala, spriteEffect, 0f);
         }
     }
 }

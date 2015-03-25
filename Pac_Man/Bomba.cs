@@ -163,6 +163,7 @@ namespace Pac_Man
                 this.Exploded = true;
 
                 inserirExplosao((int)Posicao.X, (int)Posicao.Y, Content, 0);
+                Camera.addShake(500);
                 timer = float.MaxValue;
             }
         }
@@ -174,7 +175,7 @@ namespace Pac_Man
                 explosao = Content.Load<Texture2D>("explosao");
             }
             SpriteAnimationManager.addAnimation(explosao, 9, 9, false,
-                    new Vector2(x * 30 - (explosao.Width / 9 / 4) - 10, y * 30 - (explosao.Height / 9 / 4)), 35, maxDelay);
+                    new Vector2(x, y), 35, maxDelay);
         }
          
     }

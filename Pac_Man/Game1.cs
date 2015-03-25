@@ -53,6 +53,8 @@ namespace Pac_Man
 
         bool doisJogadores;
 
+        Random random;
+
         /*
          * 0 - Caminho / Comida
          * 1 - Parede
@@ -113,7 +115,12 @@ namespace Pac_Man
             doisJogadores = false;
 
             SpriteAnimationManager.Initialize();
-            
+
+            random = new Random();
+
+            Camera.Graphics = graphics;
+            Camera.Target = new Vector2(13.45f, 10.1f);
+            Camera.WorldWith = 20;
             
             base.Initialize();
         }
@@ -234,6 +241,9 @@ namespace Pac_Man
 
             //atualizar explosões
             SpriteAnimationManager.Update(gameTime);
+
+            //Atualizar camera
+            Camera.Update(random);
 
             base.Update(gameTime);
 
@@ -426,22 +436,23 @@ namespace Pac_Man
                     switch (mapa[x, y])
                     {
                         case 0:
-                            spriteBatch.Draw(comida, new Vector2((x * 30) + 12, (y * 30) + 12), Color.White);
+                            spriteBatch.Draw(comida, new Vector2(Camera.WorldPoint2Pixels(new Vector2(x, y)).X + 12,
+                                                                 Camera.WorldPoint2Pixels(new Vector2(x, y)).Y + 12), Color.White);
                             break;
                         case 1:
-                            spriteBatch.Draw(bloco, new Vector2(x * 30, y * 30), Color.White);
+                            spriteBatch.Draw(bloco, Camera.WorldPoint2Pixels(new Vector2(x, y)), Color.White);
                             break;
                         case 4:
-                            spriteBatch.Draw(portal_saida, new Vector2(x * 30, y * 30), Color.White);
+                            spriteBatch.Draw(portal_saida, Camera.WorldPoint2Pixels(new Vector2(x, y)), Color.White);
                             break;
                         case 5:
-                            spriteBatch.Draw(portal_entrada, new Vector2(x * 30, y * 30), Color.White);
+                            spriteBatch.Draw(portal_entrada, Camera.WorldPoint2Pixels(new Vector2(x, y)), Color.White);
                             break;
                         case 6:
                             
                             if (contador >= 9f)
                             {
-                                spriteBatch.Draw(bomba, new Vector2(x * 30, y * 30), Color.White);
+                                spriteBatch.Draw(bomba, Camera.WorldPoint2Pixels(new Vector2(x, y)), Color.White);
                                 contador = 0f;
                                 somAviso.Play();
                             }
