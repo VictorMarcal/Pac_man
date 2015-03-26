@@ -176,7 +176,7 @@ namespace Pac_Man
                 explosao = Content.Load<Texture2D>("explosao");
             }
             SpriteAnimationManager.addAnimation(explosao, 9, 9, false,
-                    new Vector2(x, y), 35, maxDelay);
+                    new Vector2(x + 0.50f, y + 0.25f), 35, maxDelay);
         }
          
     }

@@ -13,25 +13,27 @@ namespace Pac_Man
         private static SoundEffect explosao;
         private static SoundEffect pacmanComer;
 
-    
+
 
         public static void playAvisoBomba(ContentManager content)
         {
+            if (avisoBomba == null) { }
             avisoBomba = content.Load<SoundEffect>("som\\avisodaBomba");
-            
-            avisoBomba.Play(.1f,1,1);
+            avisoBomba.Play(0.05f, 1, 0f);
         }
 
         public static void playExplosao(ContentManager content)
         {
-            explosao = content.Load<SoundEffect>("som\\explosao");
-            explosao.Play(1,1,1);
+            if (explosao == null)
+                explosao = content.Load<SoundEffect>("som\\explosao");
+            explosao.Play(0.3f, 1, 0f);
         }
 
         public static void playComer(ContentManager content)
         {
-            pacmanComer = content.Load<SoundEffect>("som\\pacmanComer");
-            pacmanComer.Play();
+            if (pacmanComer == null)
+                pacmanComer = content.Load<SoundEffect>("som\\pacmanComer");
+            pacmanComer.Play(0.3f, 1, 0f);
         }
     }
 }
