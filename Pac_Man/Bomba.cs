@@ -44,7 +44,7 @@ namespace Pac_Man
         private Texture2D explosao;
         
 
-        public void Update(GameTime gameTime, byte[,] mapa,float posBombaX, float posBombaY, ContentManager Content)
+        public void Update(GameTime gameTime, byte[,] mapa, ContentManager Content)
         {
             timer -= (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             if (this.exploded == false) 
@@ -53,96 +53,96 @@ namespace Pac_Man
              if (timer<=0f)
             {
                 Som.playExplosao(Content);
-                if (posBombaX == 1) 
+                if (this.posicao.X == 1) 
                 {
-                    mapa[(int)posBombaX + 1, (int)posBombaY] = 2;
-                    inserirExplosao((int)posBombaX + 1, (int)posBombaY, Content, 300);
-                    if (posBombaY == 1) 
+                    mapa[(int)this.posicao.X + 1, (int)this.posicao.Y] = 2;
+                    inserirExplosao((int)this.posicao.X + 1, (int)this.posicao.Y, Content, 300);
+                    if (this.posicao.Y == 1) 
                     {
-                        mapa[(int)posBombaX, (int)posBombaY + 1] = 2;
-                        inserirExplosao((int)posBombaX, (int)posBombaY + 1, Content, 300);
+                        mapa[(int)this.posicao.X, (int)this.posicao.Y + 1] = 2;
+                        inserirExplosao((int)this.posicao.X, (int)this.posicao.Y + 1, Content, 300);
                     }
-                     if (posBombaY == 18) 
+                    if (this.posicao.Y == 18) 
                     {
-                        mapa[(int)posBombaX, (int)posBombaY - 1] = 2;
-                        inserirExplosao((int)posBombaX - 1, (int)posBombaY, Content, 300);
+                        mapa[(int)this.posicao.X, (int)this.posicao.Y - 1] = 2;
+                        inserirExplosao((int)this.posicao.X - 1, (int)this.posicao.Y, Content, 300);
                     }
-                     if (posBombaY != 1 && posBombaY != 18) 
+                     if (this.posicao.Y != 1 && this.posicao.Y != 18) 
                     {
-                        mapa[(int)posBombaX, (int)posBombaY - 1] = 2;
-                        inserirExplosao((int)posBombaX, (int)posBombaY - 1, Content, 300);
-                        mapa[(int)posBombaX, (int)posBombaY + 1] = 2;
-                        inserirExplosao((int)posBombaX, (int)posBombaY + 1, Content, 300);
+                        mapa[(int)this.posicao.X, (int)this.posicao.Y - 1] = 2;
+                        inserirExplosao((int)this.posicao.X, (int)this.posicao.Y - 1, Content, 300);
+                        mapa[(int)this.posicao.X, (int)this.posicao.Y + 1] = 2;
+                        inserirExplosao((int)this.posicao.X, (int)this.posicao.Y + 1, Content, 300);
                     }
 
                 }
-                else if (posBombaX == 18) 
+                else if (this.posicao.X == 18) 
                 {
-                     mapa[(int)posBombaX - 1, (int)posBombaY] = 2;
-                     inserirExplosao((int)posBombaX - 1, (int)posBombaY, Content, 300);
-                    if (posBombaY == 1) 
+                    mapa[(int)this.posicao.X - 1, (int)this.posicao.Y] = 2;
+                    inserirExplosao((int)this.posicao.X - 1, (int)this.posicao.Y, Content, 300);
+                     if (this.posicao.Y == 1) 
                     {
-                        mapa[(int)posBombaX, (int)posBombaY + 1] = 2;
-                        inserirExplosao((int)posBombaX, (int)posBombaY + 1, Content, 300);
+                        mapa[(int)this.posicao.X, (int)this.posicao.Y + 1] = 2;
+                        inserirExplosao((int)this.posicao.X, (int)this.posicao.Y + 1, Content, 300);
                     }
-                     if (posBombaY == 18) 
+                     if (this.posicao.Y == 18) 
                     {
-                        mapa[(int)posBombaX, (int)posBombaY - 1] = 2;
-                        inserirExplosao((int)posBombaX, (int)posBombaY - 1, Content, 300);
+                        mapa[(int)this.posicao.X, (int)this.posicao.Y - 1] = 2;
+                        inserirExplosao((int)this.posicao.X, (int)this.posicao.Y - 1, Content, 300);
                     }
-                     if (posBombaY != 1 && posBombaY != 18) 
+                     if (this.posicao.Y != 1 && this.posicao.Y != 18) 
                     {
-                        mapa[(int)posBombaX, (int)posBombaY - 1] = 2;
-                        inserirExplosao((int)posBombaX, (int)posBombaY - 1, Content, 300);
-                        mapa[(int)posBombaX, (int)posBombaY + 1] = 2;
-                        inserirExplosao((int)posBombaX, (int)posBombaY + 1, Content, 300);
+                        mapa[(int)this.posicao.X, (int)this.posicao.Y - 1] = 2;
+                        inserirExplosao((int)this.posicao.X, (int)this.posicao.Y - 1, Content, 300);
+                        mapa[(int)this.posicao.X, (int)this.posicao.Y + 1] = 2;
+                        inserirExplosao((int)this.posicao.X, (int)this.posicao.Y + 1, Content, 300);
                     }
                 
                 }
-                else if (posBombaY == 1) 
+                else if (this.posicao.Y == 1) 
                 {
-                    mapa[(int)posBombaX, (int)posBombaY + 1] = 2;
-                    inserirExplosao((int)posBombaX, (int)posBombaY + 1, Content, 300);
-                    if (posBombaX == 1) 
-                    {                  
-                        mapa[(int)posBombaX + 1, (int)posBombaY] = 2;
-                        inserirExplosao((int)posBombaX + 1, (int)posBombaY, Content, 300);
-                    }
-                    if (posBombaX == 18) 
+                    mapa[(int)this.posicao.X, (int)this.posicao.Y + 1] = 2;
+                    inserirExplosao((int)this.posicao.X, (int)this.posicao.Y + 1, Content, 300);
+                    if (this.posicao.X == 1) 
                     {
-                        mapa[(int)posBombaX - 1, (int)posBombaY] = 2;
-                        inserirExplosao((int)posBombaX - 1, (int)posBombaY, Content, 300);
+                        mapa[(int)this.posicao.X + 1, (int)this.posicao.Y] = 2;
+                        inserirExplosao((int)this.posicao.X + 1, (int)this.posicao.Y, Content, 300);
                     }
-                    if (posBombaX != 1 && posBombaX != 18) 
+                    if (this.posicao.X == 18) 
                     {
-                        mapa[(int)posBombaX - 1, (int)posBombaY] = 2;
-                        inserirExplosao((int)posBombaX - 1, (int)posBombaY, Content, 300);
-                        mapa[(int)posBombaX + 1, (int)posBombaY] = 2;
-                        inserirExplosao((int)posBombaX + 1, (int)posBombaY, Content, 300);
+                        mapa[(int)this.posicao.X - 1, (int)this.posicao.Y] = 2;
+                        inserirExplosao((int)this.posicao.X - 1, (int)this.posicao.Y, Content, 300);
+                    }
+                    if (this.posicao.X != 1 && this.posicao.X != 18) 
+                    {
+                        mapa[(int)this.posicao.X - 1, (int)this.posicao.Y] = 2;
+                        inserirExplosao((int)this.posicao.X - 1, (int)this.posicao.Y, Content, 300);
+                        mapa[(int)this.posicao.X + 1, (int)this.posicao.Y] = 2;
+                        inserirExplosao((int)this.posicao.X + 1, (int)this.posicao.Y, Content, 300);
                     }
                     
 
                 }
-                else if (posBombaY == 18)
+                else if (this.posicao.Y == 18)
                 {
-                    mapa[(int)posBombaX, (int)posBombaY - 1] = 2;
-                    inserirExplosao((int)posBombaX, (int)posBombaY - 1, Content, 300);
-                    if (posBombaX == 1) 
+                    mapa[(int)this.posicao.X, (int)this.posicao.Y - 1] = 2;
+                    inserirExplosao((int)this.posicao.X, (int)this.posicao.Y - 1, Content, 300);
+                    if (this.posicao.X == 1) 
                     {
-                        mapa[(int)posBombaX + 1, (int)posBombaY] = 2;
-                        inserirExplosao((int)posBombaX + 1, (int)posBombaY, Content, 300);
+                        mapa[(int)this.posicao.X + 1, (int)this.posicao.Y] = 2;
+                        inserirExplosao((int)this.posicao.X + 1, (int)this.posicao.Y, Content, 300);
                     }
-                    if (posBombaX == 18) 
+                    if (this.posicao.X == 18) 
                     {
-                        mapa[(int)posBombaX - 1, (int)posBombaY] = 2;
-                        inserirExplosao((int)posBombaX - 1, (int)posBombaY, Content, 300);
+                        mapa[(int)this.posicao.X - 1, (int)this.posicao.Y] = 2;
+                        inserirExplosao((int)this.posicao.X - 1, (int)this.posicao.Y, Content, 300);
                     }
-                    if (posBombaX != 1 && posBombaX != 18) 
+                    if (this.posicao.X != 1 && this.posicao.X != 18) 
                     {
-                        mapa[(int)posBombaX - 1, (int)posBombaY] = 2;
-                        inserirExplosao((int)posBombaX - 1, (int)posBombaY, Content, 300);
-                        mapa[(int)posBombaX + 1, (int)posBombaY] = 2;
-                        inserirExplosao((int)posBombaX + 1, (int)posBombaY, Content, 300);
+                        mapa[(int)this.posicao.X - 1, (int)this.posicao.Y] = 2;
+                        inserirExplosao((int)this.posicao.X - 1, (int)this.posicao.Y, Content, 300);
+                        mapa[(int)this.posicao.X + 1, (int)this.posicao.Y] = 2;
+                        inserirExplosao((int)this.posicao.X + 1, (int)this.posicao.Y, Content, 300);
 
                     }
 
@@ -150,14 +150,14 @@ namespace Pac_Man
                 else 
                 {
                     
-                    mapa[(int)posBombaX, (int)posBombaY + 1] = 2;
-                    inserirExplosao((int)posBombaX, (int)posBombaY + 1, Content, 300);
-                    mapa[(int)posBombaX, (int)posBombaY - 1] = 2;
-                    inserirExplosao((int)posBombaX, (int)posBombaY - 1, Content, 300);
-                    mapa[(int)posBombaX + 1, (int)posBombaY] = 2;
-                    inserirExplosao((int)posBombaX + 1, (int)posBombaY, Content, 300);
-                    mapa[(int)posBombaX - 1, (int)posBombaY] = 2;
-                    inserirExplosao((int)posBombaX - 1, (int)posBombaY, Content, 300);
+                    mapa[(int)this.posicao.X, (int)this.posicao.Y + 1] = 2;
+                    inserirExplosao((int)this.posicao.X, (int)this.posicao.Y + 1, Content, 300);
+                    mapa[(int)this.posicao.X, (int)this.posicao.Y - 1] = 2;
+                    inserirExplosao((int)this.posicao.X, (int)this.posicao.Y - 1, Content, 300);
+                    mapa[(int)this.posicao.X + 1, (int)this.posicao.Y] = 2;
+                    inserirExplosao((int)this.posicao.X + 1, (int)this.posicao.Y, Content, 300);
+                    mapa[(int)this.posicao.X - 1, (int)this.posicao.Y] = 2;
+                    inserirExplosao((int)this.posicao.X - 1, (int)this.posicao.Y, Content, 300);
 
                 }
 

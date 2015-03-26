@@ -155,7 +155,7 @@ namespace Pac_Man
             
             foreach (Bomba bomb in bombas)
             {
-                bomb.Update(gameTime, mapa, bomb.Posicao.X, bomb.Posicao.Y, Content);
+                bomb.Update(gameTime, mapa, Content);
             }
             
         }
