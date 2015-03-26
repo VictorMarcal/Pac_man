@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Pac_Man
 {
-    class Bomba
+    public class Bomba
     {
         private float timer;
         private bool exploded;
@@ -18,6 +18,16 @@ namespace Pac_Man
             get { return exploded;}
             set { exploded = value; }
         }
+
+        private Personagem parent;
+
+        public Personagem Parent
+        {
+            get { return parent; }
+            set { parent = value; }
+        }
+        
+
         //textura da bomba
         private Texture2D textura;
         public Texture2D Textura
@@ -37,8 +47,6 @@ namespace Pac_Man
             this.Posicao = posicao;
             this.Exploded = false;
             this.timer = 600f;
-            
-            
         }
 
         private Texture2D explosao;
@@ -143,7 +151,6 @@ namespace Pac_Man
                         inserirExplosao((int)this.posicao.X - 1, (int)this.posicao.Y, Content, 300);
                         mapa[(int)this.posicao.X + 1, (int)this.posicao.Y] = 2;
                         inserirExplosao((int)this.posicao.X + 1, (int)this.posicao.Y, Content, 300);
-
                     }
 
                 }
@@ -165,7 +172,7 @@ namespace Pac_Man
                 this.Exploded = true;
 
                 inserirExplosao((int)Posicao.X, (int)Posicao.Y, Content, 0);
-                Camera.addShake(500);
+                Camera.addShake(300);
                 timer = float.MaxValue;
             }
         }

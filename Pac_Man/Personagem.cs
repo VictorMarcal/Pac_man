@@ -29,6 +29,14 @@ namespace Pac_Man
     {
         float timer;
         private List<Bomba> bombas;
+        /// <summary>
+        /// Devolve a lista de bombas colocadas por esta personagem
+        /// </summary>
+        /// <returns></returns>
+        public List<Bomba> getBombas()
+        {
+            return bombas;
+        }
 
         private Texture2D textura;
         /// <summary>
@@ -137,8 +145,9 @@ namespace Pac_Man
             if (score >= 100)
             {
                 Bomba bomba = new Bomba(Color.White, posicao);
+                bomba.Parent = this;
                 bombas.Add(bomba);
-                return (score - 100);
+                return (score - 5);
             }
             return (score);
         }
@@ -159,6 +168,12 @@ namespace Pac_Man
             }
             
         }
+
+        public void removeBomba(Bomba bomba)
+        {
+            bombas.Remove(bomba);
+        }
+
         public void Update(GameTime gameTime, List<Personagem> pacmans, byte[,] mapa, List<Personagem> listaFantasmas,float tempoExplosao, ContentManager Content)
         {
            
@@ -271,14 +286,9 @@ namespace Pac_Man
             //plantar bombas
             foreach (Bomba bomb in bombas)
             {
-                if (bomb.Exploded == false)
+                if (!bomb.Exploded)
                 {
                     mapa[(int)bomb.Posicao.X, (int)bomb.Posicao.Y] = 6;
-                }
-                else if(bomb.Exploded==true)
-                {
-                    mapa[(int)bomb.Posicao.X, (int)bomb.Posicao.Y] = 2;
-                    
                 }
             }
             /*

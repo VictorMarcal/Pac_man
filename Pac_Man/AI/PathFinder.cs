@@ -143,13 +143,16 @@ namespace Pac_Man.AI
                     if (fantasma != fantasmaAtivo)
                     {
                         if ((int)fantasma.getPosicaoTarget().X == x && (int)fantasma.getPosicaoTarget().Y == y ||
-                            (int)fantasma.Posicao.X == x && (int)fantasma.Posicao.Y == y ||
-                            mapa[x, y] == 6)
+                            (int)fantasma.Posicao.X == x && (int)fantasma.Posicao.Y == y)
                         {
                             return true;
                         }
                     }
 
+                }
+                if (mapa[x, y] == 6)
+                {
+                    return true;
                 }
             }
             return false;

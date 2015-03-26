@@ -56,6 +56,9 @@ namespace Pac_Man
 
         Random random;
 
+        List<Personagem> listaTempPersonagens;
+        List<Bomba> listaTempBombas;
+
         /*
          * 0 - Caminho / Comida
          * 1 - Parede
@@ -114,6 +117,8 @@ namespace Pac_Man
             fantasmas = new List<Personagem>();
             pacmans = new List<Personagem>();
             doisJogadores = false;
+            listaTempPersonagens = new List<Personagem>();
+            listaTempBombas = new List<Bomba>();
 
             SpriteAnimationManager.Initialize();
 
@@ -183,6 +188,10 @@ namespace Pac_Man
             {
                 pacman.Dispose();
             }
+            foreach (Personagem fantasma in fantasmas)
+            {
+                fantasma.Dispose();
+            }
             comida.Dispose();
             sem_comida.Dispose();
             bomba.Dispose();
@@ -213,18 +222,13 @@ namespace Pac_Man
 
                 updateInput();
                 
-                if (bombaLargada == true) 
-                {
-                    tempoExpulão += (float)gameTime.ElapsedGameTime.TotalSeconds;
-                }
+               
 
 
                 foreach (Personagem pacman in pacmans)
                 {
-                    pacman.Update(gameTime, pacmans, mapa, fantasmas,tempoExpulão, Content);
-                    
-                    pacman.UpdateBombs(tempoExpulão, mapa,gameTime, Content);
-                    
+                    pacman.Update(gameTime, pacmans, mapa, fantasmas,tempoExpulão, Content);                  
+                    pacman.UpdateBombs(tempoExpulão, mapa,gameTime, Content);    
                 }
                 
                 foreach (Personagem fantasma in fantasmas)
@@ -232,21 +236,22 @@ namespace Pac_Man
                     fantasma.Update(gameTime, pacmans, mapa, fantasmas,tempoExpulão, Content);
                 }
 
-                comer();
-                bombaLargada = false;
-               
-                
+
                 ultimoMovimento = 0;
                 tempoExpulão = 0;
-                
-                
+                             
             }
+
+            comer();
 
             //atualizar explosões
             SpriteAnimationManager.Update(gameTime);
             
             //Atualizar camera
             Camera.Update(random);
+
+            //Verificar morte de fantasmas ou pacman
+            colisaoBombaFantasma();
 
             base.Update(gameTime);
 
@@ -522,7 +527,39 @@ namespace Pac_Man
                        Som.playComer(Content);
                 }
             }
-        }  
+        }
+
+        private void colisaoBombaFantasma()
+        {
+            foreach (Personagem pacman in pacmans)
+            {
+                //Para cada pacman..
+                foreach (Bomba bomba in pacman.getBombas())
+                {
+                    //Para cada bomba do pacman..
+                    if (bomba.Exploded)
+                    {
+                        //Esta bomba explodiu, verificar se colide com algum fantasma
+                        listaTempPersonagens = Colisoes.bombaFantasma(bomba.Posicao, fantasmas);
+                        listaTempBombas.Add(bomba);
+                        mapa[(int)bomba.Posicao.X, (int)bomba.Posicao.Y] = 2;
+                    }
+                }
+            }
+
+            //Retirar os fantasmas mortos da lista
+            foreach (Personagem fantasma in listaTempPersonagens)
+            {
+                fantasmas.Remove(fantasma);
+            }
+            //Retirar as bombas explodidas
+            foreach (Bomba bomba in listaTempBombas)
+            {
+                bomba.Parent.removeBomba(bomba);
+            }
+            listaTempBombas.Clear();
+            listaTempPersonagens.Clear();
+        }
        
     }
     
