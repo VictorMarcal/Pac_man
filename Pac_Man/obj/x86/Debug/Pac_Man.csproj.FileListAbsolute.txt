@@ -57,4 +57,3 @@ C:\Users\User\Documents\GitHub\Pac_man\Pac_Man\bin\Windows\Debug\SharpDX.Direct3
 C:\Users\User\Documents\GitHub\Pac_man\Pac_Man\bin\Windows\Debug\Content\ghost.png
 C:\Users\User\Documents\GitHub\Pac_man\Pac_Man\bin\Windows\Debug\Content\MyFont.xnb
 C:\Users\User\Documents\GitHub\Pac_man\Pac_Man\obj\x86\Debug\Pac_Man.csprojResolveAssemblyReference.cache
-C:\Users\Joana\Documents\GitHub\Pac_man\Pac_Man\bin\Windows\Debug\SharpDX.MediaFoundation.dll

@@ -456,13 +456,9 @@ namespace Pac_Man
                             spriteBatch.Draw(portal_entrada, Camera.WorldPoint2Pixels(new Vector2(x, y)), Color.White);
                             break;
                         case 6:
+                             spriteBatch.Draw(bomba, Camera.WorldPoint2Pixels(new Vector2(x, y)), Color.White);
+                             contador = 0f;
                             
-                            if (contador >= 3f)
-                            {
-                                spriteBatch.Draw(bomba, Camera.WorldPoint2Pixels(new Vector2(x, y)), Color.White);
-                                contador = 0f;
-                                Som.playAvisoBomba(Content);
-                            }
                             break;
                         default:
                             break;

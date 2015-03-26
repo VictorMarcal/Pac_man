@@ -47,7 +47,8 @@ namespace Pac_Man
         public void Update(GameTime gameTime, byte[,] mapa,float posBombaX, float posBombaY, ContentManager Content)
         {
             timer -= (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            
+            if (this.exploded == false) 
+            { Som.playAvisoBomba(Content); }
             
              if (timer<=0f)
             {
