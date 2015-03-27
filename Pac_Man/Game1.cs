@@ -542,6 +542,7 @@ namespace Pac_Man
             listaTempPersonagens = Colisoes.fantasmaPacman(fantasmas, pacmans);
             foreach (Personagem pacman in listaTempPersonagens)
             {
+                pacman.removeBombas(mapa);
                 pacmans.Remove(pacman);
             }
             listaTempPersonagens.Clear();
@@ -574,6 +575,7 @@ namespace Pac_Man
                 }
                 else
                 {
+                    personagem.removeBombas(mapa);
                     pacmans.Remove(personagem);
                 }
                 
