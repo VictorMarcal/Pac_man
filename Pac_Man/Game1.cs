@@ -535,12 +535,18 @@ namespace Pac_Man
 
                 spriteBatch.Draw(corMenu, new Rectangle(100, 50, 500, 540), Color.White);
                 spriteBatch.DrawString(myFont, "Movimento PacMan", new Vector2(110, 50), Color.Yellow);
+                spriteBatch.DrawString(myFont, "1", new Vector2(420, 50), Color.White);
+                spriteBatch.DrawString(myFont, "2", new Vector2(440, 50), Color.GreenYellow);
                 spriteBatch.DrawString(myFont, "   W", new Vector2(110, 75), Color.White);
                 spriteBatch.DrawString(myFont, " A S D", new Vector2(110, 110), Color.White);
+                spriteBatch.DrawString(myFont, "   ^", new Vector2(250, 75), Color.GreenYellow);
+                spriteBatch.DrawString(myFont, " < v >", new Vector2(250, 110), Color.GreenYellow);
                 spriteBatch.DrawString(myFont, "Plantar Bomba", new Vector2(110, 150), Color.Yellow);
-                spriteBatch.DrawString(myFont, " B", new Vector2(110, 190), Color.White);
+                spriteBatch.DrawString(myFont, "   B", new Vector2(110, 190), Color.White);
+                spriteBatch.DrawString(myFont, " Delete", new Vector2(250, 190), Color.GreenYellow);
                 spriteBatch.DrawString(myFont, "Abrir/Fechar Portal", new Vector2(110, 250), Color.Yellow);
                 spriteBatch.DrawString(myFont, " Space", new Vector2(110, 290), Color.White);
+                //spriteBatch.DrawString(myFont, " Insert", new Vector2(250, 290), Color.GreenYellow);
                 spriteBatch.DrawString(myFont, "Para ativar segundo\njogador pressionar\numa das setas. ", new Vector2(110, 370), Color.Yellow);
                 spriteBatch.DrawString(myFont, "Pressione Enter para jogar.", new Vector2(110, 520), Color.Red);
             }
