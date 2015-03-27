@@ -499,7 +499,7 @@ namespace Pac_Man
                 
                 //desenhar texto e mostrar pontuaçao
                 spriteBatch.DrawString(myFont, "Score", new Vector2(650, 10 + offset), Color.Yellow);
-                spriteBatch.DrawString(myFont, pacmans[0].Score + "", new Vector2(680, 50), Color.Yellow);
+                spriteBatch.DrawString(myFont, pacman.Score + "", new Vector2(680, 50 + offset), Color.Yellow);
                 offset += 90;
             }
             
