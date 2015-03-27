@@ -92,29 +92,5 @@ namespace Pac_Man
             return listaTempPersonagens;
         }
 
-        public static List<Personagem> fantasmaPacman(List<Personagem> fantasmas, List<Personagem> pacmans)
-        {
-            if (listaTempPersonagens == null)
-            {
-                listaTempPersonagens = new List<Personagem>();
-            }
-            else
-            {
-                listaTempPersonagens.Clear();
-            }
-            foreach (Personagem fantasma in fantasmas)
-            {
-                foreach (Personagem pacman in pacmans)
-                {
-                    if (Math.Round(fantasma.Posicao.X) == Math.Round(pacman.Posicao.X) && Math.Round(fantasma.Posicao.Y) == Math.Round(pacman.Posicao.Y))
-                    {
-                        //Este fantasma está a tocar num pacman!
-                        listaTempPersonagens.Add(pacman);
-                    }
-                }
-            }
-            return listaTempPersonagens;
-        }
-
     }
 }
