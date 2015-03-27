@@ -342,7 +342,7 @@ namespace Pac_Man
                             //mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 6;
                             pacmans[0].Score=pacmans[0].insereBomba(pacmans[0].Score);
                             bombaLargada = true;
-                            proximaBombaPac2 = false;
+                            proximaBombaPac1 = false;
                             //numerodeBombasimplantadas = 1;
 
                         }
