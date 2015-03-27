@@ -156,6 +156,10 @@ namespace Pac_Man
             Personagem fantasma3 = new Personagem(Content, "ghost", TipoPersonagem.NPC, mapa, Color.Blue, 4).teleportTo(new Vector2(9, 11));
             fantasma3.Velocidade = 0.5f;
             fantasmas.Add(fantasma3);
+
+            Personagem fantasma4 = new Personagem(Content, "ghost", TipoPersonagem.NPC, mapa, Color.Pink, 4).teleportTo(new Vector2(9, 10));
+            fantasma3.Velocidade = 0.5f;
+            fantasmas.Add(fantasma4);
             
             comida = Content.Load<Texture2D>("comida");
             sem_comida = Content.Load<Texture2D>("sem_comida");
@@ -251,7 +255,7 @@ namespace Pac_Man
             Camera.Update(random);
 
             //Verificar morte de fantasmas ou pacman
-            colisaoBombaFantasma();
+            colisaoBomba();
 
             base.Update(gameTime);
 
@@ -530,7 +534,7 @@ namespace Pac_Man
             }
         }
 
-        private void colisaoBombaFantasma()
+        private void colisaoBomba()
         {
             foreach (Personagem pacman in pacmans)
             {
@@ -541,7 +545,7 @@ namespace Pac_Man
                     if (bomba.Exploded)
                     {
                         //Esta bomba explodiu, verificar se colide com algum fantasma
-                        listaTempPersonagens = Colisoes.bombaFantasma(bomba.Posicao, fantasmas);
+                        listaTempPersonagens = Colisoes.bombaFantasmaPacman(bomba.Posicao, fantasmas, pacmans);
                         listaTempBombas.Add(bomba);
                         mapa[(int)bomba.Posicao.X, (int)bomba.Posicao.Y] = 2;
                     }
@@ -549,9 +553,17 @@ namespace Pac_Man
             }
 
             //Retirar os fantasmas mortos da lista
-            foreach (Personagem fantasma in listaTempPersonagens)
+            foreach (Personagem personagem in listaTempPersonagens)
             {
-                fantasmas.Remove(fantasma);
+                if (personagem.TipoPersonagem() == TipoPersonagem.NPC)
+                {
+                    fantasmas.Remove(personagem);
+                }
+                else
+                {
+                    pacmans.Remove(personagem);
+                }
+                
             }
             //Retirar as bombas explodidas
             foreach (Bomba bomba in listaTempBombas)
