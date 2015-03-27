@@ -490,14 +490,14 @@ namespace Pac_Man
             //Desenhar explosões
             SpriteAnimationManager.Draw(spriteBatch);
 
-            //desenhar texto e mostrar pontuaçao
-            spriteBatch.DrawString(myFont, "Score", new Vector2(650, 10), Color.Yellow);
-            spriteBatch.DrawString(myFont, pacmans[0].Score+"", new Vector2(680, 50), Color.Yellow);
-            
-            if(pacmans.Count==2)
+            int offset = 0;
+            foreach (Personagem pacman in pacmans)
             {
-                spriteBatch.DrawString(myFont, "Score", new Vector2(650, 100), Color.Pink);
-                spriteBatch.DrawString(myFont, pacmans[1].Score + "", new Vector2(680, 150), Color.Pink);
+                
+                //desenhar texto e mostrar pontuaçao
+                spriteBatch.DrawString(myFont, "Score", new Vector2(650, 10 + offset), Color.Yellow);
+                spriteBatch.DrawString(myFont, pacmans[0].Score + "", new Vector2(680, 50), Color.Yellow);
+                offset += 90;
             }
             
             spriteBatch.DrawString(myFont, "Game Time", new Vector2(620, 200), Color.Yellow);
