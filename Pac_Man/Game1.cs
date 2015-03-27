@@ -257,6 +257,9 @@ namespace Pac_Man
             //Verificar morte de fantasmas ou pacman
             colisaoBomba();
 
+            //Verificar colisao de fantasmas com pacmans
+            colisaoFantasmaPacman();
+
             base.Update(gameTime);
 
         }
@@ -532,6 +535,16 @@ namespace Pac_Man
                        Som.playComer(Content);
                 }
             }
+        }
+
+        public void colisaoFantasmaPacman()
+        {
+            listaTempPersonagens = Colisoes.fantasmaPacman(fantasmas, pacmans);
+            foreach (Personagem pacman in listaTempPersonagens)
+            {
+                pacmans.Remove(pacman);
+            }
+            listaTempPersonagens.Clear();
         }
 
         private void colisaoBomba()
