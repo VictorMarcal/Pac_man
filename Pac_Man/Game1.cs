@@ -65,7 +65,7 @@ namespace Pac_Man
             jogo,
         };
         GameStatus status;
-        Rectangle menu;
+
         /*
          * 0 - Caminho / Comida
          * 1 - Parede
@@ -86,7 +86,7 @@ namespace Pac_Man
                         {3,0,1,1,1,1,1,0,1,1,0,1,0,1,1,1,1,1,0,3},
                         {3,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,3},
                         {3,1,1,0,1,0,1,1,1,1,1,1,1,1,0,1,0,1,1,3},
-                        {0,0,0,0,1,0,2,2,2,2,2,2,2,1,0,1,0,0,0,0},
+                        {2,0,0,0,1,0,2,2,2,2,2,2,2,1,0,1,0,0,0,2},
                         {3,1,1,0,1,0,1,1,1,1,1,1,1,1,0,1,0,1,1,3},
                         {3,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,3},
                         {3,0,1,1,1,1,1,0,1,0,1,1,0,1,1,1,1,1,0,3},
@@ -134,6 +134,7 @@ namespace Pac_Man
             Camera.Graphics = graphics;
             Camera.Target = new Vector2(13.45f, 10.1f);
             Camera.WorldWith = 20;
+
             status = GameStatus.inicio;
 
             base.Initialize();
@@ -166,7 +167,7 @@ namespace Pac_Man
             fantasmas.Add(fantasma3);
 
             Personagem fantasma4 = new Personagem(Content, "ghost", TipoPersonagem.NPC, mapa, Color.Pink, 4).teleportTo(new Vector2(9, 10));
-            fantasma3.Velocidade = 0.5f;
+            fantasma4.Velocidade = 0.5f;
             fantasmas.Add(fantasma4);
 
             comida = Content.Load<Texture2D>("comida");
@@ -220,12 +221,14 @@ namespace Pac_Man
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
             if (status == GameStatus.inicio && Keyboard.GetState().IsKeyDown(Keys.Enter))
             {
                 status = GameStatus.jogo;
             }
             if (status == GameStatus.jogo)
             {
+
                 ultimoMovimento += (float)gameTime.ElapsedGameTime.TotalSeconds;
                 time += (float)gameTime.ElapsedGameTime.TotalSeconds;
                 teclado = Keyboard.GetState();
@@ -268,6 +271,9 @@ namespace Pac_Man
 
                 //Verificar morte de fantasmas ou pacman
                 colisaoBomba();
+
+                //Verificar colisao de fantasmas com pacmans
+                colisaoFantasmaPacman();
             }
 
             base.Update(gameTime);
@@ -352,7 +358,7 @@ namespace Pac_Man
                             //mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 6;
                             pacmans[0].Score = pacmans[0].insereBomba(pacmans[0].Score);
                             bombaLargada = true;
-                            proximaBombaPac2 = false;
+                            proximaBombaPac1 = false;
                             //numerodeBombasimplantadas = 1;
 
                         }
@@ -454,7 +460,6 @@ namespace Pac_Man
             GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin();
 
-
             //desenhar o mapa
             for (int x = 0; x < 20; x++)
             {
@@ -504,18 +509,19 @@ namespace Pac_Man
             //Desenhar explosões
             SpriteAnimationManager.Draw(spriteBatch);
 
-            //desenhar texto e mostrar pontuaçao
-            spriteBatch.DrawString(myFont, "Score", new Vector2(650, 10), Color.Yellow);
-            spriteBatch.DrawString(myFont, pacmans[0].Score + "", new Vector2(680, 50), Color.Yellow);
-
-            if (pacmans.Count == 2)
+            int offset = 0;
+            foreach (Personagem pacman in pacmans)
             {
-                spriteBatch.DrawString(myFont, "Score", new Vector2(650, 100), Color.Pink);
-                spriteBatch.DrawString(myFont, pacmans[1].Score + "", new Vector2(680, 150), Color.Pink);
+
+                //desenhar texto e mostrar pontuaçao
+                spriteBatch.DrawString(myFont, "Score", new Vector2(650, 10 + offset), Color.Yellow);
+                spriteBatch.DrawString(myFont, pacman.Score + "", new Vector2(680, 50 + offset), Color.Yellow);
+                offset += 90;
             }
 
             spriteBatch.DrawString(myFont, "Game Time", new Vector2(620, 200), Color.Yellow);
             spriteBatch.DrawString(myFont, gametime + "sec", new Vector2(680, 250), Color.Yellow);
+
             //desenhar menu inicial
             if (status == GameStatus.inicio)
             {
@@ -531,6 +537,7 @@ namespace Pac_Man
                 spriteBatch.DrawString(myFont, "Para ativar segundo\njogador pressionar\numa das setas. ", new Vector2(110, 370), Color.Yellow);
                 spriteBatch.DrawString(myFont, "Pressione Enter para jogar.", new Vector2(110, 520), Color.Red);
             }
+
             spriteBatch.End();
 
             base.Draw(gameTime);
@@ -560,6 +567,17 @@ namespace Pac_Man
             }
         }
 
+        public void colisaoFantasmaPacman()
+        {
+            listaTempPersonagens = Colisoes.fantasmaPacman(fantasmas, pacmans);
+            foreach (Personagem pacman in listaTempPersonagens)
+            {
+                pacman.removeBombas(mapa);
+                pacmans.Remove(pacman);
+            }
+            listaTempPersonagens.Clear();
+        }
+
         private void colisaoBomba()
         {
             foreach (Personagem pacman in pacmans)
@@ -587,6 +605,7 @@ namespace Pac_Man
                 }
                 else
                 {
+                    personagem.removeBombas(mapa);
                     pacmans.Remove(personagem);
                 }
 

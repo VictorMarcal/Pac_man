@@ -176,6 +176,14 @@ namespace Pac_Man
             bombas.Remove(bomba);
         }
 
+        public void removeBombas(byte[,] mapa)
+        {
+            foreach (Bomba bomba in bombas)
+            {
+                mapa[(int)bomba.Posicao.X, (int)bomba.Posicao.Y] = 2;
+            }
+        }
+
         public void Update(GameTime gameTime, List<Personagem> pacmans, byte[,] mapa, List<Personagem> listaFantasmas, float tempoExplosao, ContentManager Content)
         {
 
