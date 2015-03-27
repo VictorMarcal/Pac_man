@@ -22,25 +22,25 @@ namespace Pac_Man
                 return false;
 
             }
-            if (posiçãoY >19 )
+            if (posiçãoY > 19)
             {
                 pacman.teleportTo(new Vector2(posiçãoX, 0));
                 return false;
             }
 
-            else if (mapa[posiçãoX, posiçãoY] == 1 || mapa[posiçãoX,posiçãoY]== 3 || mapa[posiçãoX,posiçãoY]== 6)
+            else if (mapa[posiçãoX, posiçãoY] == 1 || mapa[posiçãoX, posiçãoY] == 3 || mapa[posiçãoX, posiçãoY] == 6)
             {
                 return true;
             }
-            
-            
+
+
 
             return false;
         }
-       /* public Vector2 colisao(Vector2 posicaofutura) 
-        {
+        /* public Vector2 colisao(Vector2 posicaofutura) 
+         {
 
-        }*/
+         }*/
 
         /// <summary>
         /// Devolve uma lista de fantasmas que foram mortos por uma bomba
@@ -70,7 +70,7 @@ namespace Pac_Man
                     {
                         //Este fantasma está ao alcance da bomba, bye bye
                         listaTempPersonagens.Add(fantasma);
-                    } 
+                    }
                 }
             }
             foreach (Personagem pacman in pacmans)

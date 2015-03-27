@@ -10,7 +10,7 @@ using Pac_Man.Animations;
 
 namespace Pac_Man
 {
-    
+
     public enum TipoPersonagem
     {
         Player,
@@ -161,14 +161,14 @@ namespace Pac_Man
             return this;
         }
 
-        public void UpdateBombs(float tempoExplosao, byte[,] mapa,GameTime gameTime, ContentManager Content)
+        public void UpdateBombs(float tempoExplosao, byte[,] mapa, GameTime gameTime, ContentManager Content)
         {
-            
+
             foreach (Bomba bomb in bombas)
             {
                 bomb.Update(gameTime, mapa, Content);
             }
-            
+
         }
 
         public void removeBomba(Bomba bomba)
@@ -176,9 +176,9 @@ namespace Pac_Man
             bombas.Remove(bomba);
         }
 
-        public void Update(GameTime gameTime, List<Personagem> pacmans, byte[,] mapa, List<Personagem> listaFantasmas,float tempoExplosao, ContentManager Content)
+        public void Update(GameTime gameTime, List<Personagem> pacmans, byte[,] mapa, List<Personagem> listaFantasmas, float tempoExplosao, ContentManager Content)
         {
-           
+
             if (tipoPersonagem == Pac_Man.TipoPersonagem.NPC)
             {
 
@@ -209,7 +209,8 @@ namespace Pac_Man
 
                 if (mapa[(int)Posicao.X, (int)Posicao.Y] == 5 && contadorPortalEntrada > 100)
                 {
-                    if(teleport == null){
+                    if (teleport == null)
+                    {
                         teleport = Content.Load<Texture2D>("teleport");
                     }
                     if (deteleport == null)
@@ -253,7 +254,7 @@ namespace Pac_Man
             {
                 this.posicaoTarget = path.First();
             }
-            
+
         }
 
         public void moverPacMan(Direccao direccao)
@@ -288,7 +289,7 @@ namespace Pac_Man
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch, GameTime gameTime,Byte[,] mapa)
+        public void Draw(SpriteBatch spriteBatch, GameTime gameTime, Byte[,] mapa)
         {
             spriteBatch.Draw(Textura, new Vector2(Camera.WorldPoint2Pixels(Posicao).X + Textura.Width / 4, Camera.WorldPoint2Pixels(Posicao).Y + Textura.Height / 4), null, cor, this.Rotacao, Vector2.Zero, 1f, flip, 0f);
             //plantar bombas
@@ -312,7 +313,7 @@ namespace Pac_Man
             //    }
 
             //}
-            
+
         }
 
         /// <summary>
