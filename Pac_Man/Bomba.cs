@@ -56,12 +56,32 @@ namespace Pac_Man
         {
             timer -= (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             if (this.exploded == false) 
-            { Som.playAvisoBomba(Content); }
+            { 
+                Som.playAvisoBomba(Content); 
+            }
             
              if (timer<=0f)
             {
                 Som.playExplosao(Content);
-                if (this.posicao.X == 1) 
+
+                if (this.posicao.Y == 0)
+                {
+                    mapa[(int)this.posicao.X , (int)this.posicao.Y + 1] = 2;
+                    inserirExplosao((int)this.posicao.X, (int)this.posicao.Y + 1, Content, 300);
+                    inserirExplosao((int)this.posicao.X, 19, Content, 300);
+
+                }
+                else 
+                    if (this.posicao.Y == 19)
+                {
+                    mapa[(int)this.posicao.X, (int)this.posicao.Y - 1] = 2;
+                    inserirExplosao((int)this.posicao.X, (int)this.posicao.Y - 1, Content, 300);
+                    inserirExplosao((int)this.posicao.X, 0, Content, 300);
+
+                }
+
+                
+                else if (this.posicao.X == 1) 
                 {
                     mapa[(int)this.posicao.X + 1, (int)this.posicao.Y] = 2;
                     inserirExplosao((int)this.posicao.X + 1, (int)this.posicao.Y, Content, 300);
