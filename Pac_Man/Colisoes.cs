@@ -106,8 +106,8 @@ namespace Pac_Man
             {
                 foreach (Personagem pacman in pacmans)
                 {
-                    if (Math.Round(fantasma.Posicao.X, 1) == Math.Round(pacman.Posicao.X, 1) 
-                        && Math.Round(fantasma.Posicao.Y, 1) == Math.Round(pacman.Posicao.Y, 1))
+                    if (Math.Round(fantasma.Posicao.X) == Math.Round(pacman.Posicao.X) 
+                        && Math.Round(fantasma.Posicao.Y) == Math.Round(pacman.Posicao.Y))
                     {
                         //Este fantasma está a tocar num pacman!
                         listaTempPersonagens.Add(pacman);
