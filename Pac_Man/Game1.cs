@@ -59,6 +59,13 @@ namespace Pac_Man
         List<Personagem> listaTempPersonagens;
         List<Bomba> listaTempBombas;
 
+        enum GameStatus
+        {
+            inicio,
+            jogo,
+        };
+        GameStatus status;
+        Rectangle menu;
         /*
          * 0 - Caminho / Comida
          * 1 - Parede
@@ -127,6 +134,7 @@ namespace Pac_Man
             Camera.Graphics = graphics;
             Camera.Target = new Vector2(13.45f, 10.1f);
             Camera.WorldWith = 20;
+            status=GameStatus.inicio;
             
             base.Initialize();
         }
@@ -212,51 +220,56 @@ namespace Pac_Man
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
-
-            ultimoMovimento += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            time += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            teclado = Keyboard.GetState();
-            gametime = (int)time;
-            contador += 0.5f;
-            
-            
-            if (ultimoMovimento > 0.09f)
+            if (status == GameStatus.inicio && Keyboard.GetState().IsKeyDown(Keys.Enter))
             {
-
-                updateInput();
-                
-               
-
-
-                foreach (Personagem pacman in pacmans)
-                {
-                    pacman.Update(gameTime, pacmans, mapa, fantasmas,tempoExpulão, Content);                  
-                    pacman.UpdateBombs(tempoExpulão, mapa,gameTime, Content);    
-                }
-                
-                foreach (Personagem fantasma in fantasmas)
-                {
-                    fantasma.Update(gameTime, pacmans, mapa, fantasmas,tempoExpulão, Content);
-                }
-
-
-                ultimoMovimento = 0;
-                tempoExpulão = 0;
-                             
+                status = GameStatus.jogo;
             }
+            if (status == GameStatus.jogo)
+            {
+                ultimoMovimento += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                time += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                teclado = Keyboard.GetState();
+                gametime = (int)time;
+                contador += 0.5f;
 
-            comer();
 
-            //atualizar explosões
-            SpriteAnimationManager.Update(gameTime);
+                if (ultimoMovimento > 0.09f)
+                {
+
+                    updateInput();
+
+
+
+
+                    foreach (Personagem pacman in pacmans)
+                    {
+                        pacman.Update(gameTime, pacmans, mapa, fantasmas, tempoExpulão, Content);
+                        pacman.UpdateBombs(tempoExpulão, mapa, gameTime, Content);
+                    }
+
+                    foreach (Personagem fantasma in fantasmas)
+                    {
+                        fantasma.Update(gameTime, pacmans, mapa, fantasmas, tempoExpulão, Content);
+                    }
+
+
+                    ultimoMovimento = 0;
+                    tempoExpulão = 0;
+
+                }
+
+                comer();
+
+                //atualizar explosões
+                SpriteAnimationManager.Update(gameTime);
+
+                //Atualizar camera
+                Camera.Update(random);
+
+                //Verificar morte de fantasmas ou pacman
+                colisaoBomba();
+            }
             
-            //Atualizar camera
-            Camera.Update(random);
-
-            //Verificar morte de fantasmas ou pacman
-            colisaoBomba();
-
             base.Update(gameTime);
 
         }
@@ -440,7 +453,8 @@ namespace Pac_Man
 
             GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin();
-
+            
+          
             //desenhar o mapa
             for (int x = 0; x < 20; x++)
             {
@@ -502,11 +516,23 @@ namespace Pac_Man
             
             spriteBatch.DrawString(myFont, "Game Time", new Vector2(620, 200), Color.Yellow);
             spriteBatch.DrawString(myFont, gametime + "sec", new Vector2(680, 250), Color.Yellow);
+            //desenhar menu inicial
+            if (status == GameStatus.inicio)
+            {
 
-            
-
+                spriteBatch.Draw(sem_comida, new Rectangle(100, 50, 500, 540), Color.White);
+                spriteBatch.DrawString(myFont, "Movimento PacMan", new Vector2(110, 50), Color.Yellow);
+                spriteBatch.DrawString(myFont, "   W", new Vector2(110, 75), Color.White);
+                spriteBatch.DrawString(myFont, " A S D", new Vector2(110, 110), Color.White);
+                spriteBatch.DrawString(myFont, "Plantar Bomba", new Vector2(110, 150), Color.Yellow);
+                spriteBatch.DrawString(myFont, " B", new Vector2(110, 190), Color.White);
+                spriteBatch.DrawString(myFont, "Abrir/Fechar Portal", new Vector2(110, 250), Color.Yellow);
+                spriteBatch.DrawString(myFont, " Space", new Vector2(110, 290), Color.White);
+                spriteBatch.DrawString(myFont, "Para ativar segundo\njogador pressionar\numa das setas. ", new Vector2(110, 370), Color.Yellow);
+                spriteBatch.DrawString(myFont, "Pressione Enter para jogar.", new Vector2(110, 520), Color.Red);
+            }
             spriteBatch.End();
-
+            
             base.Draw(gameTime);
 
         }
