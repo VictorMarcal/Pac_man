@@ -63,9 +63,12 @@ namespace Pac_Man
         {
             inicio,
             jogo,
+            GameOver,
+            
         };
         GameStatus status;
-
+        Texture2D corMenu;
+        
         /*
          * 0 - Caminho / Comida
          * 1 - Parede
@@ -136,7 +139,8 @@ namespace Pac_Man
             Camera.WorldWith = 20;
 
             status = GameStatus.inicio;
-
+            corMenu = new Texture2D(graphics.GraphicsDevice, 1, 1,false, SurfaceFormat.Color);
+            corMenu.SetData<Color>(new Color[] { Color.Blue });
             base.Initialize();
         }
 
@@ -221,7 +225,7 @@ namespace Pac_Man
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
+          
             if (status == GameStatus.inicio && Keyboard.GetState().IsKeyDown(Keys.Enter))
             {
                 status = GameStatus.jogo;
@@ -274,6 +278,9 @@ namespace Pac_Man
 
                 //Verificar colisao de fantasmas com pacmans
                 colisaoFantasmaPacman();
+
+                //verificar se todos foram assassinados brutalmente
+                verificarGameOver();
             }
 
             base.Update(gameTime);
@@ -526,7 +533,7 @@ namespace Pac_Man
             if (status == GameStatus.inicio)
             {
 
-                spriteBatch.Draw(sem_comida, new Rectangle(100, 50, 500, 540), Color.White);
+                spriteBatch.Draw(corMenu, new Rectangle(100, 50, 500, 540), Color.White);
                 spriteBatch.DrawString(myFont, "Movimento PacMan", new Vector2(110, 50), Color.Yellow);
                 spriteBatch.DrawString(myFont, "   W", new Vector2(110, 75), Color.White);
                 spriteBatch.DrawString(myFont, " A S D", new Vector2(110, 110), Color.White);
@@ -538,8 +545,14 @@ namespace Pac_Man
                 spriteBatch.DrawString(myFont, "Pressione Enter para jogar.", new Vector2(110, 520), Color.Red);
             }
 
-            spriteBatch.End();
+            
 
+            if (status == GameStatus.GameOver)
+            {
+                spriteBatch.Draw(corMenu, new Rectangle(100, 50, 450, 100), Color.White);
+                spriteBatch.DrawString(myFont, "Game Over \nPlease Insert Coin", new Vector2(110, 50), Color.Yellow);
+            }
+            spriteBatch.End();
             base.Draw(gameTime);
 
         }
@@ -624,6 +637,13 @@ namespace Pac_Man
             listaTempPersonagens.Clear();
         }
 
+        void verificarGameOver()
+        {
+            if(pacmans.Count==0)
+            {
+                status = GameStatus.GameOver;
+            }
+        }
     }
 
 }
