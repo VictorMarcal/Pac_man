@@ -11,17 +11,36 @@ namespace Pac_Man
 
         private static List<Personagem> listaTempPersonagens;
 
-        public static bool paredeEncontrada(byte[,] mapa, Vector2 posicaoFutura)
+        public static bool paredeEncontrada(byte[,] mapa, Vector2 posicaoFutura, Personagem pacman)
         {
             int posiçãoX = (int)Math.Round((30 * posicaoFutura.X) * 20 / 600);
             int posiçãoY = (int)Math.Round((30 * posicaoFutura.Y) * 20 / 600);
-            if (mapa[posiçãoX, posiçãoY] == 1 || mapa[posiçãoX,posiçãoY]== 3 || mapa[posiçãoX,posiçãoY]== 6)
+
+            if (posiçãoY < 0)
+            {
+                pacman.teleportTo(new Vector2(posiçãoX, 19));
+                return false;
+
+            }
+            if (posiçãoY >19 )
+            {
+                pacman.teleportTo(new Vector2(posiçãoX, 0));
+                return false;
+            }
+
+            else if (mapa[posiçãoX, posiçãoY] == 1 || mapa[posiçãoX,posiçãoY]== 3 || mapa[posiçãoX,posiçãoY]== 6)
             {
                 return true;
             }
+            
+            
 
             return false;
         }
+       /* public Vector2 colisao(Vector2 posicaofutura) 
+        {
+
+        }*/
 
         /// <summary>
         /// Devolve uma lista de fantasmas que foram mortos por uma bomba

@@ -278,15 +278,16 @@ namespace Pac_Man
 
                     #region Player 1
                     if (teclado.IsKeyDown(Keys.W) &&
-                            !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X, pacman.Posicao.Y - 1))
+                            !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X, pacman.Posicao.Y - 1),pacman)
                             && teclado.IsKeyUp(Keys.S)
                             && teclado.IsKeyUp(Keys.A)
                             && teclado.IsKeyUp(Keys.D))
                     {
                         pacman.moverPacMan(Direccao.Cima);
                     }
+                    
                     if (teclado.IsKeyDown(Keys.A) &&
-                        !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X - 1, pacman.Posicao.Y))
+                        !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X - 1, pacman.Posicao.Y),pacman)
                         && teclado.IsKeyUp(Keys.S)
                         && teclado.IsKeyUp(Keys.W)
                         && teclado.IsKeyUp(Keys.D))
@@ -294,7 +295,7 @@ namespace Pac_Man
                         pacman.moverPacMan(Direccao.Esquerda);
                     }
                     if (teclado.IsKeyDown(Keys.D) &&
-                        !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X + 1, pacman.Posicao.Y))
+                        !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X + 1, pacman.Posicao.Y),pacman)
                         && teclado.IsKeyUp(Keys.S)
                         && teclado.IsKeyUp(Keys.A)
                         && teclado.IsKeyUp(Keys.W))
@@ -302,7 +303,7 @@ namespace Pac_Man
                         pacman.moverPacMan(Direccao.Direita);
                     }
                     if (teclado.IsKeyDown(Keys.S) &&
-                        !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X, pacman.Posicao.Y + 1))
+                        !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X, pacman.Posicao.Y + 1),pacman)
                         && teclado.IsKeyUp(Keys.W)
                         && teclado.IsKeyUp(Keys.A)
                         && teclado.IsKeyUp(Keys.D))
@@ -352,7 +353,7 @@ namespace Pac_Man
                     if (doisJogadores)
                     {
                         if (teclado.IsKeyDown(Keys.Up) &&
-                            !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X, pacman.Posicao.Y - 1))
+                            !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X, pacman.Posicao.Y - 1),pacman)
                             && teclado.IsKeyUp(Keys.Down)
                             && teclado.IsKeyUp(Keys.Left)
                             && teclado.IsKeyUp(Keys.Right))
@@ -360,7 +361,7 @@ namespace Pac_Man
                             pacman.moverPacMan(Direccao.Cima);
                         }
                         if (teclado.IsKeyDown(Keys.Left) &&
-                            !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X - 1, pacman.Posicao.Y))
+                            !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X - 1, pacman.Posicao.Y),pacman)
                             && teclado.IsKeyUp(Keys.Down)
                             && teclado.IsKeyUp(Keys.Up)
                             && teclado.IsKeyUp(Keys.Right))
@@ -368,7 +369,7 @@ namespace Pac_Man
                             pacman.moverPacMan(Direccao.Esquerda);
                         }
                         if (teclado.IsKeyDown(Keys.Right) &&
-                            !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X + 1, pacman.Posicao.Y))
+                            !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X + 1, pacman.Posicao.Y),pacman)
                             && teclado.IsKeyUp(Keys.Down)
                             && teclado.IsKeyUp(Keys.Left)
                             && teclado.IsKeyUp(Keys.Up))
@@ -376,7 +377,7 @@ namespace Pac_Man
                             pacman.moverPacMan(Direccao.Direita);
                         }
                         if (teclado.IsKeyDown(Keys.Down) &&
-                            !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X, pacman.Posicao.Y + 1))
+                            !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X, pacman.Posicao.Y + 1),pacman)
                             && teclado.IsKeyUp(Keys.Up)
                             && teclado.IsKeyUp(Keys.Left)
                             && teclado.IsKeyUp(Keys.Right))

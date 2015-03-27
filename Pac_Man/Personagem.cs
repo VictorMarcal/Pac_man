@@ -22,7 +22,9 @@ namespace Pac_Man
         Cima,
         Baixo,
         Esquerda,
-        Direita
+        Direita,
+        teleportParaBaixo,
+        teleportParaCima
     }
 
     public class Personagem
@@ -273,6 +275,12 @@ namespace Pac_Man
                     case Direccao.Direita:
                         this.posicaoTarget.X += 1;
                         flip = SpriteEffects.None;
+                        break;
+                    case Direccao.teleportParaBaixo:
+                        this.posicaoTarget.Y = 19;
+                        break;
+                    case Direccao.teleportParaCima:
+                        this.posicaoTarget.Y = 0;
                         break;
                     default:
                         break;
