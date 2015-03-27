@@ -572,6 +572,11 @@ namespace Pac_Man
             listaTempPersonagens = Colisoes.fantasmaPacman(fantasmas, pacmans);
             foreach (Personagem pacman in listaTempPersonagens)
             {
+                if (pacman.cor == Color.Pink)
+                {
+                    //Morreu o segundo pacman
+                    doisJogadores = false;
+                }
                 pacman.removeBombas(mapa);
                 pacmans.Remove(pacman);
             }

@@ -109,7 +109,7 @@ namespace Pac_Man
         PathFinder pathFinder;
         List<Vector2> path;
 
-        Color cor;
+        public Color cor;
 
         int pathOffset;
 
