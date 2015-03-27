@@ -158,7 +158,7 @@ namespace Pac_Man
             fantasmas.Add(fantasma3);
 
             Personagem fantasma4 = new Personagem(Content, "ghost", TipoPersonagem.NPC, mapa, Color.Pink, 4).teleportTo(new Vector2(9, 10));
-            fantasma3.Velocidade = 0.5f;
+            fantasma4.Velocidade = 0.5f;
             fantasmas.Add(fantasma4);
             
             comida = Content.Load<Texture2D>("comida");
