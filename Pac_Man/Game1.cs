@@ -192,10 +192,12 @@ namespace Pac_Man
         protected override void Update(GameTime gameTime)
         {
 
+            teclado = Keyboard.GetState();
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-          
-            if (status == GameStatus.inicio && Keyboard.GetState().IsKeyDown(Keys.Enter))
+
+            if (status == GameStatus.inicio && teclado.IsKeyDown(Keys.Enter))
             {
                 status = GameStatus.jogo;
             }
@@ -204,7 +206,6 @@ namespace Pac_Man
 
                 ultimoMovimento += (float)gameTime.ElapsedGameTime.TotalSeconds;
                 time += (float)gameTime.ElapsedGameTime.TotalSeconds;
-                teclado = Keyboard.GetState();
                 gametime = (int)time;
                 contador += 0.5f;
 
@@ -250,6 +251,12 @@ namespace Pac_Man
 
                 //verificar se todos foram assassinados brutalmente
                 verificarGameOver();
+
+            }
+            //Game reset
+            if (status == GameStatus.GameOver && teclado.IsKeyDown(Keys.Enter))
+            {
+                resetGame();
             }
 
             base.Update(gameTime);
@@ -524,8 +531,8 @@ namespace Pac_Man
 
             if (status == GameStatus.GameOver)
             {
-                spriteBatch.Draw(corMenu, new Rectangle(100, 50, 450, 100), Color.White);
-                spriteBatch.DrawString(myFont, "Game Over \nPlease Insert Coin", new Vector2(110, 50), Color.Yellow);
+                spriteBatch.Draw(corMenu, new Rectangle(100, 50, 450, 200), Color.White);
+                spriteBatch.DrawString(myFont, "Game Over \nPlease Insert Coin\n\n(Enter to restart)", new Vector2(110, 50), Color.Yellow);
             }
             spriteBatch.End();
             base.Draw(gameTime);
@@ -590,6 +597,19 @@ namespace Pac_Man
             Personagem fantasma4 = new Personagem(Content, "ghost", TipoPersonagem.NPC, mapa, Color.Pink, 4).teleportTo(new Vector2(9, 10));
             fantasma4.Velocidade = 0.5f;
             fantasmas.Add(fantasma4);
+        }
+
+        private void resetGame()
+        {
+            pacmans.Clear();
+            fantasmas.Clear();
+            mapa = loadMapa();
+            loadPacmans();
+            loadFantasmas();
+            Camera.resetShake();
+            SpriteAnimationManager.resetAnimations();
+            Som.resetSounds();
+            status = GameStatus.jogo;
         }
 
 

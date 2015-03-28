@@ -23,6 +23,11 @@ namespace Pac_Man.Animations
             listAnimations.Add(new SpriteAnimation(textura, largura, altura, looping, posicao, fps, random.Next(Math.Min(100, maxDelay), maxDelay)));
         }
 
+        public static void resetAnimations()
+        {
+            listAnimations.Clear();
+        }
+
         public static void Update(GameTime gameTime)
         {
             //Limpar a lista de animações mortas

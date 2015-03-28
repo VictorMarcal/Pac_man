@@ -50,6 +50,11 @@ namespace Pac_Man
             shakeAmount += valor;
         }
 
+        static public void resetShake()
+        {
+            shakeAmount = 0;
+        }
+
         static private void calcularRatio()
         {
             if (Camera.lastSeenPixelWidth != Camera.graphics.PreferredBackBufferWidth)
