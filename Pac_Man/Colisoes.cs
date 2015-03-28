@@ -75,7 +75,7 @@ namespace Pac_Man
             }
             foreach (Personagem pacman in pacmans)
             {
-                for (int i = 1; i < 3; i++)
+                for (int i = 1; i < 2; i++)
                 {
                     if (Math.Round(posicaoBomba.X) == Math.Round(pacman.Posicao.X) && Math.Round(posicaoBomba.Y) == Math.Round(pacman.Posicao.Y)
                         || Math.Round(posicaoBomba.X + i) == Math.Round(pacman.Posicao.X) && Math.Round(posicaoBomba.Y) == Math.Round(pacman.Posicao.Y)

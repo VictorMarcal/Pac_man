@@ -46,7 +46,7 @@ namespace Pac_Man
         {
             this.Posicao = posicao;
             this.Exploded = false;
-            this.timer = 600f;
+            this.timer = 300f;
         }
 
         private Texture2D explosao;

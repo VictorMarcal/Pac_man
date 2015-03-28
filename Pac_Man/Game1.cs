@@ -64,20 +64,11 @@ namespace Pac_Man
             inicio,
             jogo,
             GameOver,
+            ganhou
             
         };
         GameStatus status;
         Texture2D corMenu;
-        
-        /*
-         * 0 - Caminho / Comida
-         * 1 - Parede
-         * 2 - ???
-         * 3 - sasa dos fantasmas
-         * 4 - Portal de saida
-         * 5 - Portal de entrada
-         * 6 - Bomba
-        */
 
         KeyboardState teclado;
         byte[,] mapa;
@@ -252,9 +243,11 @@ namespace Pac_Man
                 //verificar se todos foram assassinados brutalmente
                 verificarGameOver();
 
+                verificarJogoGanho();
+
             }
             //Game reset
-            if (status == GameStatus.GameOver && teclado.IsKeyDown(Keys.Enter))
+            if ((status == GameStatus.GameOver || status == GameStatus.ganhou) && teclado.IsKeyDown(Keys.Enter))
             {
                 resetGame();
             }
@@ -534,6 +527,12 @@ namespace Pac_Man
                 spriteBatch.Draw(corMenu, new Rectangle(100, 50, 450, 200), Color.White);
                 spriteBatch.DrawString(myFont, "Game Over \nPlease Insert Coin\n\n(Enter to restart)", new Vector2(110, 50), Color.Yellow);
             }
+
+            if (status == GameStatus.ganhou)
+            {
+                spriteBatch.Draw(corMenu, new Rectangle(100, 50, 450, 200), Color.White);
+                spriteBatch.DrawString(myFont, "Congratulations! \nYou won PacPortMan\n\n(Enter to restart)", new Vector2(110, 50), Color.Yellow);
+            }
             spriteBatch.End();
             base.Draw(gameTime);
 
@@ -547,6 +546,15 @@ namespace Pac_Man
 
         private byte[,] loadMapa()
         {
+            /*
+         * 0 - Caminho / Comida
+         * 1 - Parede
+         * 2 - ???
+         * 3 - sasa dos fantasmas
+         * 4 - Portal de saida
+         * 5 - Portal de entrada
+         * 6 - Bomba
+        */
             byte[,] mapa ={{3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3},
                         {3,0,0,0,0,1,1,0,0,0,0,0,0,1,1,0,0,0,0,3},
                         {3,0,1,0,0,1,1,0,1,1,0,1,0,1,1,0,0,1,0,3},
@@ -608,8 +616,28 @@ namespace Pac_Man
             loadFantasmas();
             Camera.resetShake();
             SpriteAnimationManager.resetAnimations();
-            Som.resetSounds();
             status = GameStatus.jogo;
+        }
+
+        /// <summary>
+        /// Verifica se não existe comida no mapa
+        /// </summary>
+        /// <returns>Devolve true se não existe comida no mapa</returns>
+        private void verificarJogoGanho()
+        {
+            int contador = 0;
+            for (int i = 0; i < mapa.GetLength(0); i++)
+            {
+                for (int j = 0; j < mapa.GetLength(1); j++)
+                {
+                    if (mapa[i, j] == 0)
+                    {
+                       contador++;
+                    }
+                }
+            }
+            if(contador == 0)
+                status = GameStatus.ganhou;
         }
 
 

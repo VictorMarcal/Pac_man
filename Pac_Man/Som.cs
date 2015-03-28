@@ -36,20 +36,5 @@ namespace Pac_Man
             pacmanComer.Play(0.3f, 1, 0f);
         }
 
-        public static void resetSounds()
-        {
-            if (avisoBomba != null)
-            {
-                avisoBomba.Dispose();
-            }
-            if (explosao != null)
-            {
-                explosao.Dispose();
-            }
-            if (pacmanComer != null)
-            {
-                pacmanComer.Dispose();
-            }
-        }
     }
 }
