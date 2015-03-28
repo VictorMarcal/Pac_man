@@ -139,8 +139,7 @@ namespace Pac_Man
             bloco = Content.Load<Texture2D>("parede");
             paredeFerro = Content.Load<Texture2D>("parede2");
 
-            Personagem pac = new Personagem(Content, "pac2", TipoPersonagem.Player, mapa, Color.Yellow, 0);
-            pacmans.Add(pac);
+            loadPacmans();
 
             Personagem fantasma = new Personagem(Content, "ghost", TipoPersonagem.NPC, mapa, Color.Green, 1).teleportTo(new Vector2(9, 7));
             fantasma.Velocidade = 0.5f;
@@ -576,6 +575,16 @@ namespace Pac_Man
                         {3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3},
                         {3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3}};
             return mapa;
+        }
+
+        private void loadPacmans()
+        {
+            Personagem pac = new Personagem(Content, "pac2", TipoPersonagem.Player, mapa, Color.Yellow, 0);
+            pacmans.Add(pac);
+            if (doisJogadores)
+            {
+                criarSegundoJogador();
+            }
         }
 
 
