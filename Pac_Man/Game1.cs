@@ -141,21 +141,7 @@ namespace Pac_Man
 
             loadPacmans();
 
-            Personagem fantasma = new Personagem(Content, "ghost", TipoPersonagem.NPC, mapa, Color.Green, 1).teleportTo(new Vector2(9, 7));
-            fantasma.Velocidade = 0.5f;
-            fantasmas.Add(fantasma);
-
-            Personagem fantasma2 = new Personagem(Content, "ghost", TipoPersonagem.NPC, mapa, Color.Red, 6).teleportTo(new Vector2(9, 9));
-            fantasma2.Velocidade = 0.5f;
-            fantasmas.Add(fantasma2);
-
-            Personagem fantasma3 = new Personagem(Content, "ghost", TipoPersonagem.NPC, mapa, Color.Blue, 4).teleportTo(new Vector2(9, 11));
-            fantasma3.Velocidade = 0.5f;
-            fantasmas.Add(fantasma3);
-
-            Personagem fantasma4 = new Personagem(Content, "ghost", TipoPersonagem.NPC, mapa, Color.Pink, 4).teleportTo(new Vector2(9, 10));
-            fantasma4.Velocidade = 0.5f;
-            fantasmas.Add(fantasma4);
+            loadFantasmas();
 
             comida = Content.Load<Texture2D>("comida");
             sem_comida = Content.Load<Texture2D>("sem_comida");
@@ -585,6 +571,25 @@ namespace Pac_Man
             {
                 criarSegundoJogador();
             }
+        }
+
+        private void loadFantasmas()
+        {
+            Personagem fantasma = new Personagem(Content, "ghost", TipoPersonagem.NPC, mapa, Color.Green, 1).teleportTo(new Vector2(9, 7));
+            fantasma.Velocidade = 0.5f;
+            fantasmas.Add(fantasma);
+
+            Personagem fantasma2 = new Personagem(Content, "ghost", TipoPersonagem.NPC, mapa, Color.Red, 6).teleportTo(new Vector2(9, 9));
+            fantasma2.Velocidade = 0.5f;
+            fantasmas.Add(fantasma2);
+
+            Personagem fantasma3 = new Personagem(Content, "ghost", TipoPersonagem.NPC, mapa, Color.Blue, 4).teleportTo(new Vector2(9, 11));
+            fantasma3.Velocidade = 0.5f;
+            fantasmas.Add(fantasma3);
+
+            Personagem fantasma4 = new Personagem(Content, "ghost", TipoPersonagem.NPC, mapa, Color.Pink, 4).teleportTo(new Vector2(9, 10));
+            fantasma4.Velocidade = 0.5f;
+            fantasmas.Add(fantasma4);
         }
 
 
