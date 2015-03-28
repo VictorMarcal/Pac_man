@@ -52,8 +52,6 @@ namespace Pac_Man
         Texture2D portal_saida;
         Texture2D portal_entrada;
 
-        bool doisJogadores;
-
         Random random;
 
         List<Personagem> listaTempPersonagens;
@@ -98,7 +96,6 @@ namespace Pac_Man
 
             fantasmas = new List<Personagem>();
             pacmans = new List<Personagem>();
-            doisJogadores = false;
             listaTempPersonagens = new List<Personagem>();
             listaTempBombas = new List<Bomba>();
 
@@ -258,23 +255,35 @@ namespace Pac_Man
 
         private void updateInput()
         {
+
+            //Verificar se há um 1º jogador para entrar
+            if ((teclado.IsKeyDown(Keys.W)
+                || teclado.IsKeyDown(Keys.S)
+                || teclado.IsKeyDown(Keys.D)
+                || teclado.IsKeyDown(Keys.A)
+                || teclado.IsKeyDown(Keys.Space))
+                && pacmans.Find(x => x.player == 1) == null)
+            {
+                loadPacmans();
+            }
+
+
+            //Verificar se há um 2º jogador para entrar
+            if ((teclado.IsKeyDown(Keys.Up)
+                || teclado.IsKeyDown(Keys.Down)
+                || teclado.IsKeyDown(Keys.Left)
+                || teclado.IsKeyDown(Keys.Right)
+                || teclado.IsKeyDown(Keys.Insert)
+                || teclado.IsKeyDown(Keys.Delete))
+                && pacmans.Find(x => x.player == 2) == null)
+            {
+                criarSegundoJogador();
+            }
+
             foreach (Personagem pacman in pacmans)
             {
-                if (pacman == pacmans[0])
+                if (pacman.player == 1)
                 {
-
-                    //Verificar se há um 2º jogador para entrar
-                    if ((teclado.IsKeyDown(Keys.Up)
-                        || teclado.IsKeyDown(Keys.Down)
-                        || teclado.IsKeyDown(Keys.Left)
-                        || teclado.IsKeyDown(Keys.Right)
-                        || teclado.IsKeyDown(Keys.Insert)
-                        || teclado.IsKeyDown(Keys.Delete))
-                        && !doisJogadores)
-                    {
-                        doisJogadores = true;
-                    }
-
                     #region Player 1
                     if (teclado.IsKeyDown(Keys.W) &&
                             !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X, pacman.Posicao.Y - 1), pacman)
@@ -345,88 +354,84 @@ namespace Pac_Man
                     }
                     #endregion
                 }
-                else
+                else if(pacman.player == 2)
                 {
                     #region Player 2
 
-                    if (doisJogadores)
+                    
+                    if (teclado.IsKeyDown(Keys.Up) &&
+                        !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X, pacman.Posicao.Y - 1), pacman)
+                        && teclado.IsKeyUp(Keys.Down)
+                        && teclado.IsKeyUp(Keys.Left)
+                        && teclado.IsKeyUp(Keys.Right))
                     {
-                        if (teclado.IsKeyDown(Keys.Up) &&
-                            !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X, pacman.Posicao.Y - 1), pacman)
-                            && teclado.IsKeyUp(Keys.Down)
-                            && teclado.IsKeyUp(Keys.Left)
-                            && teclado.IsKeyUp(Keys.Right))
-                        {
-                            pacman.moverPacMan(Direccao.Cima);
-                        }
-                        if (teclado.IsKeyDown(Keys.Left) &&
-                            !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X - 1, pacman.Posicao.Y), pacman)
-                            && teclado.IsKeyUp(Keys.Down)
-                            && teclado.IsKeyUp(Keys.Up)
-                            && teclado.IsKeyUp(Keys.Right))
-                        {
-                            pacman.moverPacMan(Direccao.Esquerda);
-                        }
-                        if (teclado.IsKeyDown(Keys.Right) &&
-                            !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X + 1, pacman.Posicao.Y), pacman)
-                            && teclado.IsKeyUp(Keys.Down)
-                            && teclado.IsKeyUp(Keys.Left)
-                            && teclado.IsKeyUp(Keys.Up))
-                        {
-                            pacman.moverPacMan(Direccao.Direita);
-                        }
-                        if (teclado.IsKeyDown(Keys.Down) &&
-                            !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X, pacman.Posicao.Y + 1), pacman)
-                            && teclado.IsKeyUp(Keys.Up)
-                            && teclado.IsKeyUp(Keys.Left)
-                            && teclado.IsKeyUp(Keys.Right))
-                        {
-                            pacman.moverPacMan(Direccao.Baixo);
-                        }
-                        if (teclado.IsKeyDown(Keys.Insert))
-                        {
-                            if (Utils.existePortal(mapa, 4) && !Utils.existePortal(mapa, 5) && Utils.posicaoPortalSaida(mapa).X != (int)pacman.Posicao.X && Utils.posicaoPortalSaida(mapa).Y != (int)pacman.Posicao.Y)
-                            {
-                                //Já existe portal de saída, vamos colocar um portal de entrada
-                                mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 5;
-                            }
-                            else if (!Utils.existePortal(mapa, 4) && !Utils.existePortal(mapa, 5))
-                            {
-                                //Ainda não existe portal de saida, vamos colocar portal de saida
-                                mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 4;
-                            }
-                        }
-                        if (teclado.IsKeyDown(Keys.Delete) && proximaBombaPac2 == true)
-                        {
-                            if (pacmans[1].Score > 20 && numerodeBombasimplantadas == 0)
-                            {
-
-                                // posição da bomba passa a ser igual à posição do pac neste instante de tempo!!
-                                //Bomba bomb=new Bomba(Content, "Bomb", Color.White, pacman.Posicao);
-                                //bombas.Add(bomb);
-                                //PosiçãoBomba = new Vector2(pacman.Posicao.X, pacman.Posicao.Y);
-                                //mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 6;
-                                pacmans[1].Score = pacmans[1].insereBomba(pacmans[1].Score);
-                                bombaLargada = true;
-                                proximaBombaPac2 = false;
-                                //numerodeBombasimplantadas = 1;
-
-                            }
-
-
-                        }
-                        if (teclado.IsKeyUp(Keys.Delete))
-                        {
-                            proximaBombaPac2 = true;
-                        }
-                    #endregion
+                        pacman.moverPacMan(Direccao.Cima);
                     }
+                    if (teclado.IsKeyDown(Keys.Left) &&
+                        !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X - 1, pacman.Posicao.Y), pacman)
+                        && teclado.IsKeyUp(Keys.Down)
+                        && teclado.IsKeyUp(Keys.Up)
+                        && teclado.IsKeyUp(Keys.Right))
+                    {
+                        pacman.moverPacMan(Direccao.Esquerda);
+                    }
+                    if (teclado.IsKeyDown(Keys.Right) &&
+                        !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X + 1, pacman.Posicao.Y), pacman)
+                        && teclado.IsKeyUp(Keys.Down)
+                        && teclado.IsKeyUp(Keys.Left)
+                        && teclado.IsKeyUp(Keys.Up))
+                    {
+                        pacman.moverPacMan(Direccao.Direita);
+                    }
+                    if (teclado.IsKeyDown(Keys.Down) &&
+                        !Colisoes.paredeEncontrada(mapa, new Vector2(pacman.Posicao.X, pacman.Posicao.Y + 1), pacman)
+                        && teclado.IsKeyUp(Keys.Up)
+                        && teclado.IsKeyUp(Keys.Left)
+                        && teclado.IsKeyUp(Keys.Right))
+                    {
+                        pacman.moverPacMan(Direccao.Baixo);
+                    }
+                    if (teclado.IsKeyDown(Keys.Insert))
+                    {
+                        if (Utils.existePortal(mapa, 4) && !Utils.existePortal(mapa, 5) && Utils.posicaoPortalSaida(mapa).X != (int)pacman.Posicao.X && Utils.posicaoPortalSaida(mapa).Y != (int)pacman.Posicao.Y)
+                        {
+                            //Já existe portal de saída, vamos colocar um portal de entrada
+                            mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 5;
+                        }
+                        else if (!Utils.existePortal(mapa, 4) && !Utils.existePortal(mapa, 5))
+                        {
+                            //Ainda não existe portal de saida, vamos colocar portal de saida
+                            mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 4;
+                        }
+                    }
+                    if (teclado.IsKeyDown(Keys.Delete) && proximaBombaPac2 == true)
+                    {
+                        if (pacmans[1].Score > 20 && numerodeBombasimplantadas == 0)
+                        {
+
+                            // posição da bomba passa a ser igual à posição do pac neste instante de tempo!!
+                            //Bomba bomb=new Bomba(Content, "Bomb", Color.White, pacman.Posicao);
+                            //bombas.Add(bomb);
+                            //PosiçãoBomba = new Vector2(pacman.Posicao.X, pacman.Posicao.Y);
+                            //mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 6;
+                            pacmans[1].Score = pacmans[1].insereBomba(pacmans[1].Score);
+                            bombaLargada = true;
+                            proximaBombaPac2 = false;
+                            //numerodeBombasimplantadas = 1;
+
+                        }
+
+
+                    }
+                    if (teclado.IsKeyUp(Keys.Delete))
+                    {
+                        proximaBombaPac2 = true;
+                    }
+                #endregion
                 }
+                
             }
-            if (doisJogadores && pacmans.Count == 1)
-            {
-                criarSegundoJogador();
-            }
+
         }
 
 
@@ -540,7 +545,7 @@ namespace Pac_Man
 
         private void criarSegundoJogador()
         {
-            Personagem pac = new Personagem(Content, "pac2", TipoPersonagem.Player, mapa, Color.Pink, 0).teleportTo(new Vector2(11, 5));
+            Personagem pac = new Personagem(Content, "pac2", TipoPersonagem.Player, mapa, Color.Pink, 0, 2).teleportTo(new Vector2(11, 5));
             pacmans.Add(pac);
         }
 
@@ -580,29 +585,25 @@ namespace Pac_Man
 
         private void loadPacmans()
         {
-            Personagem pac = new Personagem(Content, "pac2", TipoPersonagem.Player, mapa, Color.Yellow, 0);
+            Personagem pac = new Personagem(Content, "pac2", TipoPersonagem.Player, mapa, Color.Yellow, 0, 1);
             pacmans.Add(pac);
-            if (doisJogadores)
-            {
-                criarSegundoJogador();
-            }
         }
 
         private void loadFantasmas()
         {
-            Personagem fantasma = new Personagem(Content, "ghost", TipoPersonagem.NPC, mapa, Color.Green, 1).teleportTo(new Vector2(9, 7));
+            Personagem fantasma = new Personagem(Content, "ghost", TipoPersonagem.NPC, mapa, Color.Green, 1, 0).teleportTo(new Vector2(9, 7));
             fantasma.Velocidade = 0.5f;
             fantasmas.Add(fantasma);
 
-            Personagem fantasma2 = new Personagem(Content, "ghost", TipoPersonagem.NPC, mapa, Color.Red, 6).teleportTo(new Vector2(9, 9));
+            Personagem fantasma2 = new Personagem(Content, "ghost", TipoPersonagem.NPC, mapa, Color.Red, 6, 0).teleportTo(new Vector2(9, 9));
             fantasma2.Velocidade = 0.5f;
             fantasmas.Add(fantasma2);
 
-            Personagem fantasma3 = new Personagem(Content, "ghost", TipoPersonagem.NPC, mapa, Color.Blue, 4).teleportTo(new Vector2(9, 11));
+            Personagem fantasma3 = new Personagem(Content, "ghost", TipoPersonagem.NPC, mapa, Color.Blue, 4, 0).teleportTo(new Vector2(9, 11));
             fantasma3.Velocidade = 0.5f;
             fantasmas.Add(fantasma3);
 
-            Personagem fantasma4 = new Personagem(Content, "ghost", TipoPersonagem.NPC, mapa, Color.Pink, 4).teleportTo(new Vector2(9, 10));
+            Personagem fantasma4 = new Personagem(Content, "ghost", TipoPersonagem.NPC, mapa, Color.Pink, 4, 0).teleportTo(new Vector2(9, 10));
             fantasma4.Velocidade = 0.5f;
             fantasmas.Add(fantasma4);
         }
@@ -662,11 +663,6 @@ namespace Pac_Man
             listaTempPersonagens = Colisoes.fantasmaPacman(fantasmas, pacmans);
             foreach (Personagem pacman in listaTempPersonagens)
             {
-                if (pacman.cor == Color.Pink)
-                {
-                    //Morreu o segundo pacman
-                    doisJogadores = false;
-                }
                 pacman.removeBombas(mapa);
                 pacmans.Remove(pacman);
             }

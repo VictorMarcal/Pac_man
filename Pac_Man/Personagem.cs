@@ -60,6 +60,8 @@ namespace Pac_Man
         }
 
         private Vector2 posicaoTarget;
+
+        public int player;
         public Vector2 getPosicaoTarget()
         {
             return posicaoTarget;
@@ -122,7 +124,7 @@ namespace Pac_Man
         /// </summary>
         /// <param name="content">Instância de ContentManager</param>
         /// <param name="assetName">Nome da textura desta personagem</param>
-        public Personagem(ContentManager content, string assetName, TipoPersonagem tipoPersonagem, byte[,] mapa, Color cor, int pathOffset)
+        public Personagem(ContentManager content, string assetName, TipoPersonagem tipoPersonagem, byte[,] mapa, Color cor, int pathOffset, int player)
         {
             bombas = new List<Bomba>();
             this.Rotacao = 0f;
@@ -140,6 +142,7 @@ namespace Pac_Man
             this.path = new List<Vector2>();
             this.pathOffset = pathOffset;
             this.contadorPortalEntrada = 0;
+            this.player = player;
         }
         public int insereBomba(int score)
         {
