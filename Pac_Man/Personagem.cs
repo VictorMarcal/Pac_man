@@ -146,13 +146,13 @@ namespace Pac_Man
         }
         public int insereBomba(int score)
         {
-            timer = 600f;
+
             if (score >= 100)
             {
                 Bomba bomba = new Bomba(Color.White, posicao);
                 bomba.Parent = this;
                 bombas.Add(bomba);
-                return (score - 5);
+                return (score - 25);
             }
             return (score);
         }
