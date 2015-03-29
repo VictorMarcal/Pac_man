@@ -333,7 +333,7 @@ namespace Pac_Man
                     }
                     if (teclado.IsKeyDown(Keys.B) && proximaBombaPac1 == true)
                     {
-                        if (pacmans[0].Score > 50 && numerodeBombasimplantadas == 0)
+                        if (pacman.Score > 50 && numerodeBombasimplantadas == 0)
                         {
 
                             // posição da bomba passa a ser igual à posição do pac neste instante de tempo!!
@@ -341,7 +341,7 @@ namespace Pac_Man
                             //bombas.Add(bomb);
                             //PosiçãoBomba = new Vector2(pacman.Posicao.X, pacman.Posicao.Y);
                             //mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 6;
-                            pacmans[0].Score = pacmans[0].insereBomba(pacmans[0].Score);
+                            pacman.Score = pacman.insereBomba(pacman.Score);
                             bombaLargada = true;
                             proximaBombaPac1 = false;
                             //numerodeBombasimplantadas = 1;
@@ -406,7 +406,7 @@ namespace Pac_Man
                     }
                     if (teclado.IsKeyDown(Keys.Delete) && proximaBombaPac2 == true)
                     {
-                        if (pacmans[1].Score > 20 && numerodeBombasimplantadas == 0)
+                        if (pacman.Score > 20 && numerodeBombasimplantadas == 0)
                         {
 
                             // posição da bomba passa a ser igual à posição do pac neste instante de tempo!!
@@ -414,7 +414,7 @@ namespace Pac_Man
                             //bombas.Add(bomb);
                             //PosiçãoBomba = new Vector2(pacman.Posicao.X, pacman.Posicao.Y);
                             //mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 6;
-                            pacmans[1].Score = pacmans[1].insereBomba(pacmans[1].Score);
+                            pacman.Score = pacman.insereBomba(pacman.Score);
                             bombaLargada = true;
                             proximaBombaPac2 = false;
                             //numerodeBombasimplantadas = 1;
@@ -495,8 +495,8 @@ namespace Pac_Man
             {
 
                 //desenhar texto e mostrar pontuaçao
-                spriteBatch.DrawString(myFont, "Score", new Vector2(650, 10 + offset), Color.Yellow);
-                spriteBatch.DrawString(myFont, pacman.Score + "", new Vector2(680, 50 + offset), Color.Yellow);
+                spriteBatch.DrawString(myFont, "Score", new Vector2(650, 10 + offset), pacman.player == 1 ? Color.Yellow : Color.Pink);
+                spriteBatch.DrawString(myFont, pacman.Score + "", new Vector2(680, 50 + offset), pacman.player == 1 ? Color.Yellow : Color.Pink);
                 offset += 90;
             }
 
