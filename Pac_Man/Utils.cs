@@ -6,12 +6,16 @@ using System.Text;
 
 namespace Pac_Man
 {
+    /// <summary>
+    /// Classe Utils - Utilidades
+    /// </summary>
     public static class Utils
     {
         /// <summary>
         /// Devolve true caso já exista um portal no mapa
         /// </summary>
         /// <param name="mapa">Mapa</param>
+        /// <param name="tipo">Tipo de portal: entrada ou saida</param>
         /// <returns>True or False</returns>
         public static bool existePortal(byte[,] mapa, int tipo){
             for(int x = 0; x < mapa.GetLength(0); x++)

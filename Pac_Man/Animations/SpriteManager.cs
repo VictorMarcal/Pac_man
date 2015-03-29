@@ -12,21 +12,57 @@ using System.Text;
 
 namespace Pac_Man.Animations
 {
+    /// <summary>
+    /// Classe SpriteManager
+    /// </summary>
     public abstract class SpriteManager
     {
-
+        /// <summary>
+        /// Textura da sprite
+        /// </summary>
         protected Texture2D textura;
         private Vector2 posicao;
+        /// <summary>
+        /// Cor a utilizar aquando do desenho
+        /// </summary>
         public Color cor = Color.White;
+        /// <summary>
+        /// Origem da sprite
+        /// </summary>
         public Vector2 origem;
+        /// <summary>
+        /// Rotação
+        /// </summary>
         public float rotacao = 0f;
+        /// <summary>
+        /// Escala
+        /// </summary>
         public float escala = 1f;
+        /// <summary>
+        /// Rodada?
+        /// </summary>
         public SpriteEffects spriteEffect;
+        /// <summary>
+        /// Rectângulo da sprite
+        /// </summary>
         protected Rectangle[] rectangulos;
+        /// <summary>
+        /// Index do frame que está a ser desenhado
+        /// </summary>
         protected int frameIndex = 0;
+        /// <summary>
+        /// Indica se a sprite deve ser desenhada
+        /// </summary>
         protected bool draw;
         int altura, largura;
 
+        /// <summary>
+        /// Construtor
+        /// </summary>
+        /// <param name="textura">Textura / spritesheet</param>
+        /// <param name="linhas">Nº de linhas da animação</param>
+        /// <param name="colunas">Nº de colunas da animação</param>
+        /// <param name="posicao">Posição</param>
         public SpriteManager(Texture2D textura, int linhas, int colunas, Vector2 posicao)
         {
             this.textura = textura;
@@ -46,6 +82,10 @@ namespace Pac_Man.Animations
             this.draw = false;
         }
 
+        /// <summary>
+        /// Desenha uma sprite
+        /// </summary>
+        /// <param name="spriteBatch">SpriteBatch</param>
         public void Draw(SpriteBatch spriteBatch)
         {
             if(this.draw)

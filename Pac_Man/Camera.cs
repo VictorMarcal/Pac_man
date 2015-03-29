@@ -6,6 +6,9 @@ using System.Text;
 
 namespace Pac_Man
 {
+    /// <summary>
+    /// Classe Camera
+    /// </summary>
     public static class Camera
     {
 
@@ -45,11 +48,18 @@ namespace Pac_Man
         static private Vector2 shake;
         static private int shakeAmount;
 
+        /// <summary>
+        /// Adiciona uma determina quantidade de shake
+        /// </summary>
+        /// <param name="valor">Valor de shake a adicionar</param>
         static public void addShake(int valor)
         {
             shakeAmount += valor;
         }
 
+        /// <summary>
+        /// Pára todo o cameraShake
+        /// </summary>
         static public void resetShake()
         {
             shakeAmount = 0;
@@ -89,6 +99,10 @@ namespace Pac_Man
             return pixelPoint + shake;
         }
 
+        /// <summary>
+        /// Atualiza a camera
+        /// </summary>
+        /// <param name="random">Instância de Random</param>
         static public void Update(Random random)
         {
             if (shakeAmount > 0)

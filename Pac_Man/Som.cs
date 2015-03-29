@@ -7,6 +7,9 @@ using System.Text;
 
 namespace Pac_Man
 {
+    /// <summary>
+    /// Classe Som
+    /// </summary>
     public static class Som
     {
         private static SoundEffect avisoBomba;
@@ -14,7 +17,10 @@ namespace Pac_Man
         private static SoundEffect pacmanComer;
 
 
-
+        /// <summary>
+        /// Toca o som de aviso de bomba
+        /// </summary>
+        /// <param name="content">Instância de ContentManager</param>
         public static void playAvisoBomba(ContentManager content)
         {
             if (avisoBomba == null) { }
@@ -22,6 +28,10 @@ namespace Pac_Man
             avisoBomba.Play(0.05f, 1, 0f);
         }
 
+        /// <summary>
+        /// Toca o som de explosão
+        /// </summary>
+        /// <param name="content">Instância de ContentManager</param>
         public static void playExplosao(ContentManager content)
         {
             if (explosao == null)
@@ -29,6 +39,10 @@ namespace Pac_Man
             explosao.Play(0.3f, 1, 0f);
         }
 
+        /// <summary>
+        /// Toca o som de comer
+        /// </summary>
+        /// <param name="content">Instância de ContentManager</param>
         public static void playComer(ContentManager content)
         {
             if (pacmanComer == null)

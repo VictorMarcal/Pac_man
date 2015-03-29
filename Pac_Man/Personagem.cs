@@ -11,25 +11,57 @@ using Pac_Man.Animations;
 namespace Pac_Man
 {
 
+    /// <summary>
+    /// Tipo de personagem
+    /// </summary>
     public enum TipoPersonagem
     {
+        /// <summary>
+        /// Jogador
+        /// </summary>
         Player,
+        /// <summary>
+        /// Fantasma
+        /// </summary>
         NPC
     }
 
+    /// <summary>
+    /// Direções
+    /// </summary>
     public enum Direccao
     {
+        /// <summary>
+        /// Cima
+        /// </summary>
         Cima,
+        /// <summary>
+        /// Baixo
+        /// </summary>
         Baixo,
+        /// <summary>
+        /// Esquerda
+        /// </summary>
         Esquerda,
+        /// <summary>
+        /// Direita
+        /// </summary>
         Direita,
+        /// <summary>
+        /// teleport para Baixo
+        /// </summary>
         teleportParaBaixo,
+        /// <summary>
+        /// Teleport para cima
+        /// </summary>
         teleportParaCima
     }
 
+    /// <summary>
+    /// Classe Personagem
+    /// </summary>
     public class Personagem
     {
-        float timer;
         private List<Bomba> bombas;
         /// <summary>
         /// Devolve a lista de bombas colocadas por esta personagem
@@ -61,7 +93,14 @@ namespace Pac_Man
 
         private Vector2 posicaoTarget;
 
+        /// <summary>
+        /// Nº de jogador (1/2)
+        /// </summary>
         public int player;
+        /// <summary>
+        /// Devolve a posição para onde a personagem se está a mover
+        /// </summary>
+        /// <returns></returns>
         public Vector2 getPosicaoTarget()
         {
             return posicaoTarget;
@@ -101,6 +140,9 @@ namespace Pac_Man
 
         //score
         private int score;
+        /// <summary>
+        /// Pontos deste jogador
+        /// </summary>
         public int Score
         {
             get { return score; }
@@ -111,6 +153,9 @@ namespace Pac_Man
         PathFinder pathFinder;
         List<Vector2> path;
 
+        /// <summary>
+        /// Cor da personagem
+        /// </summary>
         public Color cor;
 
         int pathOffset;
@@ -120,10 +165,15 @@ namespace Pac_Man
         Texture2D teleport, deteleport;
 
         /// <summary>
-        /// Construtor
+        /// Construtor da personagem
         /// </summary>
-        /// <param name="content">Instância de ContentManager</param>
+        /// <param name="content">ContentManager</param>
         /// <param name="assetName">Nome da textura desta personagem</param>
+        /// <param name="tipoPersonagem">Tipo de personagem (player / NPC)</param>
+        /// <param name="mapa">Mapa</param>
+        /// <param name="cor">Cor da personagem</param>
+        /// <param name="pathOffset">Path Offset</param>
+        /// <param name="player">Nº de player (1 ou 2)</param>
         public Personagem(ContentManager content, string assetName, TipoPersonagem tipoPersonagem, byte[,] mapa, Color cor, int pathOffset, int player)
         {
             bombas = new List<Bomba>();
@@ -144,6 +194,11 @@ namespace Pac_Man
             this.contadorPortalEntrada = 0;
             this.player = player;
         }
+        /// <summary>
+        /// Insere uma bomba na posição atual da personagem
+        /// </summary>
+        /// <param name="score">Score da personagem</param>
+        /// <returns></returns>
         public int insereBomba(int score)
         {
 
@@ -157,6 +212,11 @@ namespace Pac_Man
             return (score);
         }
 
+        /// <summary>
+        /// Teleporta a personagem para uma determinada localização
+        /// </summary>
+        /// <param name="posicao">Posição para onde se pretende teleportar</param>
+        /// <returns></returns>
         public Personagem teleportTo(Vector2 posicao)
         {
             this.Posicao = posicao;
@@ -164,6 +224,13 @@ namespace Pac_Man
             return this;
         }
 
+        /// <summary>
+        /// Atualiza as bombas desta personagem
+        /// </summary>
+        /// <param name="tempoExplosao">Tempo explosão</param>
+        /// <param name="mapa">Mapa</param>
+        /// <param name="gameTime">GameTime</param>
+        /// <param name="Content">ContentManager</param>
         public void UpdateBombs(float tempoExplosao, byte[,] mapa, GameTime gameTime, ContentManager Content)
         {
 
@@ -174,11 +241,19 @@ namespace Pac_Man
 
         }
 
+        /// <summary>
+        /// Remove uma determinada bomba da lista de bombas
+        /// </summary>
+        /// <param name="bomba">Bomba a remover</param>
         public void removeBomba(Bomba bomba)
         {
             bombas.Remove(bomba);
         }
 
+        /// <summary>
+        /// Remove todas as bombas colocadas por este personagem do mapa
+        /// </summary>
+        /// <param name="mapa">Mapa</param>
         public void removeBombas(byte[,] mapa)
         {
             foreach (Bomba bomba in bombas)
@@ -187,6 +262,15 @@ namespace Pac_Man
             }
         }
 
+        /// <summary>
+        /// Update
+        /// </summary>
+        /// <param name="gameTime">GameTime</param>
+        /// <param name="pacmans">Lista de pacmans</param>
+        /// <param name="mapa">Mapa</param>
+        /// <param name="listaFantasmas">Lista de fantasmas</param>
+        /// <param name="tempoExplosao">Tempo expçosão</param>
+        /// <param name="Content">ContentManager</param>
         public void Update(GameTime gameTime, List<Personagem> pacmans, byte[,] mapa, List<Personagem> listaFantasmas, float tempoExplosao, ContentManager Content)
         {
 
@@ -268,6 +352,10 @@ namespace Pac_Man
 
         }
 
+        /// <summary>
+        /// Move a personagem numa determinada direção
+        /// </summary>
+        /// <param name="direccao">Direção em que se pretende mover</param>
         public void moverPacMan(Direccao direccao)
         {
             if (Posicao == posicaoTarget)
@@ -300,6 +388,12 @@ namespace Pac_Man
             }
         }
 
+        /// <summary>
+        /// Desenha no ecrã a personagem
+        /// </summary>
+        /// <param name="spriteBatch">Instância de SpriteBath</param>
+        /// <param name="gameTime">GameTime</param>
+        /// <param name="mapa">Mapa</param>
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime, Byte[,] mapa)
         {
             spriteBatch.Draw(Textura, new Vector2(Camera.WorldPoint2Pixels(Posicao).X + Textura.Width / 4, Camera.WorldPoint2Pixels(Posicao).Y + Textura.Height / 4), null, cor, this.Rotacao, Vector2.Zero, 1f, flip, 0f);

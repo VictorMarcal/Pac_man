@@ -11,6 +11,9 @@ using System.Text;
 
 namespace Pac_Man.AI
 {
+    /// <summary>
+    /// Classe SearchNode
+    /// </summary>
     public class SearchNode
     {
 

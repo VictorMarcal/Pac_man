@@ -9,8 +9,6 @@ using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
 using Pac_Man.Animations;
 using Microsoft.Xna.Framework.Audio;
-using Pac_Man.Animations;
-using Microsoft.Xna.Framework.Audio;
 #endregion
 
 namespace Pac_Man
@@ -33,7 +31,6 @@ namespace Pac_Man
         SoundEffect somComer;
         SoundEffect somExplosao;
         SoundEffect somAviso;
-        SoundEffectInstance instanceSomComer;
 
         SpriteFont myFont;
         Texture2D dummyTexture;
@@ -42,8 +39,7 @@ namespace Pac_Man
         float time;
         int gametime;
         float contador;
-        bool bombaLargada = false;
-        public float tempoExpulão;
+        float tempoExpulão;
         int numerodeBombasimplantadas = 0;
         bool proximaBombaPac1;
         bool proximaBombaPac2;
@@ -71,6 +67,9 @@ namespace Pac_Man
         KeyboardState teclado;
         byte[,] mapa;
 
+        /// <summary>
+        /// Classe principal
+        /// </summary>
         public Game1()
             : base()
         {
@@ -342,7 +341,6 @@ namespace Pac_Man
                             //PosiçãoBomba = new Vector2(pacman.Posicao.X, pacman.Posicao.Y);
                             //mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 6;
                             pacman.Score = pacman.insereBomba(pacman.Score);
-                            bombaLargada = true;
                             proximaBombaPac1 = false;
                             //numerodeBombasimplantadas = 1;
 
@@ -415,7 +413,6 @@ namespace Pac_Man
                             //PosiçãoBomba = new Vector2(pacman.Posicao.X, pacman.Posicao.Y);
                             //mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 6;
                             pacman.Score = pacman.insereBomba(pacman.Score);
-                            bombaLargada = true;
                             proximaBombaPac2 = false;
                             //numerodeBombasimplantadas = 1;
 
@@ -435,6 +432,10 @@ namespace Pac_Man
         }
 
 
+        /// <summary>
+        /// Desenha o jogo
+        /// </summary>
+        /// <param name="gameTime">GameTime</param>
         protected override void Draw(GameTime gameTime)
         {
 
@@ -658,6 +659,9 @@ namespace Pac_Man
             }
         }
 
+        /// <summary>
+        /// Lida com colisões entre fantasmas e pacmans
+        /// </summary>
         public void colisaoFantasmaPacman()
         {
             listaTempPersonagens = Colisoes.fantasmaPacman(fantasmas, pacmans);

@@ -9,10 +9,16 @@ using System.Text;
 
 namespace Pac_Man
 {
+    /// <summary>
+    /// Classe Bomba
+    /// </summary>
     public class Bomba
     {
         private float timer;
         private bool exploded;
+        /// <summary>
+        /// Indica se a bomba já explodiu
+        /// </summary>
         public bool Exploded
         {
             get { return exploded;}
@@ -21,27 +27,30 @@ namespace Pac_Man
 
         private Personagem parent;
 
+        /// <summary>
+        /// Personagem que colocou a bomba
+        /// </summary>
         public Personagem Parent
         {
             get { return parent; }
             set { parent = value; }
         }
         
-
-        //textura da bomba
-        private Texture2D textura;
-        public Texture2D Textura
-        {
-            get { return textura; }
-        }
-        //posicao da bomba
         private Vector2 posicao;
+        /// <summary>
+        /// Posição da bomba
+        /// </summary>
         public Vector2 Posicao
         {
             get { return posicao; }
             set { posicao = value; }
         }
-        //construtor
+        
+        /// <summary>
+        /// Construtor da bomba
+        /// </summary>
+        /// <param name="cor">Cor da bomba</param>
+        /// <param name="posicao">Posição</param>
         public Bomba( Color cor, Vector2 posicao)
         {
             this.Posicao = posicao;
@@ -51,7 +60,12 @@ namespace Pac_Man
 
         private Texture2D explosao;
         
-
+        /// <summary>
+        /// Atualiza a bomba
+        /// </summary>
+        /// <param name="gameTime">GameTime</param>
+        /// <param name="mapa">Mapa</param>
+        /// <param name="Content">ContentManager</param>
         public void Update(GameTime gameTime, byte[,] mapa, ContentManager Content)
         {
             timer -= (float)gameTime.ElapsedGameTime.TotalMilliseconds;

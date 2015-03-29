@@ -11,6 +11,9 @@ using System.Text;
 
 namespace Pac_Man.AI
 {
+    /// <summary>
+    /// Classe PathFinder
+    /// </summary>
     public class PathFinder
     {
         /// <summary>
@@ -45,6 +48,8 @@ namespace Pac_Man.AI
         /// Construtor
         /// </summary>
         /// <param name="mapa">A matriz do mapa</param>
+        /// <param name="listaFantasmas">Lista de fantasmas</param>
+        /// <param name="fantasmaAtivo">Fantasma ativo</param>
         public PathFinder(byte[,] mapa, List<Personagem> listaFantasmas, Personagem fantasmaAtivo)
         {
             this.largura = mapa.GetLength(0);
@@ -55,7 +60,9 @@ namespace Pac_Man.AI
         /// <summary>
         /// Divide a matriz do mapa num grapho de nodes
         /// </summary>
-        /// <param name="mapa"></param>
+        /// <param name="mapa">Mapa</param>
+        /// <param name="listaFantasmas">Lista de fantasmas</param>
+        /// <param name="fantasmaAtivo">Fantasma ativo</param>
         private void InicializarSearchNodes(byte[,] mapa, List<Personagem> listaFantasmas = null, Personagem fantasmaAtivo = null)
         {
             if (searchNodes == null)

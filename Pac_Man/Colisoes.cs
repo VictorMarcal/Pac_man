@@ -6,11 +6,21 @@ using System.Text;
 
 namespace Pac_Man
 {
+    /// <summary>
+    /// Classe Colisões
+    /// </summary>
     public static class Colisoes
     {
 
         private static List<Personagem> listaTempPersonagens;
 
+        /// <summary>
+        /// Devolve true se existe uma parede na posição para onde se pretende mover
+        /// </summary>
+        /// <param name="mapa">Mapa</param>
+        /// <param name="posicaoFutura">Posição para onde se pretende mover, que será testada</param>
+        /// <param name="pacman">Pacman a mover</param>
+        /// <returns></returns>
         public static bool paredeEncontrada(byte[,] mapa, Vector2 posicaoFutura, Personagem pacman)
         {
             int posiçãoX = (int)Math.Round((30 * posicaoFutura.X) * 20 / 600);
@@ -47,6 +57,7 @@ namespace Pac_Man
         /// </summary>
         /// <param name="posicaoBomba">Posição central da bomba</param>
         /// <param name="fantasmas">Lista de fantasmas</param>
+        /// <param name="pacmans">Lista de pacmans</param>
         /// <returns></returns>
         public static List<Personagem> bombaFantasmaPacman(Vector2 posicaoBomba, List<Personagem> fantasmas, List<Personagem> pacmans)
         {
@@ -92,6 +103,12 @@ namespace Pac_Man
             return listaTempPersonagens;
         }
 
+        /// <summary>
+        /// Devolve uma lista de pacmans que estão em colisão com fantasmas
+        /// </summary>
+        /// <param name="fantasmas">Lista de fantasmas</param>
+        /// <param name="pacmans">Lista de pacmans</param>
+        /// <returns></returns>
         public static List<Personagem> fantasmaPacman(List<Personagem> fantasmas, List<Personagem> pacmans)
         {
             if (listaTempPersonagens == null)
