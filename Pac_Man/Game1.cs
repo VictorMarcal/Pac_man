@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
 using Pac_Man.Animations;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 #endregion
 
 namespace Pac_Man
@@ -52,7 +53,7 @@ namespace Pac_Man
 
         List<Personagem> listaTempPersonagens;
         List<Bomba> listaTempBombas;
-
+        bool musicaPlay;
         enum GameStatus
         {
             inicio,
@@ -109,6 +110,7 @@ namespace Pac_Man
             status = GameStatus.inicio;
             corMenu = new Texture2D(graphics.GraphicsDevice, 1, 1,false, SurfaceFormat.Color);
             corMenu.SetData<Color>(new Color[] { Color.Blue });
+            musicaPlay = false;
             base.Initialize();
         }
 
@@ -145,6 +147,7 @@ namespace Pac_Man
             somComer = Content.Load<SoundEffect>("som\\pacmanComer");
             somAviso = Content.Load<SoundEffect>("som\\avisodaBomba");
             somExplosao = Content.Load<SoundEffect>("som\\explosao");
+            Som.playMusica(Content);
         }
 
 
@@ -442,7 +445,9 @@ namespace Pac_Man
 
             GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin();
-
+                   
+        
+            
             //desenhar o mapa
             for (int x = 0; x < 20; x++)
             {

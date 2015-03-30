@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace Pac_Man
         private static SoundEffect explosao;
         private static SoundEffect pacmanComer;
         private static SoundEffect erroBomba;
+        private static Song musica;
 
 
         /// <summary>
@@ -61,5 +63,19 @@ namespace Pac_Man
             erroBomba.Play(0.3f, 1, 0f);
         }
 
+        /// <summary>
+        /// musica
+        /// </summary>
+        /// <param name="content">Instância de ContentManager</param>
+        public static void playMusica(ContentManager content)
+        {
+            
+                musica = content.Load<Song>("som\\musicamp3");
+                MediaPlayer.Volume = 0.2f;
+            MediaPlayer.Play(musica);
+            MediaPlayer.IsRepeating = true;
+           
+            
+        }
     }
 }
