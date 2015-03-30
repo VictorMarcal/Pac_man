@@ -198,8 +198,9 @@ namespace Pac_Man
         /// Insere uma bomba na posição atual da personagem
         /// </summary>
         /// <param name="score">Score da personagem</param>
+        /// <param name="content">Instância de ContentManager</param>
         /// <returns></returns>
-        public int insereBomba(int score)
+        public int insereBomba(int score, ContentManager content)
         {
 
             if (score >= 100)
@@ -208,6 +209,10 @@ namespace Pac_Man
                 bomba.Parent = this;
                 bombas.Add(bomba);
                 return (score - 25);
+            }
+            else if(score < 100)
+            {
+                Som.playErro(content);
             }
             return (score);
         }

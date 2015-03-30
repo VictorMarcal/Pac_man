@@ -15,6 +15,7 @@ namespace Pac_Man
         private static SoundEffect avisoBomba;
         private static SoundEffect explosao;
         private static SoundEffect pacmanComer;
+        private static SoundEffect erroBomba;
 
 
         /// <summary>
@@ -48,6 +49,16 @@ namespace Pac_Man
             if (pacmanComer == null)
                 pacmanComer = content.Load<SoundEffect>("som\\pacmanComer");
             pacmanComer.Play(0.3f, 1, 0f);
+        }
+        /// <summary>
+        /// Toca o som de erro ao colocar bomba, quando nao tem pontuacao suficiente
+        /// </summary>
+        /// <param name="content">Instância de ContentManager</param>
+        public static void playErro(ContentManager content)
+        {
+            if (erroBomba == null)
+                erroBomba = content.Load<SoundEffect>("som\\error");
+            erroBomba.Play(0.3f, 1, 0f);
         }
 
     }

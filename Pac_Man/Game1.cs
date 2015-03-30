@@ -332,7 +332,7 @@ namespace Pac_Man
                     }
                     if (teclado.IsKeyDown(Keys.B) && proximaBombaPac1 == true)
                     {
-                        if (pacman.Score > 50 && numerodeBombasimplantadas == 0)
+                        if (pacman.Score > 0 && numerodeBombasimplantadas == 0)
                         {
 
                             // posição da bomba passa a ser igual à posição do pac neste instante de tempo!!
@@ -340,8 +340,9 @@ namespace Pac_Man
                             //bombas.Add(bomb);
                             //PosiçãoBomba = new Vector2(pacman.Posicao.X, pacman.Posicao.Y);
                             //mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 6;
-                            pacman.Score = pacman.insereBomba(pacman.Score);
-                            proximaBombaPac1 = false;
+                              pacman.Score = pacman.insereBomba(pacman.Score, Content);
+                              proximaBombaPac1 = false;
+                            
                             //numerodeBombasimplantadas = 1;
 
                         }
@@ -404,7 +405,7 @@ namespace Pac_Man
                     }
                     if (teclado.IsKeyDown(Keys.Delete) && proximaBombaPac2 == true)
                     {
-                        if (pacman.Score > 20 && numerodeBombasimplantadas == 0)
+                        if (pacman.Score > 0 && numerodeBombasimplantadas == 0)
                         {
 
                             // posição da bomba passa a ser igual à posição do pac neste instante de tempo!!
@@ -412,7 +413,7 @@ namespace Pac_Man
                             //bombas.Add(bomb);
                             //PosiçãoBomba = new Vector2(pacman.Posicao.X, pacman.Posicao.Y);
                             //mapa[(int)pacman.Posicao.X, (int)pacman.Posicao.Y] = 6;
-                            pacman.Score = pacman.insereBomba(pacman.Score);
+                            pacman.Score = pacman.insereBomba(pacman.Score,Content);
                             proximaBombaPac2 = false;
                             //numerodeBombasimplantadas = 1;
 
