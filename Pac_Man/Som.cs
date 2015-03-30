@@ -63,10 +63,15 @@ namespace Pac_Man
                 erroBomba = content.Load<SoundEffect>("som\\error");
             erroBomba.Play(0.3f, 1, 0f);
         }
+
+        /// <summary>
+        /// Toca o som de teleport
+        /// </summary>
+        /// <param name="content">Content Manager</param>
         public static void playTeleport(ContentManager content)
         {
-            //if (somTeleport == null)
-                somTeleport = content.Load<SoundEffect>("som\\somteleport");
+            if (somTeleport == null)
+                somTeleport = content.Load<SoundEffect>("som\\explosao");
             somTeleport.Play(0.1f, 1, 0f);
         }
         /// <summary>
