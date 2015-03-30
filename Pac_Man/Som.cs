@@ -17,6 +17,7 @@ namespace Pac_Man
         private static SoundEffect explosao;
         private static SoundEffect pacmanComer;
         private static SoundEffect erroBomba;
+        private static SoundEffect somTeleport;
         private static Song musica;
 
 
@@ -62,7 +63,12 @@ namespace Pac_Man
                 erroBomba = content.Load<SoundEffect>("som\\error");
             erroBomba.Play(0.3f, 1, 0f);
         }
-
+        public static void playTeleport(ContentManager content)
+        {
+            //if (somTeleport == null)
+                somTeleport = content.Load<SoundEffect>("som\\somteleport");
+            somTeleport.Play(0.1f, 1, 0f);
+        }
         /// <summary>
         /// musica
         /// </summary>

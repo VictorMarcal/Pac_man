@@ -226,6 +226,7 @@ namespace Pac_Man
         {
             this.Posicao = posicao;
             this.posicaoTarget = posicao;
+            
             return this;
         }
 
@@ -322,9 +323,11 @@ namespace Pac_Man
 
                     Vector2 posicaosaida = Utils.posicaoPortalSaida(mapa);
                     this.teleportTo(posicaosaida);
+                    Som.playTeleport(Content);
                     SpriteAnimationManager.addAnimation(deteleport, 2, 5, false, new Vector2(Posicao.X + 0.3f, Posicao.Y + 0.3f), 20, 200);
                     Utils.eliminarPortais(mapa);
                     contadorPortalEntrada = 0;
+
                 }
 
                 if (Utils.existePortal(mapa, 5))

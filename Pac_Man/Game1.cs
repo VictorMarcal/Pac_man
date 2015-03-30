@@ -32,6 +32,7 @@ namespace Pac_Man
         SoundEffect somComer;
         SoundEffect somExplosao;
         SoundEffect somAviso;
+        SoundEffect somTeleport;
 
         SpriteFont myFont;
         Texture2D dummyTexture;
@@ -147,6 +148,7 @@ namespace Pac_Man
             somComer = Content.Load<SoundEffect>("som\\pacmanComer");
             somAviso = Content.Load<SoundEffect>("som\\avisodaBomba");
             somExplosao = Content.Load<SoundEffect>("som\\explosao");
+            somTeleport = Content.Load<SoundEffect>("som\\somteleport");
             Som.playMusica(Content);
         }
 
