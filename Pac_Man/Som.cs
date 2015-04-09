@@ -80,9 +80,9 @@ namespace Pac_Man
         /// <param name="content">Instância de ContentManager</param>
         public static void playMusica(ContentManager content)
         {
-            
+            if(musica == null)
                 musica = content.Load<Song>("som\\musicamp3");
-                MediaPlayer.Volume = 0.2f;
+            MediaPlayer.Volume = 0.2f;
             MediaPlayer.Play(musica);
             MediaPlayer.IsRepeating = true;
            

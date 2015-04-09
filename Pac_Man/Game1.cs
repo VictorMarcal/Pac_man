@@ -54,7 +54,6 @@ namespace Pac_Man
 
         List<Personagem> listaTempPersonagens;
         List<Bomba> listaTempBombas;
-        bool musicaPlay;
         enum GameStatus
         {
             inicio,
@@ -111,7 +110,6 @@ namespace Pac_Man
             status = GameStatus.inicio;
             corMenu = new Texture2D(graphics.GraphicsDevice, 1, 1,false, SurfaceFormat.Color);
             corMenu.SetData<Color>(new Color[] { Color.Blue });
-            musicaPlay = false;
             base.Initialize();
         }
 
@@ -149,7 +147,7 @@ namespace Pac_Man
             somAviso = Content.Load<SoundEffect>("som\\avisodaBomba");
             somExplosao = Content.Load<SoundEffect>("som\\explosao");
             somTeleport = Content.Load<SoundEffect>("som\\somteleport");
-            Som.playMusica(Content);
+            //Som.playMusica(Content);
         }
 
 

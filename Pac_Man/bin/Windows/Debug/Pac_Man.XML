@@ -1,0 +1,660 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Pac_Man</name>
+    </assembly>
+    <members>
+        <member name="T:Pac_Man.AI.PathFinder">
+            <summary>
+            Classe PathFinder
+            </summary>
+        </member>
+        <member name="F:Pac_Man.AI.PathFinder.searchNodes">
+            <summary>
+            Guarda uma lista de posções do mapa em que se pode andar
+            </summary>
+        </member>
+        <member name="F:Pac_Man.AI.PathFinder.largura">
+            <summary>
+            Largura do mapa
+            </summary>
+        </member>
+        <member name="F:Pac_Man.AI.PathFinder.altura">
+            <summary>
+            Altura do mapa
+            </summary>
+        </member>
+        <member name="F:Pac_Man.AI.PathFinder.openList">
+            <summary>
+            Lista de nós que estão disponíveis para procurar
+            </summary>
+        </member>
+        <member name="F:Pac_Man.AI.PathFinder.closedList">
+            <summary>
+            Lista de nós que já foram estudados
+            </summary>
+        </member>
+        <member name="M:Pac_Man.AI.PathFinder.#ctor(System.Byte[0:,0:],System.Collections.Generic.List{Pac_Man.Personagem},Pac_Man.Personagem)">
+            <summary>
+            Construtor
+            </summary>
+            <param name="mapa">A matriz do mapa</param>
+            <param name="listaFantasmas">Lista de fantasmas</param>
+            <param name="fantasmaAtivo">Fantasma ativo</param>
+        </member>
+        <member name="M:Pac_Man.AI.PathFinder.InicializarSearchNodes(System.Byte[0:,0:],System.Collections.Generic.List{Pac_Man.Personagem},Pac_Man.Personagem)">
+            <summary>
+            Divide a matriz do mapa num grapho de nodes
+            </summary>
+            <param name="mapa">Mapa</param>
+            <param name="listaFantasmas">Lista de fantasmas</param>
+            <param name="fantasmaAtivo">Fantasma ativo</param>
+        </member>
+        <member name="M:Pac_Man.AI.PathFinder.Heuristic(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Devolve uma estimativa da distância entre dois pontos
+            </summary>
+            <param name="ponto1">Ponto de origem</param>
+            <param name="ponto2">Objetivo</param>
+            <returns></returns>
+        </member>
+        <member name="M:Pac_Man.AI.PathFinder.ResetSearchNodes">
+            <summary>
+            Faz reset ao estado dos nós
+            </summary>
+        </member>
+        <member name="M:Pac_Man.AI.PathFinder.FindBestNode">
+            <summary>
+            Devolve o nó com distância mais pequena ao objetivo
+            </summary>
+        </member>
+        <member name="M:Pac_Man.AI.PathFinder.FindFinalPath(Pac_Man.AI.SearchNode,Pac_Man.AI.SearchNode)">
+            <summary>
+            Usa o campo parent dos nodes para refazer
+            um caminho do end node para o start node
+            </summary>
+        </member>
+        <member name="M:Pac_Man.AI.PathFinder.FindPath(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Byte[0:,0:],System.Collections.Generic.List{Pac_Man.Personagem},Pac_Man.Personagem)">
+            <summary>
+            Finds the optimal path from one point to another.
+            </summary>
+        </member>
+        <member name="T:Pac_Man.AI.SearchNode">
+            <summary>
+            Classe SearchNode
+            </summary>
+        </member>
+        <member name="F:Pac_Man.AI.SearchNode.InOpenList">
+            <summary>
+            Permite verificar se este nó está na openList
+            </summary>
+        </member>
+        <member name="F:Pac_Man.AI.SearchNode.InClosedList">
+            <summary>
+            Permite verificar se este nó está na closedList
+            </summary>
+        </member>
+        <member name="P:Pac_Man.AI.SearchNode.Posicao">
+            <summary>
+            Posicao no mapa
+            </summary>
+        </member>
+        <member name="P:Pac_Man.AI.SearchNode.Caminho">
+            <summary>
+            Indica se esta posição no mapa é ou não caminho
+            </summary>
+        </member>
+        <member name="P:Pac_Man.AI.SearchNode.Parent">
+            <summary>
+            Referência para nó que colocou este nó na lista aberta.
+            Utilizado para refazer o caminho deste o alvo até à origem
+            </summary>
+        </member>
+        <member name="P:Pac_Man.AI.SearchNode.DistanciaAlvo">
+            <summary>
+            Distancia aproximada desde o start node até ao goal node se o percurso passa por este nó (F)
+            </summary>
+        </member>
+        <member name="P:Pac_Man.AI.SearchNode.DistanciaViajada">
+            <summary>
+            Distancia percorrida desde o nó de origem (G)
+            </summary>
+        </member>
+        <member name="P:Pac_Man.AI.SearchNode.Vizinhos">
+            <summary>
+            Contêm os 4 vizinhos deste nó (cima, baixo, esquerda, direita)
+            </summary>
+        </member>
+        <member name="T:Pac_Man.Animations.SpriteManager">
+            <summary>
+            Classe SpriteManager
+            </summary>
+        </member>
+        <member name="F:Pac_Man.Animations.SpriteManager.textura">
+            <summary>
+            Textura da sprite
+            </summary>
+        </member>
+        <member name="F:Pac_Man.Animations.SpriteManager.cor">
+            <summary>
+            Cor a utilizar aquando do desenho
+            </summary>
+        </member>
+        <member name="F:Pac_Man.Animations.SpriteManager.origem">
+            <summary>
+            Origem da sprite
+            </summary>
+        </member>
+        <member name="F:Pac_Man.Animations.SpriteManager.rotacao">
+            <summary>
+            Rotação
+            </summary>
+        </member>
+        <member name="F:Pac_Man.Animations.SpriteManager.escala">
+            <summary>
+            Escala
+            </summary>
+        </member>
+        <member name="F:Pac_Man.Animations.SpriteManager.spriteEffect">
+            <summary>
+            Rodada?
+            </summary>
+        </member>
+        <member name="F:Pac_Man.Animations.SpriteManager.rectangulos">
+            <summary>
+            Rectângulo da sprite
+            </summary>
+        </member>
+        <member name="F:Pac_Man.Animations.SpriteManager.frameIndex">
+            <summary>
+            Index do frame que está a ser desenhado
+            </summary>
+        </member>
+        <member name="F:Pac_Man.Animations.SpriteManager.draw">
+            <summary>
+            Indica se a sprite deve ser desenhada
+            </summary>
+        </member>
+        <member name="M:Pac_Man.Animations.SpriteManager.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,System.Int32,System.Int32,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Construtor
+            </summary>
+            <param name="textura">Textura / spritesheet</param>
+            <param name="linhas">Nº de linhas da animação</param>
+            <param name="colunas">Nº de colunas da animação</param>
+            <param name="posicao">Posição</param>
+        </member>
+        <member name="M:Pac_Man.Animations.SpriteManager.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Desenha uma sprite
+            </summary>
+            <param name="spriteBatch">SpriteBatch</param>
+        </member>
+        <member name="T:Pac_Man.Animations.SpriteAnimationManager">
+            <summary>
+            Classe SpriteAnimationManager
+            </summary>
+        </member>
+        <member name="M:Pac_Man.Animations.SpriteAnimationManager.Initialize">
+            <summary>
+            Inicializa a lista de animações
+            </summary>
+        </member>
+        <member name="M:Pac_Man.Animations.SpriteAnimationManager.addAnimation(Microsoft.Xna.Framework.Graphics.Texture2D,System.Int32,System.Int32,System.Boolean,Microsoft.Xna.Framework.Vector2,System.Int32,System.Int32)">
+            <summary>
+            Adiciona uma animação à lista de animações
+            </summary>
+            <param name="textura">Spritesheet da animação</param>
+            <param name="largura">Largura da spritesheet</param>
+            <param name="altura">Altura da spritesheet</param>
+            <param name="looping">Loop?</param>
+            <param name="posicao">Posição da animação</param>
+            <param name="fps">FPS pretendidos</param>
+            <param name="maxDelay">Delay até começar a animação</param>
+        </member>
+        <member name="M:Pac_Man.Animations.SpriteAnimationManager.resetAnimations">
+            <summary>
+            Elimina todas as animações da lista de animações
+            </summary>
+        </member>
+        <member name="M:Pac_Man.Animations.SpriteAnimationManager.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Update das animações na lista
+            </summary>
+            <param name="gameTime">GameTime</param>
+        </member>
+        <member name="M:Pac_Man.Animations.SpriteAnimationManager.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Desenha as animações da lista
+            </summary>
+            <param name="spriteBatch">SpriteBatch</param>
+        </member>
+        <member name="T:Pac_Man.Bomba">
+            <summary>
+            Classe Bomba
+            </summary>
+        </member>
+        <member name="M:Pac_Man.Bomba.#ctor(Microsoft.Xna.Framework.Color,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Construtor da bomba
+            </summary>
+            <param name="cor">Cor da bomba</param>
+            <param name="posicao">Posição</param>
+        </member>
+        <member name="M:Pac_Man.Bomba.Update(Microsoft.Xna.Framework.GameTime,System.Byte[0:,0:],Microsoft.Xna.Framework.Content.ContentManager)">
+            <summary>
+            Atualiza a bomba
+            </summary>
+            <param name="gameTime">GameTime</param>
+            <param name="mapa">Mapa</param>
+            <param name="Content">ContentManager</param>
+        </member>
+        <member name="P:Pac_Man.Bomba.Exploded">
+            <summary>
+            Indica se a bomba já explodiu
+            </summary>
+        </member>
+        <member name="P:Pac_Man.Bomba.Parent">
+            <summary>
+            Personagem que colocou a bomba
+            </summary>
+        </member>
+        <member name="P:Pac_Man.Bomba.Posicao">
+            <summary>
+            Posição da bomba
+            </summary>
+        </member>
+        <member name="T:Pac_Man.Camera">
+            <summary>
+            Classe Camera
+            </summary>
+        </member>
+        <member name="M:Pac_Man.Camera.addShake(System.Int32)">
+            <summary>
+            Adiciona uma determina quantidade de shake
+            </summary>
+            <param name="valor">Valor de shake a adicionar</param>
+        </member>
+        <member name="M:Pac_Man.Camera.resetShake">
+            <summary>
+            Pára todo o cameraShake
+            </summary>
+        </member>
+        <member name="M:Pac_Man.Camera.WorldPoint2Pixels(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Traduz coordenadas do mundo virtual para coordenadas em pixeis
+            </summary>
+            <param name="point">Coordenada no mundo virtual</param>
+            <returns>Coordenada em pixeis</returns>
+        </member>
+        <member name="M:Pac_Man.Camera.Update(System.Random)">
+            <summary>
+            Atualiza a camera
+            </summary>
+            <param name="random">Instância de Random</param>
+        </member>
+        <member name="P:Pac_Man.Camera.Graphics">
+            <summary>
+            Instância do graphics device
+            </summary>
+        </member>
+        <member name="P:Pac_Man.Camera.WorldWith">
+            <summary>
+            Largura do mundo
+            </summary>
+        </member>
+        <member name="P:Pac_Man.Camera.Target">
+            <summary>
+            Coordenadas virtuais centrais da camara
+            </summary>
+        </member>
+        <member name="T:Pac_Man.Colisoes">
+            <summary>
+            Classe Colisões
+            </summary>
+        </member>
+        <member name="M:Pac_Man.Colisoes.paredeEncontrada(System.Byte[0:,0:],Microsoft.Xna.Framework.Vector2,Pac_Man.Personagem)">
+            <summary>
+            Devolve true se existe uma parede na posição para onde se pretende mover
+            </summary>
+            <param name="mapa">Mapa</param>
+            <param name="posicaoFutura">Posição para onde se pretende mover, que será testada</param>
+            <param name="pacman">Pacman a mover</param>
+            <returns></returns>
+        </member>
+        <member name="M:Pac_Man.Colisoes.bombaFantasmaPacman(Microsoft.Xna.Framework.Vector2,System.Collections.Generic.List{Pac_Man.Personagem},System.Collections.Generic.List{Pac_Man.Personagem})">
+            <summary>
+            Devolve uma lista de fantasmas que foram mortos por uma bomba
+            </summary>
+            <param name="posicaoBomba">Posição central da bomba</param>
+            <param name="fantasmas">Lista de fantasmas</param>
+            <param name="pacmans">Lista de pacmans</param>
+            <returns></returns>
+        </member>
+        <member name="M:Pac_Man.Colisoes.fantasmaPacman(System.Collections.Generic.List{Pac_Man.Personagem},System.Collections.Generic.List{Pac_Man.Personagem})">
+            <summary>
+            Devolve uma lista de pacmans que estão em colisão com fantasmas
+            </summary>
+            <param name="fantasmas">Lista de fantasmas</param>
+            <param name="pacmans">Lista de pacmans</param>
+            <returns></returns>
+        </member>
+        <member name="T:Pac_Man.Game1">
+            <summary>
+            This is the main type for your game
+            </summary>
+        </member>
+        <member name="M:Pac_Man.Game1.#ctor">
+            <summary>
+            Classe principal
+            </summary>
+        </member>
+        <member name="M:Pac_Man.Game1.Initialize">
+            <summary>
+            Allows the game to perform any initialization it needs to before starting to run.
+            This is where it can query for any required services and load any non-graphic
+            related content.  Calling base.Initialize will enumerate through any components
+            and initialize them as well.
+            </summary>
+        </member>
+        <member name="M:Pac_Man.Game1.LoadContent">
+            <summary>
+            LoadContent will be called once per game and is the place to load
+            all of your content.
+            </summary>
+        </member>
+        <member name="M:Pac_Man.Game1.UnloadContent">
+            <summary>
+            UnloadContent will be called once per game and is the place to unload
+            all content.
+            </summary>
+        </member>
+        <member name="M:Pac_Man.Game1.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Allows the game to run logic such as updating the world,
+            checking for collisions, gathering input, and playing audio.
+            </summary>
+            <param name="gameTime">Provides a snapshot of timing values.</param>
+        </member>
+        <member name="M:Pac_Man.Game1.Draw(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Desenha o jogo
+            </summary>
+            <param name="gameTime">GameTime</param>
+        </member>
+        <member name="M:Pac_Man.Game1.verificarJogoGanho">
+            <summary>
+            Verifica se não existe comida no mapa
+            </summary>
+            <returns>Devolve true se não existe comida no mapa</returns>
+        </member>
+        <member name="M:Pac_Man.Game1.colisaoFantasmaPacman">
+            <summary>
+            Lida com colisões entre fantasmas e pacmans
+            </summary>
+        </member>
+        <member name="T:Pac_Man.TipoPersonagem">
+            <summary>
+            Tipo de personagem
+            </summary>
+        </member>
+        <member name="F:Pac_Man.TipoPersonagem.Player">
+            <summary>
+            Jogador
+            </summary>
+        </member>
+        <member name="F:Pac_Man.TipoPersonagem.NPC">
+            <summary>
+            Fantasma
+            </summary>
+        </member>
+        <member name="T:Pac_Man.Direccao">
+            <summary>
+            Direções
+            </summary>
+        </member>
+        <member name="F:Pac_Man.Direccao.Cima">
+            <summary>
+            Cima
+            </summary>
+        </member>
+        <member name="F:Pac_Man.Direccao.Baixo">
+            <summary>
+            Baixo
+            </summary>
+        </member>
+        <member name="F:Pac_Man.Direccao.Esquerda">
+            <summary>
+            Esquerda
+            </summary>
+        </member>
+        <member name="F:Pac_Man.Direccao.Direita">
+            <summary>
+            Direita
+            </summary>
+        </member>
+        <member name="F:Pac_Man.Direccao.teleportParaBaixo">
+            <summary>
+            teleport para Baixo
+            </summary>
+        </member>
+        <member name="F:Pac_Man.Direccao.teleportParaCima">
+            <summary>
+            Teleport para cima
+            </summary>
+        </member>
+        <member name="T:Pac_Man.Personagem">
+            <summary>
+            Classe Personagem
+            </summary>
+        </member>
+        <member name="M:Pac_Man.Personagem.getBombas">
+            <summary>
+            Devolve a lista de bombas colocadas por esta personagem
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="F:Pac_Man.Personagem.player">
+            <summary>
+            Nº de jogador (1/2)
+            </summary>
+        </member>
+        <member name="M:Pac_Man.Personagem.getPosicaoTarget">
+            <summary>
+            Devolve a posição para onde a personagem se está a mover
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Pac_Man.Personagem.TipoPersonagem">
+            <summary>
+            Devolve o tipo de personagem
+            </summary>
+            <returns>Tipo de personagem</returns>
+        </member>
+        <member name="F:Pac_Man.Personagem.cor">
+            <summary>
+            Cor da personagem
+            </summary>
+        </member>
+        <member name="M:Pac_Man.Personagem.#ctor(Microsoft.Xna.Framework.Content.ContentManager,System.String,Pac_Man.TipoPersonagem,System.Byte[0:,0:],Microsoft.Xna.Framework.Color,System.Int32,System.Int32)">
+            <summary>
+            Construtor da personagem
+            </summary>
+            <param name="content">ContentManager</param>
+            <param name="assetName">Nome da textura desta personagem</param>
+            <param name="tipoPersonagem">Tipo de personagem (player / NPC)</param>
+            <param name="mapa">Mapa</param>
+            <param name="cor">Cor da personagem</param>
+            <param name="pathOffset">Path Offset</param>
+            <param name="player">Nº de player (1 ou 2)</param>
+        </member>
+        <member name="M:Pac_Man.Personagem.insereBomba(System.Int32,Microsoft.Xna.Framework.Content.ContentManager)">
+            <summary>
+            Insere uma bomba na posição atual da personagem
+            </summary>
+            <param name="score">Score da personagem</param>
+            <param name="content">Instância de ContentManager</param>
+            <returns></returns>
+        </member>
+        <member name="M:Pac_Man.Personagem.teleportTo(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Teleporta a personagem para uma determinada localização
+            </summary>
+            <param name="posicao">Posição para onde se pretende teleportar</param>
+            <returns></returns>
+        </member>
+        <member name="M:Pac_Man.Personagem.UpdateBombs(System.Single,System.Byte[0:,0:],Microsoft.Xna.Framework.GameTime,Microsoft.Xna.Framework.Content.ContentManager)">
+            <summary>
+            Atualiza as bombas desta personagem
+            </summary>
+            <param name="tempoExplosao">Tempo explosão</param>
+            <param name="mapa">Mapa</param>
+            <param name="gameTime">GameTime</param>
+            <param name="Content">ContentManager</param>
+        </member>
+        <member name="M:Pac_Man.Personagem.removeBomba(Pac_Man.Bomba)">
+            <summary>
+            Remove uma determinada bomba da lista de bombas
+            </summary>
+            <param name="bomba">Bomba a remover</param>
+        </member>
+        <member name="M:Pac_Man.Personagem.removeBombas(System.Byte[0:,0:])">
+            <summary>
+            Remove todas as bombas colocadas por este personagem do mapa
+            </summary>
+            <param name="mapa">Mapa</param>
+        </member>
+        <member name="M:Pac_Man.Personagem.Update(Microsoft.Xna.Framework.GameTime,System.Collections.Generic.List{Pac_Man.Personagem},System.Byte[0:,0:],System.Collections.Generic.List{Pac_Man.Personagem},System.Single,Microsoft.Xna.Framework.Content.ContentManager)">
+            <summary>
+            Update
+            </summary>
+            <param name="gameTime">GameTime</param>
+            <param name="pacmans">Lista de pacmans</param>
+            <param name="mapa">Mapa</param>
+            <param name="listaFantasmas">Lista de fantasmas</param>
+            <param name="tempoExplosao">Tempo expçosão</param>
+            <param name="Content">ContentManager</param>
+        </member>
+        <member name="M:Pac_Man.Personagem.moverPacMan(Pac_Man.Direccao)">
+            <summary>
+            Move a personagem numa determinada direção
+            </summary>
+            <param name="direccao">Direção em que se pretende mover</param>
+        </member>
+        <member name="M:Pac_Man.Personagem.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.GameTime,System.Byte[0:,0:])">
+            <summary>
+            Desenha no ecrã a personagem
+            </summary>
+            <param name="spriteBatch">Instância de SpriteBath</param>
+            <param name="gameTime">GameTime</param>
+            <param name="mapa">Mapa</param>
+        </member>
+        <member name="M:Pac_Man.Personagem.Dispose">
+            <summary>
+            Destruir a textura
+            </summary>
+        </member>
+        <member name="P:Pac_Man.Personagem.Textura">
+            <summary>
+            Textura utilizada por esta personagem
+            </summary>
+        </member>
+        <member name="P:Pac_Man.Personagem.Posicao">
+            <summary>
+            Posição da personagem no mundo
+            </summary>
+        </member>
+        <member name="P:Pac_Man.Personagem.Rotacao">
+            <summary>
+            Rotação da personagem
+            </summary>
+        </member>
+        <member name="P:Pac_Man.Personagem.Velocidade">
+            <summary>
+            Velocidade a que a personagem se move
+            </summary>
+        </member>
+        <member name="P:Pac_Man.Personagem.Score">
+            <summary>
+            Pontos deste jogador
+            </summary>
+        </member>
+        <member name="T:Pac_Man.Program">
+            <summary>
+            The main class.
+            </summary>
+        </member>
+        <member name="M:Pac_Man.Program.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:Pac_Man.Som">
+            <summary>
+            Classe Som
+            </summary>
+        </member>
+        <member name="M:Pac_Man.Som.playAvisoBomba(Microsoft.Xna.Framework.Content.ContentManager)">
+            <summary>
+            Toca o som de aviso de bomba
+            </summary>
+            <param name="content">Instância de ContentManager</param>
+        </member>
+        <member name="M:Pac_Man.Som.playExplosao(Microsoft.Xna.Framework.Content.ContentManager)">
+            <summary>
+            Toca o som de explosão
+            </summary>
+            <param name="content">Instância de ContentManager</param>
+        </member>
+        <member name="M:Pac_Man.Som.playComer(Microsoft.Xna.Framework.Content.ContentManager)">
+            <summary>
+            Toca o som de comer
+            </summary>
+            <param name="content">Instância de ContentManager</param>
+        </member>
+        <member name="M:Pac_Man.Som.playErro(Microsoft.Xna.Framework.Content.ContentManager)">
+            <summary>
+            Toca o som de erro ao colocar bomba, quando nao tem pontuacao suficiente
+            </summary>
+            <param name="content">Instância de ContentManager</param>
+        </member>
+        <member name="M:Pac_Man.Som.playTeleport(Microsoft.Xna.Framework.Content.ContentManager)">
+            <summary>
+            Toca o som de teleport
+            </summary>
+            <param name="content">Content Manager</param>
+        </member>
+        <member name="M:Pac_Man.Som.playMusica(Microsoft.Xna.Framework.Content.ContentManager)">
+            <summary>
+            musica
+            </summary>
+            <param name="content">Instância de ContentManager</param>
+        </member>
+        <member name="T:Pac_Man.Utils">
+            <summary>
+            Classe Utils - Utilidades
+            </summary>
+        </member>
+        <member name="M:Pac_Man.Utils.existePortal(System.Byte[0:,0:],System.Int32)">
+            <summary>
+            Devolve true caso já exista um portal no mapa
+            </summary>
+            <param name="mapa">Mapa</param>
+            <param name="tipo">Tipo de portal: entrada ou saida</param>
+            <returns>True or False</returns>
+        </member>
+        <member name="M:Pac_Man.Utils.posicaoPortalSaida(System.Byte[0:,0:])">
+            <summary>
+            Devolve a posicao no mapa do portal de saida
+            </summary>
+            <param name="mapa">Mapa</param>
+            <returns>Vector2</returns>
+        </member>
+        <member name="M:Pac_Man.Utils.eliminarPortais(System.Byte[0:,0:])">
+            <summary>
+            Elimina os portais do mapa
+            </summary>
+            <param name="mapa">Mapa</param>
+        </member>
+    </members>
+</doc>
