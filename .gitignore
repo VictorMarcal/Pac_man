@@ -2,3 +2,5 @@
 *.exe
 *.cache
 *.suo
+Pac_Man/bin/
+Pac_Man/obj/
