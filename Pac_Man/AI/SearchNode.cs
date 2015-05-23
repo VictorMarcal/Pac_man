@@ -37,9 +37,7 @@ namespace Pac_Man.AI
             set { caminho = value; }
         }
 
-        private SearchNode[] vizinhos;
-
-
+        
         private SearchNode parent;
         /// <summary>
         /// Referência para nó que colocou este nó na lista aberta.
@@ -81,6 +79,8 @@ namespace Pac_Man.AI
             set { distanciaViajada = value; }
         }
 
+
+        private SearchNode[] vizinhos;
         /// <summary>
         /// Contêm os 4 vizinhos deste nó (cima, baixo, esquerda, direita)
         /// </summary>
