@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shfbBuild product="Sandcastle Help File Builder" version="2014.12.20.0" projectFile="C:\Users\nlopes\Documents\IPCA\EDJD\code\Técnicas de Desenvolvimento de Jogos\Pac_man\documentation.shfbproj" started="29-03-2015 21:10:11">
+<shfbBuild product="Sandcastle Help File Builder" version="2014.12.20.0" projectFile="C:\Users\nlopes\Documents\IPCA\EDJD\code\Técnicas de Desenvolvimento de Jogos\Pac_man\documentation.shfbproj" started="01-06-2015 23:51:48">
 <buildStep step="Initializing">
 Finding tools...
 The Sandcastle tools are located in &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\&#39;
@@ -13,31 +13,28 @@ Lightweight Website Style Version 2014.12.20.0
 Copyright &#169; 2006-2014, Eric Woodruff, All Rights Reserved
 Portions Copyright &#169; 2014, Sam Harwell, All Rights Reserved
 </buildStep>
-<buildStep step="ClearWorkFolder">
-Clearing working folder...
-</buildStep>
 <buildStep step="ValidatingDocumentationSources">
 Validating and copying documentation source information
-Source: C:\Users\nlopes\Documents\IPCA\EDJD\code\T&#233;cnicas de Desenvolvimento de Jogos\Pac_man\Pac_Man\bin\Windows\Release\Pac_Man.exe
-    Found assembly &#39;C:\Users\nlopes\Documents\IPCA\EDJD\code\T&#233;cnicas de Desenvolvimento de Jogos\Pac_man\Pac_Man\bin\Windows\Release\Pac_Man.exe&#39;
-Source: C:\Users\nlopes\Documents\IPCA\EDJD\code\T&#233;cnicas de Desenvolvimento de Jogos\Pac_man\Pac_Man\bin\Windows\Release\Pac_Man.XML
+Source: C:\Users\nlopes\Documents\IPCA\EDJD\1&#186; Ano\2&#186; Semestre\T&#233;cnicas de Desenvolvimento de Jogos Digitais\Trabalhos\The-Morkians\TDJ_ProjectoFinal\TDJ_ProjectoFinal\bin\Windows\Release\TDJ_ProjectoFinal.exe
+    Found assembly &#39;C:\Users\nlopes\Documents\IPCA\EDJD\1&#186; Ano\2&#186; Semestre\T&#233;cnicas de Desenvolvimento de Jogos Digitais\Trabalhos\The-Morkians\TDJ_ProjectoFinal\TDJ_ProjectoFinal\bin\Windows\Release\TDJ_ProjectoFinal.exe&#39;
+Source: C:\Users\nlopes\Documents\IPCA\EDJD\1&#186; Ano\2&#186; Semestre\T&#233;cnicas de Desenvolvimento de Jogos Digitais\Trabalhos\The-Morkians\TDJ_ProjectoFinal\TDJ_ProjectoFinal\bin\Windows\Release\TDJ_ProjectoFinal.XML
 
 Copying XML comments files
-    C:\Users\nlopes\Documents\IPCA\EDJD\code\T&#233;cnicas de Desenvolvimento de Jogos\Pac_man\Pac_Man\bin\Windows\Release\Pac_Man.XML -&gt; C:\Users\nlopes\Documents\IPCA\EDJD\code\T&#233;cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\Pac_Man.XML
+    C:\Users\nlopes\Documents\IPCA\EDJD\1&#186; Ano\2&#186; Semestre\T&#233;cnicas de Desenvolvimento de Jogos Digitais\Trabalhos\The-Morkians\TDJ_ProjectoFinal\TDJ_ProjectoFinal\bin\Windows\Release\TDJ_ProjectoFinal.XML -&gt; C:\Users\nlopes\Documents\IPCA\EDJD\code\T&#233;cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\TDJ_ProjectoFinal.XML
 </buildStep>
 <buildStep step="GenerateSharedContent">
 Generating shared content files (en-US, English (United States))...
 <plugIn name="Lightweight Website Style" behavior="After" priority="1000">
-</plugIn>    Last step completed in 00:00:00,2600
+</plugIn>    Last step completed in 00:00:00,3420
 </buildStep>
 <buildStep step="GenerateApiFilter">
 Generating API filter for MRefBuilder...
-    Last step completed in 00:00:00,0210
+    Last step completed in 00:00:00,0120
 </buildStep>
 <buildStep step="GenerateReflectionInfo">
 Generating reflection information...
 [C:\windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe]
-Build started 29-03-2015 21:10:12.
+Build started 01-06-2015 23:51:51.
 Project &quot;C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\GenerateRefInfo.proj&quot; on node 1 (default targets).
 PrepareForBuild:
   Creating directory &quot;obj\Debug\&quot;.
@@ -46,7 +43,7 @@ GenerateRefInfo:
   Copyright &#184; 2006-2014, Microsoft Corporation, All Rights Reserved.
   Portions Copyright &#184; 2006-2014, Eric Woodruff, All Rights Reserved.
   Loaded 1 assemblies for reflection and 1 dependency assemblies.
-  Wrote information on 3 namespaces, 14 types, and 85 members
+  Wrote information on 3 namespaces, 24 types, and 172 members
   Copying file from &quot;reflection.org&quot; to &quot;reflection.all&quot;.
   XslTransform (v2014.11.22.0)
   Copyright &#184; 2006-2014, Microsoft Corporation, All Rights Reserved.
@@ -56,19 +53,19 @@ Done Building Project &quot;C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas 
 
 Build succeeded.
 
-Time Elapsed 00:00:03.27
-    Last step completed in 00:00:03,9452
+Time Elapsed 00:00:04.56
+    Last step completed in 00:00:06,0153
 </buildStep>
 <buildStep step="TransformReflectionInfo">
 Transforming reflection output...
 [C:\windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe]
-Build started 29-03-2015 21:10:16.
+Build started 01-06-2015 23:51:56.
 Project &quot;C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\TransformManifest.proj&quot; on node 1 (default targets).
 TransformManifest:
   XslTransform (v2014.11.22.0)
   Copyright &#184; 2006-2014, Microsoft Corporation, All Rights Reserved.
   Portions Copyright &#184; 2006-2014, Eric Woodruff, All Rights Reserved.
-  Applying XSL transformation &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\\ProductionTransforms\ApplyVSDocModel.xsl&#39;.
+  Applying XSL transformation &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\ProductionTransforms\ApplyVSDocModel.xsl&#39;.
   Copying file from &quot;reflection.xml&quot; to &quot;reflection.nofilenames&quot;.
   XslTransform (v2014.11.22.0)
   Copyright &#184; 2006-2014, Microsoft Corporation, All Rights Reserved.
@@ -82,54 +79,54 @@ Done Building Project &quot;C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas 
 
 Build succeeded.
 
-Time Elapsed 00:00:02.55
-    Last step completed in 00:00:02,6682
+Time Elapsed 00:00:03.64
+    Last step completed in 00:00:04,0732
 </buildStep>
 <buildStep step="GenerateNamespaceSummaries">
 Generating namespace summary information...
-    Last step completed in 00:00:00,1070
+    Last step completed in 00:00:00,0990
 </buildStep>
 <buildStep step="CopyAdditionalContent">
 Copying additional content files...
 No additional content to copy
-    Last step completed in 00:00:00,0130
+    Last step completed in 00:00:00,0120
 </buildStep>
 <buildStep step="MergeTablesOfContents">
 Merging conceptual and additional tables of contents...
-    Last step completed in 00:00:00,0030
+    Last step completed in 00:00:00,0020
 </buildStep>
 <buildStep step="GenerateIntermediateTableOfContents">
 Generating intermediate table of contents file...
 [C:\windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe]
-Build started 29-03-2015 21:10:19.
+Build started 01-06-2015 23:52:00.
 Project &quot;C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\GenerateIntermediateTOC.proj&quot; on node 1 (default targets).
 GenerateIntermediateTOC:
   XslTransform (v2014.11.22.0)
   Copyright &#184; 2006-2014, Microsoft Corporation, All Rights Reserved.
   Portions Copyright &#184; 2006-2014, Eric Woodruff, All Rights Reserved.
-  Applying XSL transformation &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\\ProductionTransforms\CreateVSToc.xsl&#39;.
+  Applying XSL transformation &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\ProductionTransforms\CreateVSToc.xsl&#39;.
 Done Building Project &quot;C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\GenerateIntermediateTOC.proj&quot; (default targets).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.23
+Time Elapsed 00:00:00.29
 Generating conceptual content intermediate TOC file...
-    Last step completed in 00:00:00,4210
+    Last step completed in 00:00:00,4360
 </buildStep>
 <buildStep step="CreateBuildAssemblerConfigs">
 Creating Sandcastle configuration files...
     sandcastle.config
-    Last step completed in 00:00:00,8991
+    Last step completed in 00:00:01,0181
 </buildStep>
 <buildStep step="MergeCustomConfigs">
 Merging custom build component configurations
 C:\Users\nlopes\Documents\IPCA\EDJD\code\T&#233;cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\sandcastle.config
-    Last step completed in 00:00:00,0400
+    Last step completed in 00:00:00,0410
 </buildStep>
 <buildStep step="BuildReferenceTopics">
 Building reference help topics...
 [C:\windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe]
-Build started 29-03-2015 21:10:20.
+Build started 01-06-2015 23:52:01.
 Project &quot;C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj&quot; on node 1 (default targets).
 BuildReferenceTopics:
   BuildAssembler (v2014.11.22.0)
@@ -137,40 +134,47 @@ BuildReferenceTopics:
   Portions Copyright &#184; 2006-2014, Eric Woodruff, All Rights Reserved.
   Loading configuration...
   Processing topics...
-BuildAssembler : warning : ShowMissingComponent: [N:Pac_Man] Missing &lt;summary&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:Pac_Man.Colisoes.bombaFantasmaPacman(Microsoft.Xna.Framework.Vector2,System.Collections.Generic.List{Pac_Man.Personagem},System.Collections.Generic.List{Pac_Man.Personagem})] Missing &lt;returns&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:Pac_Man.Colisoes.fantasmaPacman(System.Collections.Generic.List{Pac_Man.Personagem},System.Collections.Generic.List{Pac_Man.Personagem})] Missing &lt;returns&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:Pac_Man.Colisoes.paredeEncontrada(System.Byte[0:,0:],Microsoft.Xna.Framework.Vector2,Pac_Man.Personagem)] Missing &lt;returns&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:Pac_Man.Game1] MSDN URL not found for target &#39;M:Microsoft.Xna.Framework.Game.Run(Microsoft.Xna.Framework.GameRunBehavior)&#39;. [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:Pac_Man.Game1] MSDN URL not found for target &#39;M:Microsoft.Xna.Framework.Game.Run(Microsoft.Xna.Framework.GameRunBehavior)&#39;. [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:Pac_Man.Personagem.getBombas] Missing &lt;returns&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:Pac_Man.Personagem.getPosicaoTarget] Missing &lt;returns&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:Pac_Man.Personagem.insereBomba(System.Int32)] Missing &lt;returns&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:Pac_Man.Personagem.teleportTo(Microsoft.Xna.Framework.Vector2)] Missing &lt;returns&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [N:Pac_Man.AI] Missing &lt;summary&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:Pac_Man.AI.PathFinder.FindBestNode] Missing &lt;returns&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:Pac_Man.AI.PathFinder.FindPath(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Byte[0:,0:],System.Collections.Generic.List{Pac_Man.Personagem},Pac_Man.Personagem)] Missing &lt;returns&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:Pac_Man.AI.PathFinder.FindPath(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Byte[0:,0:],System.Collections.Generic.List{Pac_Man.Personagem},Pac_Man.Personagem)] Missing &lt;param name=&quot;startPoint&quot;/&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:Pac_Man.AI.PathFinder.FindPath(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Byte[0:,0:],System.Collections.Generic.List{Pac_Man.Personagem},Pac_Man.Personagem)] Missing &lt;param name=&quot;endPoint&quot;/&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:Pac_Man.AI.PathFinder.FindPath(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Byte[0:,0:],System.Collections.Generic.List{Pac_Man.Personagem},Pac_Man.Personagem)] Missing &lt;param name=&quot;mapa&quot;/&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:Pac_Man.AI.PathFinder.FindPath(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Byte[0:,0:],System.Collections.Generic.List{Pac_Man.Personagem},Pac_Man.Personagem)] Missing &lt;param name=&quot;listaFantasmas&quot;/&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:Pac_Man.AI.PathFinder.FindPath(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Byte[0:,0:],System.Collections.Generic.List{Pac_Man.Personagem},Pac_Man.Personagem)] Missing &lt;param name=&quot;fantasma&quot;/&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [N:Pac_Man.Animations] Missing &lt;summary&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
-  Processed 115 topic(s)
-  19 warning(s)
+BuildAssembler : warning : ShowMissingComponent: [N:TDJ_ProjectoFinal] Missing &lt;summary&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TDJ_ProjectoFinal.Game1] MSDN URL not found for target &#39;M:Microsoft.Xna.Framework.Game.Run(Microsoft.Xna.Framework.GameRunBehavior)&#39;. [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TDJ_ProjectoFinal.Game1] MSDN URL not found for target &#39;P:Microsoft.Xna.Framework.Game.MaxElapsedTime&#39;. [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TDJ_ProjectoFinal.Game1] MSDN URL not found for target &#39;M:Microsoft.Xna.Framework.Game.Run(Microsoft.Xna.Framework.GameRunBehavior)&#39;. [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Properties.T:TDJ_ProjectoFinal.Game1] MSDN URL not found for target &#39;P:Microsoft.Xna.Framework.Game.MaxElapsedTime&#39;. [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:TDJ_ProjectoFinal.Game1.Draw(Microsoft.Xna.Framework.GameTime)] Missing &lt;param name=&quot;gameTime&quot;/&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:TDJ_ProjectoFinal.Game1.newEnemyWave(TDJ_ProjectoFinal.Scene)] Missing &lt;param name=&quot;cena&quot;/&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:TDJ_ProjectoFinal.Game1.Update(Microsoft.Xna.Framework.GameTime)] Missing &lt;param name=&quot;gameTime&quot;/&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:TDJ_ProjectoFinal.Scene.Collides(TDJ_ProjectoFinal.graficos.Sprite,TDJ_ProjectoFinal.graficos.Sprite@,Microsoft.Xna.Framework.Vector2@,System.Collections.Generic.List{TDJ_ProjectoFinal.graficos.Sprite})] Missing &lt;returns&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [N:TDJ_ProjectoFinal.entidades] Missing &lt;summary&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:TDJ_ProjectoFinal.entidades.EnemyManager.removeEnemy(TDJ_ProjectoFinal.entidades.NPC)] Missing &lt;param name=&quot;enemy&quot;/&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:TDJ_ProjectoFinal.entidades.NPC.#ctor(Microsoft.Xna.Framework.Content.ContentManager,System.String,TDJ_ProjectoFinal.entidades.TipoNave,System.Single,System.Random)] Missing &lt;param name=&quot;contents&quot;/&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:TDJ_ProjectoFinal.entidades.NPC.#ctor(Microsoft.Xna.Framework.Content.ContentManager,System.String,TDJ_ProjectoFinal.entidades.TipoNave,System.Single,System.Random)] Missing &lt;param name=&quot;assetName&quot;/&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:TDJ_ProjectoFinal.entidades.NPC.#ctor(Microsoft.Xna.Framework.Content.ContentManager,System.String,TDJ_ProjectoFinal.entidades.TipoNave,System.Single,System.Random)] Missing &lt;param name=&quot;tipoNave&quot;/&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:TDJ_ProjectoFinal.entidades.NPC.#ctor(Microsoft.Xna.Framework.Content.ContentManager,System.String,TDJ_ProjectoFinal.entidades.TipoNave,System.Single,System.Random)] Missing &lt;param name=&quot;Scl&quot;/&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:TDJ_ProjectoFinal.entidades.NPC.#ctor(Microsoft.Xna.Framework.Content.ContentManager,System.String,TDJ_ProjectoFinal.entidades.TipoNave,System.Single,System.Random)] Missing &lt;param name=&quot;random&quot;/&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:TDJ_ProjectoFinal.entidades.NPC.At(Microsoft.Xna.Framework.Vector2)] Missing &lt;returns&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:TDJ_ProjectoFinal.entidades.Player.#ctor(Microsoft.Xna.Framework.Content.ContentManager,System.String,TDJ_ProjectoFinal.entidades.TipoBala)] Missing &lt;param name=&quot;contents&quot;/&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:TDJ_ProjectoFinal.entidades.Player.#ctor(Microsoft.Xna.Framework.Content.ContentManager,System.String,TDJ_ProjectoFinal.entidades.TipoBala)] Missing &lt;param name=&quot;assetName&quot;/&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:TDJ_ProjectoFinal.entidades.Player.#ctor(Microsoft.Xna.Framework.Content.ContentManager,System.String,TDJ_ProjectoFinal.entidades.TipoBala)] Missing &lt;param name=&quot;tipobala&quot;/&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [N:TDJ_ProjectoFinal.graficos] Missing &lt;summary&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:TDJ_ProjectoFinal.graficos.Sprite.GetColorAt(System.Int32,System.Int32)] Missing &lt;returns&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:TDJ_ProjectoFinal.graficos.Sprite.GetColorAt(System.Int32,System.Int32)] Missing &lt;param name=&quot;x&quot;/&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:TDJ_ProjectoFinal.graficos.Sprite.GetColorAt(System.Int32,System.Int32)] Missing &lt;param name=&quot;y&quot;/&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [P:TDJ_ProjectoFinal.graficos.Sprite.HasCollisions] Missing &lt;summary&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [F:TDJ_ProjectoFinal.graficos.Sprite.pixelsize] Missing &lt;summary&gt; documentation [C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj]
+  Processed 212 topic(s)
+  26 warning(s)
   CopyFromIndexComponent: &quot;reflection&quot; in-memory cache entries used: 3 of 15.
   CopyFromIndexComponent: &quot;comments&quot; in-memory cache entries used: 3 of 30.
-  ResolveReferenceLinksComponent: New MSDN content ID cache size: 76 entries
+  ResolveReferenceLinksComponent: New MSDN content ID cache size: 79 entries
 Done Building Project &quot;C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\BuildReferenceTopics.proj&quot; (default targets).
 
 Build succeeded.
 
-Time Elapsed 00:00:52.34
-    Last step completed in 00:00:52,5260
+Time Elapsed 00:00:55.89
+    Last step completed in 00:00:56,0562
 </buildStep>
 <buildStep step="CombiningIntermediateTocFiles">
 Combining conceptual and API intermediate TOC files...
-    Last step completed in 00:00:00,0030
+    Last step completed in 00:00:00,0040
 </buildStep>
 <buildStep step="ExtractingHtmlInfo">
 Extracting HTML info for HTML Help 1 and/or website...
@@ -182,11 +186,11 @@ E-Mail: Eric@EWoodruff.us
 Using LCID &#39;1033&#39;, code page &#39;65001&#39;, encoding charset &#39;UTF-8&#39;.
 
 Processing Help 1 files in C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\Output\HtmlHelp1
-Processed 115 HTML files
+Processed 212 HTML files
 Sorting keywords and generating See Also indices
 Saving HTML Help 1 keyword index to C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\Documentation.hhk
 Saving HTML Help 1 table of contents to C:\Users\nlopes\Documents\IPCA\EDJD\code\T‚cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\Documentation.hhc
-    Last step completed in 00:00:01,1581
+    Last step completed in 00:00:01,5901
 </buildStep>
 <buildStep step="CopyStandardHelpContent">
 Copying standard help content...
@@ -253,7 +257,7 @@ C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyle
 C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-zh-CN.css -&gt; C:\Users\nlopes\Documents\IPCA\EDJD\code\T&#233;cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\Output\HtmlHelp1\styles\branding-zh-CN.css
 C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-zh-TW.css -&gt; C:\Users\nlopes\Documents\IPCA\EDJD\code\T&#233;cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\Output\HtmlHelp1\styles\branding-zh-TW.css
 C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding.css -&gt; C:\Users\nlopes\Documents\IPCA\EDJD\code\T&#233;cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\Output\HtmlHelp1\styles\branding.css
-    Last step completed in 00:00:00,9301
+    Last step completed in 00:00:02,2441
 </buildStep>
 <buildStep step="GenerateHelpFormatTableOfContents">
 Generating HTML Help 1 table of contents file...
@@ -261,11 +265,11 @@ Generating HTML Help 1 table of contents file...
 </buildStep>
 <buildStep step="GenerateHelpFileIndex">
 Generating HTML Help 1 index file...
-    Last step completed in 00:00:00,0050
+    Last step completed in 00:00:00,0020
 </buildStep>
 <buildStep step="GenerateHelpProject">
 Generating HTML Help 1 project file...
-    Last step completed in 00:00:00,0180
+    Last step completed in 00:00:00,0480
 </buildStep>
 <buildStep step="CompilingHelpFile">
 Compiling HTML Help 1 file...
@@ -280,13 +284,13 @@ Compiling HTML Help 1 file...
   
   
   
-  Compile time: 0 minutes, 1 second
+  Compile time: 0 minutes, 2 seconds
   
-  117	Topics
+  214	Topics
   
-  1,191	Local links
+  3,215	Local links
   
-  441	Internet links
+  676	Internet links
   
   0	Graphics
   
@@ -294,19 +298,19 @@ Compiling HTML Help 1 file...
   
   
   
-  Created c:\Users\nlopes\Documents\IPCA\EDJD\code\T&#233;cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\Output\HtmlHelp1\Documentation.chm, 174,991 bytes
+  Created c:\Users\nlopes\Documents\IPCA\EDJD\code\T&#233;cnicas de Desenvolvimento de Jogos\Pac_man\Help\Working\Output\HtmlHelp1\Documentation.chm, 308,195 bytes
   
-  Compression decreased file by 814,324 bytes.
+  Compression decreased file by 1,592,442 bytes.
   
-    Last step completed in 00:00:01,7811
+    Last step completed in 00:00:04,3803
 </buildStep>
 <buildStep step="CleanIntermediates">
 Removing intermediate files...
-    Last step completed in 00:00:00,1740
+    Last step completed in 00:00:00,3350
 </buildStep>
 <buildStep step="Completed">
 
-Build completed successfully at 29-03-2015 21:11:17.  Total time: 00:01:06,0038
+Build completed successfully at 01-06-2015 23:53:06.  Total time: 00:01:18,2185
 
 </buildStep>
 </shfbBuild>
